@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".screens.LaunchActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100px"
+            android:id="@+id/titleTextView">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="HelpingHands"
+                android:textAlignment="center"
+                android:textSize="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/subtitleTextView"
+            android:layout_below="@+id/titleTextView">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Find and manage activities in one place."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/launchImageView"
+            android:layout_below="@+id/subtitleTextView">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/launch_activity_img1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:id="@+id/getStartedLinearLayout"
+            android:layout_below="@+id/launchImageView">
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="match_parent"
+                android:text="Get Started"
+                android:background="@drawable/rounded_corner"
+                android:textColor="@color/white"
+                android:padding="18dp"
+                android:id="@+id/getStartedButton" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="25dp"
+            android:id="@+id/signInLinearLayout"
+            android:layout_below="@id/getStartedLinearLayout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already a member?"
+                android:textColor="@color/black"/>
+            <Button
+                android:layout_width="76dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-12dp"
+                android:background="@android:color/transparent"
+                android:text="Sign in"
+                android:textAllCaps="false"
+                android:id="@+id/signInButton"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

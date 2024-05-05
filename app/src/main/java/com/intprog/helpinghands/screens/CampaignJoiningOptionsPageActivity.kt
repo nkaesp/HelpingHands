@@ -1,0 +1,36 @@
+package com.intprog.helpinghands
+
+import android.content.Intent
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.Button
+import com.intprog.helpinghands.screens.DonationCampaign.DonationOptionPageActivity
+import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivitySelectionPageActivity
+import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignSelectionPageActivity
+
+class CampaignJoiningOptionsPageActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_campaign_joining_options_page)
+
+        val joinVolunteerCampaignButton = findViewById<Button>(R.id.joinVolunteerCampaignButton)
+        joinVolunteerCampaignButton.setOnClickListener {
+            val Intent = Intent( this, VolunteerCampaignSelectionPageActivity::class.java)
+            startActivity(Intent)
+        }
+
+        val joinUnspecializedActivityButton = findViewById<Button>(R.id.joinUnspecializedActivityButton)
+        joinUnspecializedActivityButton.setOnClickListener {
+            val Intent = Intent( this, UnspecializedActivitySelectionPageActivity::class.java)
+            startActivity(Intent)
+        }
+
+        val donateButton = findViewById<Button>(R.id.donateButton)
+        donateButton.setOnClickListener {
+            val Intent = Intent( this, DonationOptionPageActivity::class.java)
+            startActivity(Intent)
+        }
+
+
+    }
+}

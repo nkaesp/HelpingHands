@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CampaignJoiningOptionsPageActivity">
+
+    <ImageView
+        android:id="@+id/navTop"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:src="@drawable/navtop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/navTop"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/backTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_weight="3"
+            android:background="#E4EFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/back1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:text="Join a Campaign"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:paddingLeft="20dp"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navTop"
+        android:layout_marginTop="30dp"
+        android:text="Choose an Option"
+        android:textAlignment="center"
+        android:textColor="#98C1FF"
+        android:textSize="30dp"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/bgOfButtons"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/text1"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/bg_of_options"></ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bgOfButtons"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/joinVolunteerCampaignButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/option_buttons"
+            android:text="Join Volunteer Campaign"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textAllCaps="false"></Button>
+
+
+        <Button
+            android:id="@+id/joinUnspecializedActivityButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/option_buttons"
+            android:text="Join Unspecialized Activity"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textAllCaps="false"></Button>
+
+        <Button
+            android:id="@+id/donateButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/option_buttons"
+            android:text="Donate"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textAllCaps="false"></Button>
+    </LinearLayout>
+
+
+
+
+<!--    nav sa ubos-->
+    <ImageView
+        android:id="@+id/navBot"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/navbottom" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/navBot"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/notificationsImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:background="#F4F5F5"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bell" />
+
+        <ImageButton
+            android:id="@+id/homeImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:background="#F4F5F5"
+            android:scaleType="fitCenter"
+            android:src="@drawable/home" />
+
+        <ImageButton
+            android:id="@+id/menuImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:background="#F4F5F5"
+            android:scaleType="fitCenter"
+            android:src="@drawable/more" />
+    </LinearLayout>
+
+
+</RelativeLayout>
