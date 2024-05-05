@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".screens.DonationCampaign.DonationCampaignPostingPageActivity">
 
+
     <ImageView
         android:id="@+id/navTop"
         android:layout_width="match_parent"
@@ -66,7 +67,7 @@
     </TextView>
 
     <ImageButton
-        android:id="@+id/uploadImageButton"
+        android:id="@+id/btnUploadImage"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_below="@+id/Donation"
@@ -81,7 +82,7 @@
         android:id="@+id/DonationDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/uploadImageButton"
+        android:layout_below="@+id/btnUploadImage"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:text="Donation Details:"
@@ -100,7 +101,7 @@
         android:layout_marginRight="20dp">
 
         <EditText
-            android:id="@+id/titleEditText"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -113,11 +114,11 @@
         </EditText>
 
         <EditText
-            android:id="@+id/tagEditText"
+            android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="Tag"
+            android:hint="Description"
             android:background="#ECECEC"
             android:layout_marginLeft="5dp"
             android:paddingTop="2dp"
@@ -138,12 +139,26 @@
         android:layout_marginRight="20dp">
 
         <EditText
-            android:id="@+id/amountNeededEditText"
-            android:layout_width="180dp"
+            android:id="@+id/amountNeeded"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:hint="Amount Needed"
             android:layout_marginRight="5dp"
             android:background="#ECECEC"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp">
+        </EditText>
+
+        <EditText
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Category"
+            android:background="#ECECEC"
+            android:layout_marginLeft="5dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
             android:paddingLeft="10dp">
@@ -174,7 +189,7 @@
         android:layout_marginRight="20dp">
 
         <EditText
-            android:id="@+id/fullNameEditText"
+            android:id="@+id/fullName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -186,7 +201,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -199,7 +214,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/phoneNumberEditText"
+            android:id="@+id/phoneNum"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -212,7 +227,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/contactMethodEditText"
+            android:id="@+id/contactMethod"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -229,12 +244,13 @@
     //button continue
 
     <Button
-        android:id="@+id/continueButton"
-        android:layout_width="150dp"
+        android:id="@+id/btn_continue"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/belowContactInfo"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="15dp"
-        android:layout_centerInParent="true"
+        android:layout_marginRight="50dp"
         android:background="@drawable/btn_continue"
         android:text="Continue"
         android:textAllCaps="false"

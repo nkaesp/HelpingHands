@@ -1,85 +1,99 @@
 package com.intprog.helpinghands.screens.DonationCampaign
 
-import android.Manifest
+import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.InputFilter
+import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import com.intprog.helpinghands.R
 
 class DonationCampaignPostingPageActivity : AppCompatActivity() {
-
-    private lateinit var uploadImageButton: ImageButton
-    private var selectedImageUri: Uri? = null
-    private val READ_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 1
+    private val PICK_IMAGE_REQUEST = 1
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_posting_page)
 
-        uploadImageButton = findViewById(R.id.uploadImageButton)
+        val title = findViewById<EditText>(R.id.title)
+        title.filters = arrayOf(InputFilter.LengthFilter(25))
+        val desc = findViewById<EditText>(R.id.desc)
+        desc.filters = arrayOf(InputFilter.LengthFilter(35))
+        val amountNeeded = findViewById<EditText>(R.id.amountNeeded)
+        amountNeeded.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        val category = findViewById<EditText>(R.id.category)
+        category.filters = arrayOf(InputFilter.LengthFilter(20))
 
-        uploadImageButton.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    READ_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE)
-            } else {
-                launchImageSelectionIntent()
-            }
+        val fullName = findViewById<EditText>(R.id.fullName)
+        val email = findViewById<EditText>(R.id.email)
+        val phoneNum = findViewById<EditText>(R.id.phoneNum)
+        phoneNum.inputType = InputType.TYPE_CLASS_NUMBER
+        phoneNum.filters = arrayOf(InputFilter.LengthFilter(15))
+        val contactMethod = findViewById<EditText>(R.id.contactMethod)
+        contactMethod.filters = arrayOf(InputFilter.LengthFilter(35))
+
+        val btnUploadImage = findViewById<ImageButton>(R.id.btnUploadImage)
+        btnUploadImage.setOnClickListener {
+            openGallery()
         }
 
-        val continueButton = findViewById<Button>(R.id.continueButton)
-        continueButton.setOnClickListener {
-            val titleEditText = findViewById<EditText>(R.id.titleEditText)
-            val title = titleEditText.text.toString()
-
-            val amountNeededEditText = findViewById<EditText>(R.id.amountNeededEditText)
-            val amountNeeded = amountNeededEditText.text.toString()
-
-            val tagEditText = findViewById<EditText>(R.id.tagEditText)
-            val tag = tagEditText.text.toString()
-
-            val fullNameEditText = findViewById<EditText>(R.id.fullNameEditText)
-            val fullName = fullNameEditText.text.toString()
-
-            val emailEditText = findViewById<EditText>(R.id.emailEditText)
-            val email = emailEditText.text.toString()
-
-            val phoneNumberEditText = findViewById<EditText>(R.id.phoneNumberEditText)
-            val phoneNumber = phoneNumberEditText.text.toString()
-
-            val contactMethodEditText = findViewById<EditText>(R.id.contactMethodEditText)
-            val contactMethod = contactMethodEditText.text.toString()
-
-            val intent = Intent(this, DonationCampaignSummaryPageActivity::class.java)
-            intent.putExtra("title", title)
-            intent.putExtra("amountNeeded", amountNeeded)
-            intent.putExtra("tag", tag)
-            intent.putExtra("fullName", fullName)
-            intent.putExtra("email", email)
-            intent.putExtra("phoneNumber", phoneNumber)
-            intent.putExtra("contactMethod", contactMethod)
-
-            if (selectedImageUri != null) {
-                intent.putExtra("imageUri", selectedImageUri.toString())
+        val btn_continue = findViewById<Button>(R.id.btn_continue)
+        btn_continue.setOnClickListener {
+            if (imageUri == null) {
+                Toast.makeText(this, "Please upload an image", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
-            startActivity(intent)
+            val theTitle = title.text.toString()
+            val theDesc = desc.text.toString()
+            val theAmountNeeded = amountNeeded.text.toString()
+            val theCategory = category.text.toString()
+            val theFullName = fullName.text.toString()
+            val theEmail = email.text.toString()
+            val thePhoneNum = phoneNum.text.toString()
+            val theContactMethod = contactMethod.text.toString()
+
+            if (theTitle.isNotEmpty() && theDesc.isNotEmpty() && theAmountNeeded.isNotEmpty() &&
+                theCategory.isNotEmpty() && theFullName.isNotEmpty() && theEmail.isNotEmpty() &&
+                thePhoneNum.isNotEmpty() && theContactMethod.isNotEmpty()
+            ) {
+                val intent = Intent(this, DonationCampaignSummaryPageActivity::class.java).apply {
+                    putExtra("titleInput", theTitle)
+                    putExtra("descInput", theDesc)
+                    putExtra("amountNeededInput", theAmountNeeded)
+                    putExtra("categoryInput", theCategory)
+                    putExtra("fullNameInput", theFullName)
+                    putExtra("emailInput", theEmail)
+                    putExtra("phoneNumInput", thePhoneNum)
+                    putExtra("contactMethodInput", theContactMethod)
+                    putExtra("imageUri", imageUri.toString())
+                }
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun launchImageSelectionIntent() {
-        val intent = Intent()
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1)
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            imageUri = data.data
+            val btnUploadImage = findViewById<ImageButton>(R.id.btnUploadImage)
+            btnUploadImage.setImageURI(imageUri)
+        }
     }
 }

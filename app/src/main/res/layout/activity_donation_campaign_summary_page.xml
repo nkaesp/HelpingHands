@@ -65,21 +65,22 @@
         android:layout_marginTop="10dp">
     </TextView>
 
-    <ImageButton
-        android:id="@+id/summaryImageButton"
+    <ImageView
+        android:id="@+id/imageDonationSummary"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_below="@+id/Donation"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/unspecialized_createpost_image"
-        android:clickable="false" />
+        android:clickable="false"
+        android:scaleType="centerCrop"></ImageView>
+
     <ImageView
         android:id="@+id/contentSummary"
         android:layout_width="375dp"
         android:layout_height="250dp"
-        android:layout_below="@+id/summaryImageButton"
+        android:layout_below="@+id/imageDonationSummary"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="#ECECEC"
@@ -100,61 +101,50 @@
     //Donation Details
 
     <TextView
-        android:id="@+id/titleLabel"
-        android:layout_width="35dp"
-        android:layout_height="20dp"
+        android:id="@+id/titleSummary"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/detailsSummary"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="5dp"
         android:text="Title:"
-        android:textColor="@color/black"></TextView>
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="180dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/titleLabel"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="5dp"
-        android:text="Insert Title"></TextView>
-
-    <TextView
-        android:id="@+id/tagLabel"
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/detailsSummary"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/titleLabel"
-        android:text="Tag:"
         android:textColor="@color/black">
     </TextView>
-    <TextView
-        android:id="@+id/tagTextView"
-        android:layout_width="180dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/tagLabel"
-        android:layout_toRightOf="@id/titleTextView"
-        android:layout_marginTop="5dp"
-        android:text="Insert Tag"></TextView>
 
     <TextView
-        android:id="@+id/amountNeededLabel"
+        android:id="@+id/descriptionSummary"
         android:layout_width="175dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/titleTextView"
+        android:layout_height="40dp"
+        android:layout_below="@+id/detailsSummary"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/titleSummary"
+        android:text="Description:"
+        android:textColor="@color/black">
+    </TextView>
+
+    <TextView
+        android:id="@+id/amountNeededSummary"
+        android:layout_width="175dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/titleSummary"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="5dp"
         android:text="Amount Needed:"
-        android:textColor="@color/black"></TextView>
+        android:textColor="@color/black">
+    </TextView>
+
     <TextView
-        android:id="@+id/amountNeededTextView"
-        android:layout_width="180dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_below="@+id/amountNeededLabel"
+        android:id="@+id/categorySummary"
+        android:layout_width="175dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/descriptionSummary"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:text="Insert Amount Needed"></TextView>
+        android:layout_toRightOf="@+id/amountNeededSummary"
+        android:text="Category:"
+        android:textColor="@color/black">
+    </TextView>
 
 
     //Contact Information
@@ -168,37 +158,27 @@
         android:text="Contact Information"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_below="@+id/amountNeededTextView">
+        android:layout_below="@+id/amountNeededSummary">
     </TextView>
 
 
     <TextView
-        android:id="@+id/fullNameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/fullNameSummary"
+        android:layout_width="350dp"
+        android:layout_height="20dp"
         android:layout_below="@+id/contactSummary"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="5dp"
         android:text="Full Name:"
         android:textColor="@color/black">
     </TextView>
-    <TextView
-        android:id="@+id/fullNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/contactSummary"
-        android:layout_toRightOf="@id/fullNameLabel"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:text="Insert Full Name">
-    </TextView>
 
 
     <TextView
-        android:id="@+id/emailLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fullNameLabel"
+        android:id="@+id/emailSummary"
+        android:layout_width="350dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/fullNameSummary"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="5dp"
         android:text="Email:"
@@ -206,63 +186,33 @@
     </TextView>
 
     <TextView
-        android:id="@+id/emailTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fullNameTextView"
-        android:layout_toRightOf="@id/emailLabel"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:text="Insert Email">
-    </TextView>
-
-    <TextView
-        android:id="@+id/phoneNumberLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emailLabel"
+        android:id="@+id/phoneNumSummary"
+        android:layout_width="350dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/emailSummary"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="5dp"
         android:text="Phone Number:"
         android:textColor="@color/black">
     </TextView>
-    <TextView
-        android:id="@+id/phoneNumberTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emailTextView"
-        android:layout_toRightOf="@id/phoneNumberLabel"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:text="Insert Phone Number">
-    </TextView>
 
     <TextView
-        android:id="@+id/contactMethodLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phoneNumberLabel"
+        android:id="@+id/contactMethodSummary"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/phoneNumSummary"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="5dp"
         android:text="Preferred Contact Method:"
         android:textColor="@color/black">
     </TextView>
-    <TextView
-        android:id="@+id/contactMethodTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phoneNumberTextView"
-        android:layout_toRightOf="@id/contactMethodLabel"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:text="Insert Contact Method">
-    </TextView>
+
 
 
     //Button Post Now
 
     <Button
-        android:id="@+id/postButton"
+        android:id="@+id/btn_postNow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/contentSummary"
@@ -270,7 +220,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="100dp"
         android:background="@drawable/btn_continue"
-        android:text="Post"
+        android:text="Post Now"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold">
@@ -331,4 +281,5 @@
         </ImageButton>
 
     </LinearLayout>
+
 </RelativeLayout>
