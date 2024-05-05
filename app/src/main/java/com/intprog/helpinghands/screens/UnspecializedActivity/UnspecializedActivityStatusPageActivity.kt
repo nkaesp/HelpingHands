@@ -1,11 +1,13 @@
 package com.intprog.helpinghands.screens.UnspecializedActivity
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 
 class UnspecializedActivityStatusPageActivity : AppCompatActivity() {
@@ -24,12 +26,16 @@ class UnspecializedActivityStatusPageActivity : AppCompatActivity() {
 
         if (imageUriString != null && imageUriString.isNotEmpty()) {
             val imageUri = Uri.parse(imageUriString)
-            findViewById<ImageButton>(R.id.activityImageButton).setImageURI(imageUri)
+            findViewById<ImageView>(R.id.activityImageButton).setImageURI(imageUri)
         }
 
         val noOfParticipantsDigitTextView = findViewById<TextView>(R.id.noOfParticipantsDigitTextView)
-        noOfParticipantsDigitTextView.text = " 0/$noOfParticipants"
+        noOfParticipantsDigitTextView.text = "0/$noOfParticipants"
 
-
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

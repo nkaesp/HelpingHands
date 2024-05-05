@@ -158,60 +158,63 @@
             android:text="" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/navBot"
+    <!--    nav sa ubos-->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/navbottom"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/navBot"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/notificationImageButton"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/navBot"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="1"
-            android:background="#F4F5F5"
-            android:scaleType="fitCenter"
-            android:src="@drawable/bell">
-        </ImageButton>
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/navbottom" />
 
-        <ImageButton
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="1"
-            android:background="#F4F5F5"
-            android:scaleType="fitCenter"
-            android:src="@drawable/home">
-        </ImageButton>
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/navBot"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="1"
-            android:background="#F4F5F5"
-            android:scaleType="fitCenter"
-            android:src="@drawable/more">
-        </ImageButton>
+            <ImageButton
+                android:id="@+id/notificationsImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="#F4F5F5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bell" />
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/homeImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="#F4F5F5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/home" />
+
+            <ImageButton
+                android:id="@+id/menuImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="#F4F5F5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/more" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
