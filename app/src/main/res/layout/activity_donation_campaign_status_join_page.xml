@@ -62,8 +62,8 @@
 
     <ImageView
         android:id="@+id/campaignImageView"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/Donation"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -257,13 +257,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bgPeopleDonated"
-        android:layout_toRightOf="@+id/bgNumPeopleDonated"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:text="Join"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/bgNumPeopleDonated"
         android:background="@drawable/btn_continue"
-        android:textColor="@color/white">
-    </Button>
+        android:text="Join"
+        android:textColor="@color/white"></Button>
 
 
 
