@@ -20,11 +20,11 @@
         <activity
             android:name=".screens.LaunchActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".screens.RegistrationActivity"
@@ -60,10 +60,18 @@
         </activity>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignSummaryPageActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
+
+
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignStatusPageActivity"
-            android:exported="true" />
+            android:exported="true">
+
+
+
+        </activity>
 
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignStatusJoinPageActivity"
@@ -72,7 +80,14 @@
         </activity>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignSelectionPageActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".screens.DonationCampaign.TransactionPageActivity"
             android:exported="true" /> <!-- Unspecialized Activity -->
