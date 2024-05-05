@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.DonationCampaign.DonationCampaignStatusPageActivity">
+    tools:context=".screens.DonationCampaign.DonationCampaignStatusJoinPageActivity">
 
     <ImageView
         android:id="@+id/navTop"
@@ -253,6 +253,19 @@
         android:text="0"
         android:textColor="@color/black"></TextView>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bgPeopleDonated"
+        android:layout_toRightOf="@+id/bgNumPeopleDonated"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="Join"
+        android:background="@drawable/btn_continue"
+        android:textColor="@color/white">
+    </Button>
+
+
 
 
 
@@ -324,7 +337,6 @@
             android:scaleType="fitCenter"
             android:src="@drawable/more" />
     </LinearLayout>
-
 
 
 

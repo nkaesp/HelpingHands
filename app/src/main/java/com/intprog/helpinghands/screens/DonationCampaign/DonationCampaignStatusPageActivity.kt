@@ -12,34 +12,30 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_campaign_status_page)
 
-        val title = intent.getStringExtra("title")
-        val tag = intent.getStringExtra("tag")
-        val amountNeeded = intent.getStringExtra("amountNeeded")
+        // Retrieve data from Intent extras
+
         val imageUriString = intent.getStringExtra("imageUri")
-
-        findViewById<TextView>(R.id.titleTextView).text = title
-        findViewById<TextView>(R.id.tagTextView).text = tag
-        findViewById<TextView>(R.id.amountNeededTextView).text = amountNeeded
-
-        if (imageUriString != null && imageUriString.isNotEmpty()) {
+        if (imageUriString != null) {
             val imageUri = Uri.parse(imageUriString)
-            findViewById<ImageView>(R.id.activityImageView).setImageURI(imageUri)
+            val imageView = findViewById<ImageView>(R.id.campaignImageView)
+            imageView.setImageURI(imageUri)
         }
 
-        val currentAmountTextView = findViewById<TextView>(R.id.currentAmountTextView)
-        currentAmountTextView.text = "0"
+        val titleTextView = findViewById<TextView>(R.id.titleTextView)
+        val titleInput = intent.getStringExtra("titleInput")
+        titleTextView.text = "$titleInput"
+
+        val descTextView = findViewById<TextView>(R.id.descTextView)
+        val descInput= intent.getStringExtra("descInput")
+        descTextView.text = "$descInput"
+
+        val amountNeededTextView =  findViewById<TextView>(R.id.amountNeededTextView)
+        val amountNeededInput = intent.getStringExtra("amountNeededInput")
+        amountNeededTextView.text = "$amountNeededInput"
+        // Retrieve any other data you passed
 
 
+        // Now you can use this data to populate your UI elements in the status page
     }
-}
 
-        //val notificationImageButton = findViewById<ImageButton>(R.id.notificationImageButton)
-        //notificationImageButton.setOnClickListener {
-        //    val intent = Intent(this, UnspecializedActivitySelectionPageActivity::class.java).apply {
-        //        putExtra("title", title)
-        //        putExtra("tag", tag)
-        //        putExtra("amountNeeded", amountNeeded)
-        //        putExtra("imageUri", imageUriString)
-        //    }
-        //    startActivity(intent)
-        //}
+}

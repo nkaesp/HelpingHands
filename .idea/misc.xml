@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_campaign_posting_options_page.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_donation_campaign_selection_page.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_donation_campaign_status_join_page.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_donation_campaign_status_page.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_donation_campaign_summary_page.xml" value="0.15" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_donation_posting_page.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_donation_posting_page.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_volunteer_campaign_selection_page.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/activity_volunteer_campaign_summary.xml" value="0.15" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GroupHelpingHands/HelpingHands/app/src/main/res/layout/donation_selection_page_item.xml" value="0.22" />
       </map>
     </option>
   </component>

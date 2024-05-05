@@ -1,8 +1,11 @@
 package com.intprog.helpinghands.screens.DonationCampaign
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -57,6 +60,25 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener{
             onBackPressed()
+        }
+
+
+//        val postNowButton = findViewById<Button>(R.id.btn_postNow)
+//        postNowButton.setOnClickListener {
+//            val postNowIntent = Intent(this, DonationCampaignStatusPageActivity::class.java)
+//            startActivity(postNowIntent)
+//        }
+
+        val postNowButton = findViewById<Button>(R.id.btn_postNow)
+        postNowButton.setOnClickListener {
+            val postNowIntent = Intent(this, DonationCampaignStatusPageActivity::class.java)
+            // Pass data as extras
+            postNowIntent.putExtra("imageUri", imageUriString)
+            postNowIntent.putExtra("titleInput", titleInput)
+            postNowIntent.putExtra("descInput", descInput)
+            postNowIntent.putExtra("amountNeededInput", amountNeededInput)
+            // Pass any other data you want to send
+            startActivity(postNowIntent)
         }
 
     }
