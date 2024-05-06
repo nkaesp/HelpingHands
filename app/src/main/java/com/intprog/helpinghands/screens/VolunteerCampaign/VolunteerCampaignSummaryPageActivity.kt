@@ -1,9 +1,11 @@
 package com.intprog.helpinghands.screens.VolunteerCampaign
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -40,8 +42,23 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         backTop.setOnClickListener {
             showConfirmationDialog()
         }
-    }
 
+        val postButton = findViewById<Button>(R.id.postButton)
+        postButton.setOnClickListener {
+            // Create an intent to start VolunteerCampaignStatusPageActivity
+            val intent = Intent(this, VolunteerCampaignStatusPageActivity::class.java).apply {
+                // Pass the relevant data as extras
+                putExtra("title", title)
+                // Pass imageUriString if available
+                if (imageUriString != null) {
+                    putExtra("imageUri", imageUriString)
+                }
+            }
+            // Start the activity
+            startActivity(intent)
+        }
+
+    }
 
     private fun showConfirmationDialog() {
         AlertDialog.Builder(this)
