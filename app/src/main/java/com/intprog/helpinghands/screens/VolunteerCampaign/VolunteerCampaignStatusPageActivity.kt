@@ -24,8 +24,5 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
             val imageUri = Uri.parse(imageUriString)
             findViewById<ImageView>(R.id.postedpic).setImageURI(imageUri)
         }
-
-        // You can also handle number of volunteers and people who volunteered here
-        // Depending on how you retrieve this data
     }
 }
