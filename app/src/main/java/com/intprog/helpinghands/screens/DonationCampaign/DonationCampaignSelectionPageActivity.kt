@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import com.intprog.helpinghands.R
 
 class DonationCampaignSelectionPageActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_campaign_selection_page)
+
     }
 }

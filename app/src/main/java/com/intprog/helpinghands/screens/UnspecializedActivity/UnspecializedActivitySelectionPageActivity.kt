@@ -1,54 +1,122 @@
 package com.intprog.helpinghands.screens.UnspecializedActivity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.content.Intent
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ListView
+import android.widget.TextView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.model.Post
+import com.squareup.picasso.Picasso
 
 class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
-    private lateinit var activityListView: ListView
-    private lateinit var adapter: ArrayAdapter<String>
-    private val activitiesList = mutableListOf<String>()
+    private val posts = mutableListOf<Post>()
+    private lateinit var listView: ListView
+    private lateinit var adapter: PostAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_unspecialized_selection)
 
-        activityListView = findViewById(R.id.activityListView)
+        listView = findViewById(R.id.unspecializedActivityListView)
+        adapter = PostAdapter(this, R.layout.activity_unspecialized_selection_item, posts)
+        listView.adapter = adapter
 
-        // Retrieve the initial list of activities from intent extras
-        val initialActivities = intent.getStringArrayListExtra("activityList")
-        if (initialActivities != null) {
-            activitiesList.addAll(initialActivities)
+        loadPostsFromSharedPreferences()
+
+        val post = intent.getParcelableExtra<Post>("post")
+        if (post != null) {
+            addPost(post)
         }
 
-        // Initialize the adapter with the list of activities
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, activitiesList)
-        activityListView.adapter = adapter
-
-        // Handle click events on activity items
-        activityListView.setOnItemClickListener { parent, view, position, id ->
-            val selectedActivity = activitiesList[position]
-            Toast.makeText(this, "Selected activity: $selectedActivity", Toast.LENGTH_SHORT).show()
-            // Add your logic to handle item click, such as opening detailed view
-        }
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
-        homeImageButton.setOnClickListener{
-            val intent = Intent(this, UnspecializedActivityPostingPageActivity::class.java). apply{
-            }
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
     }
 
-    // Method to add a new activity to the list
-    fun addActivity(activity: String) {
-        // Add the new activity to the list
-        activitiesList.add(activity)
-        // Notify the adapter that the dataset has changed
+    fun addPost(post: Post) {
+        posts.add(post)
+        adapter.notifyDataSetChanged()
+
+        savePostsToSharedPreferences()
+    }
+
+    private fun loadPostsFromSharedPreferences() {
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("posts", null)
+        val type = object : TypeToken<List<Post>>() {}.type
+        val loadedPosts: List<Post>? = gson.fromJson(json, type)
+        if (loadedPosts != null) {
+            posts.clear()
+            posts.addAll(loadedPosts)
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun savePostsToSharedPreferences() {
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(posts)
+        editor.putString("posts", json)
+        editor.apply()
+    }
+
+    override fun onResume() {
+        super.onResume()
         adapter.notifyDataSetChanged()
     }
+
+    private inner class PostAdapter(
+        context: Context,
+        resource: Int,
+        objects: MutableList<Post>
+    ) : ArrayAdapter<Post>(context, resource, objects) {
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            var itemView = convertView
+            if (itemView == null) {
+                val inflater = LayoutInflater.from(context)
+                itemView = inflater.inflate(R.layout.activity_unspecialized_selection_item, parent, false)
+            }
+
+            val post = getItem(position)
+            val titleTextView = itemView!!.findViewById<TextView>(R.id.ActivityTitleTextView)
+            val imageView = itemView.findViewById<ImageButton>(R.id.activityImageView)
+            val viewDetailsButton = itemView.findViewById<Button>(R.id.viewDetailsButton)
+
+            titleTextView.text = post?.title
+
+            Picasso.get().load(post?.imageUri).into(imageView)
+
+            viewDetailsButton.setOnClickListener {
+                val intent = Intent(context, UnspecializedActivityStatusPageActivity::class.java).apply {
+                    putExtra("title", post?.title)
+                    putExtra("description", post?.description)
+                    putExtra("noOfParticipants", post?.noOfParticipants)
+                    putExtra("imageUri", post?.imageUri)
+                }
+                context.startActivity(intent)
+            }
+
+            return itemView
+        }
+
+
+
+    }
 }
-
-

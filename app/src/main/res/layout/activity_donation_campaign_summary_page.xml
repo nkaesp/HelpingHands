@@ -223,8 +223,8 @@
         android:text="Post Now"
         android:textColor="@color/white"
         android:textSize="17sp"
-        android:textStyle="bold">
-    </Button>
+        android:textStyle="bold"
+        android:onClick="onPostNowClicked"></Button>
 
     //nav sa ubos
     <ImageView
