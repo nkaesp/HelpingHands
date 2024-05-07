@@ -50,6 +50,8 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
         backTop.setOnClickListener{
             onBackPressed()
         }
+
+
     }
 
     fun addPost(post: Post) {

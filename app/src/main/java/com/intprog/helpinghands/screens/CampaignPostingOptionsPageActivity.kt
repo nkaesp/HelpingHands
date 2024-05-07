@@ -42,5 +42,7 @@ class CampaignPostingOptionsPageActivity : AppCompatActivity() {
         backTop.setOnClickListener{
             onBackPressed()
         }
+
+
     }
 }

@@ -36,6 +36,12 @@ class CampaignJoiningOptionsPageActivity : AppCompatActivity() {
         backTop.setOnClickListener{
             onBackPressed()
         }
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }
