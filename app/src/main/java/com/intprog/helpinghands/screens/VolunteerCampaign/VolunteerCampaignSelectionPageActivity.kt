@@ -14,6 +14,8 @@ import android.widget.ListView
 import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.intprog.helpinghands.CampaignJoiningOptionsPageActivity
+import com.intprog.helpinghands.CampaignPostingOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 import com.squareup.picasso.Picasso
@@ -28,11 +30,6 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_volunteer_campaign_selection_page)
 
-        val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
-        }
-
         listView = findViewById(R.id.volunteerCampaignListView)
         adapter = PostAdapter(this, R.layout.activity_volunteer_campaign_selection_item, posts)
         listView.adapter = adapter
@@ -42,6 +39,13 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
         val post = intent.getParcelableExtra<VolunteerCampaignPost>("post")
         if (post != null) {
             addPost(post)
+        }
+
+        val backTop = findViewById<ImageButton>(R.id.backTop)
+        backTop.setOnClickListener {
+            val intent = Intent(this, CampaignJoiningOptionsPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
