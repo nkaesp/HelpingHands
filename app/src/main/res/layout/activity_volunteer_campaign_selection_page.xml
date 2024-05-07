@@ -3,12 +3,18 @@
     android:id="@+id/parentLayout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="wrap_content"
     tools:context=".screens.VolunteerCampaign.VolunteerCampaignSelectionPageActivity">
+=======
+    android:layout_height="wrap_content">
+
+>>>>>>> e70de44f96b9fb330e58fdfb7f3e17d4e71d325c
     <ImageView
         android:id="@+id/navTop"
         android:layout_width="match_parent"
         android:layout_height="68dp"
+<<<<<<< HEAD
         android:src="@drawable/navtop">
     </ImageView>
 
@@ -48,6 +54,54 @@
             </TextView>
         </LinearLayout>
     </LinearLayout>
+=======
+        android:src="@drawable/navtop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/navTop"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/backTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_weight="3"
+            android:background="#E4EFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/back1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:text="Join Volunteer Campaign"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ActivityTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Activity Title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/navTop"/>
+>>>>>>> e70de44f96b9fb330e58fdfb7f3e17d4e71d325c
 
     <!--    Insert relative layout item here-->
     <RelativeLayout
@@ -69,6 +123,7 @@
             tools:listitem="@layout/activity_unspecialized_selection_item"/>
     </RelativeLayout>
 
+<<<<<<< HEAD
     <ImageView
         android:id="@+id/navBot"
         android:layout_width="match_parent"
@@ -121,3 +176,64 @@
         </ImageButton>
     </LinearLayout>
 </RelativeLayout>
+=======
+    <!--    nav sa ubos-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/navBot"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/navbottom" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/navBot"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/notificationsImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="#F4F5F5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bell" />
+
+            <ImageButton
+                android:id="@+id/homeImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="#F4F5F5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/home" />
+
+            <ImageButton
+                android:id="@+id/menuImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="#F4F5F5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/more" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+>>>>>>> e70de44f96b9fb330e58fdfb7f3e17d4e71d325c

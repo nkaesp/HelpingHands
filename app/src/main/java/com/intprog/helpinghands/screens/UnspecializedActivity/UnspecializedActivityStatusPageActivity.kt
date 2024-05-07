@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignSelectionPageActivity
 
 class UnspecializedActivityStatusPageActivity : AppCompatActivity() {
 
@@ -36,6 +37,13 @@ class UnspecializedActivityStatusPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+        }
+
+        val backTop = findViewById<ImageButton>(R.id.backTop)
+        backTop.setOnClickListener {
+            val intent = Intent(this, UnspecializedActivitySelectionPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

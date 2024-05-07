@@ -1,5 +1,6 @@
 package com.intprog.helpinghands.screens.VolunteerCampaign
 
+<<<<<<< HEAD
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +15,12 @@ import android.widget.ListView
 import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+=======
+import android.content.Intent
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.widget.ImageButton
+>>>>>>> e70de44f96b9fb330e58fdfb7f3e17d4e71d325c
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.model.Post
@@ -30,6 +37,7 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_volunteer_campaign_selection_page)
 
+<<<<<<< HEAD
         listView = findViewById(R.id.volunteerCampaignListView)
         adapter = PostAdapter(this, R.layout.activity_volunteer_campaign_selection_item, posts)
         listView.adapter = adapter
@@ -41,11 +49,14 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
             addPost(post)
         }
 
+=======
+>>>>>>> e70de44f96b9fb330e58fdfb7f3e17d4e71d325c
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
+<<<<<<< HEAD
     }
 
     fun addPost(post: Post) {
@@ -116,5 +127,13 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
             return itemView
         }
 
+=======
+
+
+        val backTop = findViewById<ImageButton>(R.id.backTop)
+        backTop.setOnClickListener{
+            onBackPressed()
+        }
+>>>>>>> e70de44f96b9fb330e58fdfb7f3e17d4e71d325c
     }
 }

@@ -21,6 +21,11 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_posting_page)
 
+        val backTop = findViewById<ImageButton>(R.id.backTop)
+        backTop.setOnClickListener{
+            onBackPressed()
+        }
+
         val title = findViewById<EditText>(R.id.title)
         title.filters = arrayOf(InputFilter.LengthFilter(25))
         val desc = findViewById<EditText>(R.id.desc)
@@ -96,4 +101,6 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
             btnUploadImage.setImageURI(imageUri)
         }
     }
+
+
 }
