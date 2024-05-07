@@ -66,8 +66,7 @@
                 android:paddingLeft="15dp"
                 android:hint="Email"
                 android:textColorHighlight="@color/black"
-                android:background="#EFEEEE"
-                android:inputType="textEmailAddress">
+                android:background="#EFEEEE">
 
             </EditText>
 
