@@ -1,11 +1,14 @@
 package com.intprog.helpinghands.screens.VolunteerCampaign
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignSelectionPageActivity
 
 class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +26,13 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
         if (imageUriString != null) {
             val imageUri = Uri.parse(imageUriString)
             findViewById<ImageView>(R.id.postedpic).setImageURI(imageUri)
+        }
+
+        val backTop = findViewById<ImageButton>(R.id.backTop)
+        backTop.setOnClickListener {
+            val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

@@ -1,8 +1,11 @@
 package com.intprog.helpinghands.screens.DonationCampaign
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.intprog.helpinghands.R
@@ -32,10 +35,14 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         val amountNeededTextView =  findViewById<TextView>(R.id.amountNeededTextView)
         val amountNeededInput = intent.getStringExtra("amountNeededInput")
         amountNeededTextView.text = "$amountNeededInput"
-        // Retrieve any other data you passed
 
+        val backTop = findViewById<ImageButton>(R.id.backTop)
+        backTop.setOnClickListener {
+            val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
-        // Now you can use this data to populate your UI elements in the status page
     }
 
 }
