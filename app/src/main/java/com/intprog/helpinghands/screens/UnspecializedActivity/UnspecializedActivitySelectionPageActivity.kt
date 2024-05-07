@@ -14,6 +14,7 @@ import android.widget.ListView
 import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.intprog.helpinghands.CampaignJoiningOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.model.Post
@@ -47,8 +48,10 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
+        backTop.setOnClickListener {
+            val intent = Intent(this, CampaignJoiningOptionsPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
 

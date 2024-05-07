@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageButton
+import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignPostingPageActivity
 import com.intprog.helpinghands.screens.DonationCampaign.DonationOptionPageActivity
 import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivitySelectionPageActivity
 import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignSelectionPageActivity
@@ -33,9 +34,12 @@ class CampaignJoiningOptionsPageActivity : AppCompatActivity() {
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
+        backTop.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
+
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)

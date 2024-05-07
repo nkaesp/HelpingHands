@@ -9,7 +9,9 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignPostingPageActivity
 
 class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +42,17 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
-            showConfirmationDialog()
+            val intent = Intent(this, VolunteerCampaignPostingPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
+
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+
 
         val postButton = findViewById<Button>(R.id.postButton)
         postButton.setOnClickListener {

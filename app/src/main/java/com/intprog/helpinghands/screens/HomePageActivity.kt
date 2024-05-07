@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
+import android.widget.ImageButton
 import com.intprog.helpinghands.model.Post
 
 class HomePageActivity : AppCompatActivity() {
@@ -20,6 +21,12 @@ class HomePageActivity : AppCompatActivity() {
         val joinCampaignButton = findViewById<Button>(R.id.joinCampaignButton)
         joinCampaignButton.setOnClickListener {
             val intent = Intent(this, CampaignJoiningOptionsPageActivity::class.java)
+            startActivity(intent)
+        }
+
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
     }

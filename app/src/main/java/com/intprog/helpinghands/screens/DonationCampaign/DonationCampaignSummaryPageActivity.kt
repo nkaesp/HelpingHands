@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 
 class DonationCampaignSummaryPageActivity : AppCompatActivity() {
@@ -58,16 +59,18 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
+        backTop.setOnClickListener {
+            val intent = Intent(this, DonationCampaignPostingPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
 
-//        val postNowButton = findViewById<Button>(R.id.btn_postNow)
-//        postNowButton.setOnClickListener {
-//            val postNowIntent = Intent(this, DonationCampaignStatusPageActivity::class.java)
-//            startActivity(postNowIntent)
-//        }
 
         val postNowButton = findViewById<Button>(R.id.btn_postNow)
         postNowButton.setOnClickListener {

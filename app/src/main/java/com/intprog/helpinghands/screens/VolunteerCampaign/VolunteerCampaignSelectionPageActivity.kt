@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageButton
+import com.intprog.helpinghands.CampaignJoiningOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 
@@ -18,10 +19,11 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
+        backTop.setOnClickListener {
+            val intent = Intent(this, CampaignJoiningOptionsPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

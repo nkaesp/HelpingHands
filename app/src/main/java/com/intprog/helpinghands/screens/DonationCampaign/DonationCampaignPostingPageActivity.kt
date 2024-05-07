@@ -11,6 +11,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import com.intprog.helpinghands.CampaignPostingOptionsPageActivity
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 
 class DonationCampaignPostingPageActivity : AppCompatActivity() {
@@ -22,8 +24,16 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_donation_posting_page)
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
+        backTop.setOnClickListener {
+            val intent = Intent(this, CampaignPostingOptionsPageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
 
         val title = findViewById<EditText>(R.id.title)
