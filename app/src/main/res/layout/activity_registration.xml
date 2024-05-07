@@ -46,14 +46,17 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/grey_rounded_corner"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="50dp">
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Email"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="15dp"
+            android:background="#EFEEEE"
+            android:paddingLeft="20dp"
+            android:inputType="textEmailAddress"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +70,9 @@
             android:layout_height="match_parent"
             android:hint="Password"
             android:inputType="textPassword"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="15dp"
+            android:background="#EFEEEE"
+            android:paddingLeft="20dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,7 +86,9 @@
             android:layout_height="match_parent"
             android:hint="Confirm Password"
             android:inputType="textPassword"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="15dp"
+            android:background="#EFEEEE"
+            android:paddingLeft="20dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,7 +101,8 @@
             android:layout_height="wrap_content"
             android:text="Create Account"
             android:background="@drawable/rounded_corner"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
 
