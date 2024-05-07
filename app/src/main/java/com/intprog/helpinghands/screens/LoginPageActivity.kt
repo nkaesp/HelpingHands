@@ -28,11 +28,12 @@ class LoginPageActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-
             val savedEmail = sharedPreferences.getString("email", "")
             val savedPassword = sharedPreferences.getString("password", "")
 
-            if (email == savedEmail && password == savedPassword) {
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+            } else if  (email == savedEmail && password == savedPassword) {
                 startActivity(Intent(this, HomePageActivity::class.java))
                 finish()
             } else {
