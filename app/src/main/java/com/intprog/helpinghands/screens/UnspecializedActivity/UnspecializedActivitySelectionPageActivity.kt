@@ -16,12 +16,12 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
-import com.intprog.helpinghands.model.Post
+import com.intprog.helpinghands.model.UnspecializedActivityPost
 import com.squareup.picasso.Picasso
 
 class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
-    private val posts = mutableListOf<Post>()
+    private val posts = mutableListOf<UnspecializedActivityPost>()
     private lateinit var listView: ListView
     private lateinit var adapter: PostAdapter
 
@@ -35,7 +35,7 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
         loadPostsFromSharedPreferences()
 
-        val post = intent.getParcelableExtra<Post>("post")
+        val post = intent.getParcelableExtra<UnspecializedActivityPost>("post")
         if (post != null) {
             addPost(post)
         }
@@ -54,7 +54,7 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
     }
 
-    fun addPost(post: Post) {
+    fun addPost(post: UnspecializedActivityPost) {
         posts.add(post)
         adapter.notifyDataSetChanged()
 
@@ -65,8 +65,8 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("UnspecializedActivityPrefs", Context.MODE_PRIVATE)
         val gson = Gson()
         val json = sharedPreferences.getString("posts", null)
-        val type = object : TypeToken<List<Post>>() {}.type
-        val loadedPosts: List<Post>? = gson.fromJson(json, type)
+        val type = object : TypeToken<List<UnspecializedActivityPost>>() {}.type
+        val loadedPosts: List<UnspecializedActivityPost>? = gson.fromJson(json, type)
         if (loadedPosts != null) {
             posts.clear()
             posts.addAll(loadedPosts)
@@ -91,8 +91,8 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
     private inner class PostAdapter(
         context: Context,
         resource: Int,
-        objects: MutableList<Post>
-    ) : ArrayAdapter<Post>(context, resource, objects) {
+        objects: MutableList<UnspecializedActivityPost>
+    ) : ArrayAdapter<UnspecializedActivityPost>(context, resource, objects) {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             var itemView = convertView

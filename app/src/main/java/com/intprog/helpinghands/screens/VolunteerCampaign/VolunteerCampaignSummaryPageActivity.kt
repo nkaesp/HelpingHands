@@ -9,7 +9,9 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivitySelectionPageActivity
 
 class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,17 +47,18 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
 
         val postButton = findViewById<Button>(R.id.postButton)
         postButton.setOnClickListener {
-            // Create an intent to start VolunteerCampaignStatusPageActivity
-            val intent = Intent(this, VolunteerCampaignStatusPageActivity::class.java).apply {
-                // Pass the relevant data as extras
-                putExtra("title", title)
-                // Pass imageUriString if available
-                if (imageUriString != null) {
-                    putExtra("imageUri", imageUriString)
+            if (!title.isNullOrEmpty() && !category.isNullOrEmpty() && !description.isNullOrEmpty()
+                && !startDate.isNullOrEmpty() && !duration.isNullOrEmpty() && !age.isNullOrEmpty()
+                && !location.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
+                val post = VolunteerCampaignPost(title ?: "",  category ?: "",  description ?: "", startDate ?: "" ,  duration ?: "",  age ?: "", imageUriString)
+
+                val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java).apply {
+                    putExtra("post", post)
                 }
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
             }
-            // Start the activity
-            startActivity(intent)
         }
 
     }
