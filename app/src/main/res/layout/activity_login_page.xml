@@ -67,8 +67,7 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColorHighlight="@color/black"
-                android:background="#EFEEEE"
-                android:inputType="textEmailAddress">
+                android:background="#EFEEEE">
 
             </EditText>
 
