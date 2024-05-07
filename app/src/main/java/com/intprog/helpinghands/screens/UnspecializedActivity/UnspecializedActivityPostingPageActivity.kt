@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignSummaryPageActivity
 
@@ -72,6 +73,12 @@ class UnspecializedActivityPostingPageActivity : AppCompatActivity() {
 
                 startActivity(intent)
             }
+        }
+
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
     }
 

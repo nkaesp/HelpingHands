@@ -55,7 +55,7 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
     }
 
     private fun loadPostsFromSharedPreferences() {
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("UnspecializedActivityPrefs", Context.MODE_PRIVATE)
         val gson = Gson()
         val json = sharedPreferences.getString("posts", null)
         val type = object : TypeToken<List<Post>>() {}.type
@@ -68,7 +68,7 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
     }
 
     private fun savePostsToSharedPreferences() {
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("UnspecializedActivityPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val gson = Gson()
         val json = gson.toJson(posts)

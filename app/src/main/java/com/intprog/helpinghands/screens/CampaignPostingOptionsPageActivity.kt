@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
+import android.widget.ImageButton
 import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignPostingPageActivity
 import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivityPostingPageActivity
 import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignPostingPageActivity
@@ -29,6 +30,12 @@ class CampaignPostingOptionsPageActivity : AppCompatActivity() {
         donationCampaignButton.setOnClickListener {
             val Intent = Intent(this, DonationCampaignPostingPageActivity::class.java)
             startActivity(Intent)
+        }
+
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
     }
 }
