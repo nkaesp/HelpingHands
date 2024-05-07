@@ -4,8 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.model.Post
 
 class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
 
@@ -41,11 +46,10 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         val postButton = findViewById<Button>(R.id.postButton)
         postButton.setOnClickListener {
             if (!title.isNullOrEmpty() && !noOfParticipants.isNullOrEmpty() && !description.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
-                val intent = Intent(this, UnspecializedActivityStatusPageActivity::class.java).apply {
-                    putExtra("title", title)
-                    putExtra("noOfParticipants", noOfParticipants)
-                    putExtra("description", description)
-                    putExtra("imageUri", imageUriString)
+                val post = Post(title ?: "", noOfParticipants ?: "", description ?: "", imageUriString)
+
+                val intent = Intent(this, UnspecializedActivitySelectionPageActivity::class.java).apply {
+                    putExtra("post", post)
                 }
                 startActivity(intent)
             } else {

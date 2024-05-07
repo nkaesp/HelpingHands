@@ -29,8 +29,8 @@
             android:clickable="false"
             android:src="@drawable/unspecialized_createpost_image" />
 
-        <TextView
-            android:id="@+id/viewDetailsTextView"
+        <Button
+            android:id="@+id/viewDetailsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -39,6 +39,7 @@
             android:clickable="true"
             android:text="View Details"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:background="@android:color/transparent"/>
     </RelativeLayout>
 </RelativeLayout>

@@ -34,7 +34,13 @@
             android:exported="true" />
         <activity
             android:name=".HomePageActivity"
-            android:exported="true" />
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity
             android:name=".CampaignJoiningOptionsPageActivity"
             android:exported="true" />
@@ -99,7 +105,8 @@
             android:exported="true" /> <!-- Volunteer Activity -->
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignPostingPageActivity"
-            android:exported="true" />
+            android:exported="true">
+        </activity>
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignSummaryPageActivity"
             android:exported="true" />
