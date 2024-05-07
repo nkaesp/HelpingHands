@@ -5,10 +5,12 @@ import android.os.Parcelable
 
 data class Post(
     val title: String,
+    val category: String,
     val description: String,
     val imageUri: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString()
