@@ -45,6 +45,11 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
+
+        val backTop = findViewById<ImageButton>(R.id.backTop)
+        backTop.setOnClickListener{
+            onBackPressed()
+        }
     }
 
     fun addPost(post: Post) {
