@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,33 @@
     android:orientation="vertical"
     tools:context=".screens.RegistrationActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/backTop"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="25dp"
+            android:layout_weight="4"
+            android:background="#FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/back1">
+        </ImageButton>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
     <RelativeLayout
+        android:id="@+id/registrationImgRelativeLayout"
         android:layout_width="340dp"
         android:layout_height="255dp"
+        android:layout_centerHorizontal="true"
         android:orientation="horizontal"
         android:background="@drawable/grey_rounded_corner"
         android:layout_gravity="center"
@@ -43,6 +67,8 @@
             android:textSize="16dp"/>
     </RelativeLayout>
     <LinearLayout
+        android:id="@+id/emailLinearLayout"
+        android:layout_below="@id/registrationImgRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/grey_rounded_corner"
@@ -59,8 +85,10 @@
             android:inputType="textEmailAddress"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/passwordLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/emailLinearLayout"
         android:background="@drawable/grey_rounded_corner"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="50dp">
@@ -75,8 +103,10 @@
             android:paddingLeft="20dp"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/confirmPasswordLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/passwordLinearLayout"
         android:background="@drawable/grey_rounded_corner"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="50dp">
@@ -93,6 +123,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/confirmPasswordLinearLayout"
         android:gravity="center"
         android:layout_marginTop="10dp">
         <Button
@@ -101,9 +132,8 @@
             android:layout_height="wrap_content"
             android:text="Create Account"
             android:background="@drawable/rounded_corner"
-            android:textColor="@color/white"
-            android:layout_marginTop="10dp"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

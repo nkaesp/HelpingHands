@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import com.intprog.helpinghands.LoginPageActivity
 import com.intprog.helpinghands.R
@@ -22,12 +23,16 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
+        val backButton: ImageButton = findViewById(R.id.backTop)
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
+
         emailEditText = findViewById(R.id.emailEditText)
         passwordEditText = findViewById(R.id.passwordEditText)
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText)
         createAccountButton = findViewById(R.id.createAccountButton)
         sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-
         createAccountButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()

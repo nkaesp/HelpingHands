@@ -65,7 +65,6 @@
                 android:layout_marginRight="20dp"
                 android:paddingLeft="15dp"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
                 android:textColorHighlight="@color/black"
                 android:background="#EFEEEE"
                 android:inputType="textEmailAddress">
