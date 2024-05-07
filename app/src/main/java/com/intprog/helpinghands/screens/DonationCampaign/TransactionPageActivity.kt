@@ -1,8 +1,10 @@
 package com.intprog.helpinghands.screens.DonationCampaign
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageButton
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 
 class TransactionPageActivity : AppCompatActivity() {
@@ -11,8 +13,16 @@ class TransactionPageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transaction_page)
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
+        backTop.setOnClickListener {
+            val intent = Intent(this, DonationOptionPageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
     }
 }

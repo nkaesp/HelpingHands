@@ -39,10 +39,11 @@ class CampaignPostingOptionsPageActivity : AppCompatActivity() {
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
+        backTop.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
-
 
     }
 }

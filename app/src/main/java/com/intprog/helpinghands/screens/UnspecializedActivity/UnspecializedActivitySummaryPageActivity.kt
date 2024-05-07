@@ -10,7 +10,12 @@ import android.widget.TextView
 import android.widget.Toast
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
+<<<<<<< HEAD
 import com.intprog.helpinghands.model.UnspecializedActivityPost
+=======
+import com.intprog.helpinghands.model.Post
+import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignPostingPageActivity
+>>>>>>> origin/main
 
 class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
 
@@ -64,8 +69,10 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
+        backTop.setOnClickListener {
+            val intent = Intent(this, UnspecializedActivityPostingPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
