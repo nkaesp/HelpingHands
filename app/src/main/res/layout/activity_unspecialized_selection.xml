@@ -9,7 +9,8 @@
         android:id="@+id/navTop"
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:src="@drawable/navtop"></ImageView>
+        android:src="@drawable/navtop">
+    </ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
