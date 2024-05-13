@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 
@@ -17,53 +18,48 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_campaign_summary_page)
 
-        //Donation Details
-        val titleSummary = findViewById<TextView>(R.id.titleSummary)
-        val titleInput= intent.getStringExtra("titleInput")
-        titleSummary.text = "Title: $titleInput"
-
-        val descriptionSummary = findViewById<TextView>(R.id.descriptionSummary)
-        val descInput= intent.getStringExtra("descInput")
-        descriptionSummary.text = "Description: $descInput"
-
-        val amountNeededSummary = findViewById<TextView>(R.id.amountNeededSummary)
-        val amountNeededInput= intent.getStringExtra("amountNeededInput")
-        amountNeededSummary.text = "Amount Needed: ₱$amountNeededInput"
-
-        val categorySummary = findViewById<TextView>(R.id.categorySummary)
-        val categoryInput= intent.getStringExtra("categoryInput")
-        categorySummary.text = "Category: $categoryInput"
-
-        //Contact Information
-        val fullNameSummary = findViewById<TextView>(R.id.fullNameSummary)
-        val fullNameInput= intent.getStringExtra("fullNameInput")
-        fullNameSummary.text = "Fullname: $fullNameInput"
-
-        val emailSummary = findViewById<TextView>(R.id.emailSummary)
-        val emailInput= intent.getStringExtra("emailInput")
-        emailSummary.text = "Email: $emailInput"
-
-        val phoneNumSummary = findViewById<TextView>(R.id.phoneNumSummary)
-        val phoneNumInput= intent.getStringExtra("phoneNumInput")
-        phoneNumSummary.text = "Phone Number: $phoneNumInput"
-
-        val contactMethodSummary = findViewById<TextView>(R.id.contactMethodSummary)
-        val contactMethodInput= intent.getStringExtra("contactMethodInput")
-        contactMethodSummary.text = "Preferred Contact Method: $contactMethodInput"
-
-        val imageUriString = intent.getStringExtra("imageUri")
-        if (imageUriString != null) {
-            val imageUri = Uri.parse(imageUriString)
-            val imageView = findViewById<ImageView>(R.id.imageDonationSummary)
-            imageView.setImageURI(imageUri)
-        }
-
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
             val intent = Intent(this, DonationCampaignPostingPageActivity::class.java)
             startActivity(intent)
             finish()
         }
+
+        val summaryImageButton: ImageView = findViewById(R.id.imageDonationSummary)
+        val titleTextView: TextView = findViewById(R.id.titleTextView)
+        val descriptionTextView: TextView = findViewById(R.id.descriptionTextView)
+        val amountNeededTextView: TextView = findViewById(R.id.amountNeededTextView)
+        val categoryTextView: TextView = findViewById(R.id.categoryTextView)
+        val fullNameTextView: TextView = findViewById(R.id.fullNameTextView)
+        val emailTextView: TextView = findViewById(R.id.emailTextView)
+        val phoneNumberTextView: TextView = findViewById(R.id.phoneNumberTextView)
+        val contactMethodTextView: TextView = findViewById(R.id.contactMethodTextView)
+
+        val imageUriString = intent.getStringExtra("imageUri")
+
+        if (!imageUriString.isNullOrEmpty()) {
+            val imageUri = Uri.parse(imageUriString)
+            summaryImageButton.setImageURI(imageUri)
+        }
+
+        val title = intent.getStringExtra("title")
+        val description = intent.getStringExtra("description")
+        val amountNeeded = intent.getStringExtra("amountNeeded")
+        val category = intent.getStringExtra("category")
+        val fullName = intent.getStringExtra("fullName")
+        val email = intent.getStringExtra("email")
+        val phoneNumber = intent.getStringExtra("phoneNumber")
+        val contactMethod = intent.getStringExtra("contactMethod")
+
+        titleTextView.text = title
+        descriptionTextView.text = description
+        amountNeededTextView.text = amountNeeded
+        categoryTextView.text = category
+        fullNameTextView.text = fullName
+        emailTextView.text = email
+        phoneNumberTextView.text = phoneNumber
+        contactMethodTextView.text = contactMethod
+
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
@@ -72,16 +68,21 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         }
 
 
-        val postNowButton = findViewById<Button>(R.id.btn_postNow)
-        postNowButton.setOnClickListener {
-            val postNowIntent = Intent(this, DonationCampaignStatusPageActivity::class.java)
-            // Pass data as extras
-            postNowIntent.putExtra("imageUri", imageUriString)
-            postNowIntent.putExtra("titleInput", titleInput)
-            postNowIntent.putExtra("descInput", descInput)
-            postNowIntent.putExtra("amountNeededInput", amountNeededInput)
-            // Pass any other data you want to send
-            startActivity(postNowIntent)
+        val postButton = findViewById<Button>(R.id.btn_postNow)
+        postButton.setOnClickListener {
+            if (!title.isNullOrEmpty() && !description.isNullOrEmpty() && !amountNeeded.isNullOrEmpty() && !category.isNullOrEmpty()
+                && !fullName.isNullOrEmpty() && !email.isNullOrEmpty() && !phoneNumber.isNullOrEmpty() && !contactMethod.isNullOrEmpty()
+                && !imageUriString.isNullOrEmpty()) {
+                val post = DonationCampaignPost(title ?: "", description ?: "", amountNeeded ?: "", category ?: "", fullName ?: "",
+                    email ?: "", phoneNumber ?: "", contactMethod ?: "", imageUriString)
+
+                val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java).apply {
+                    putExtra("post", post)
+                }
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }

@@ -46,13 +46,24 @@
     </LinearLayout>
 
 
-    <ListView
-        android:id="@+id/listView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/navTop">
+        android:layout_below="@id/navTop">
 
-    </ListView>
+        <ListView
+            android:id="@+id/donationCampaignListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            tools:listitem="@layout/activity_donation_campaign_selection_item" />
+    </RelativeLayout>
 
 
 

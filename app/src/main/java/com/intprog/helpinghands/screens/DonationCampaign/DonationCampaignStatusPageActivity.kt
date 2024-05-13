@@ -26,15 +26,15 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         }
 
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
-        val titleInput = intent.getStringExtra("titleInput")
+        val titleInput = intent.getStringExtra("title")
         titleTextView.text = "$titleInput"
 
         val descTextView = findViewById<TextView>(R.id.descTextView)
-        val descInput= intent.getStringExtra("descInput")
+        val descInput= intent.getStringExtra("description")
         descTextView.text = "$descInput"
 
         val amountNeededTextView =  findViewById<TextView>(R.id.amountNeededTextView)
-        val amountNeededInput = intent.getStringExtra("amountNeededInput")
+        val amountNeededInput = intent.getStringExtra("amountNeeded")
         amountNeededTextView.text = "$amountNeededInput"
 
         val backTop = findViewById<ImageButton>(R.id.backTop)

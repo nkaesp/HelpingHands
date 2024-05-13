@@ -79,14 +79,14 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
                 thePhoneNum.isNotEmpty() && theContactMethod.isNotEmpty()
             ) {
                 val intent = Intent(this, DonationCampaignSummaryPageActivity::class.java).apply {
-                    putExtra("titleInput", theTitle)
-                    putExtra("descInput", theDesc)
-                    putExtra("amountNeededInput", theAmountNeeded)
-                    putExtra("categoryInput", theCategory)
-                    putExtra("fullNameInput", theFullName)
-                    putExtra("emailInput", theEmail)
-                    putExtra("phoneNumInput", thePhoneNum)
-                    putExtra("contactMethodInput", theContactMethod)
+                    putExtra("title", theTitle)
+                    putExtra("description", theDesc)
+                    putExtra("amountNeeded", theAmountNeeded)
+                    putExtra("category", theCategory)
+                    putExtra("fullName", theFullName)
+                    putExtra("email", theEmail)
+                    putExtra("phoneNumber", thePhoneNum)
+                    putExtra("contactMethod", theContactMethod)
                     putExtra("imageUri", imageUri.toString())
                 }
                 startActivity(intent)
