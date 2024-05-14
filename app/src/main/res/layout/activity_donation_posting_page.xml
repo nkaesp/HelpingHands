@@ -160,7 +160,7 @@
         android:layout_width="370dp"
         android:layout_height="80dp"
         android:hint="Description"
-        android:background="#ECECEC"
+        android:background="@drawable/bg_radius_ten_gray"
         android:layout_below="@id/below_details2"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
