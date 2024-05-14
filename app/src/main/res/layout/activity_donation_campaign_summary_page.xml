@@ -52,6 +52,17 @@
 
 <!--    content-->
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/navTop"
+        android:layout_above="@id/navBot"
+        tools:ignore="NotSibling">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/Donation"
         android:layout_width="match_parent"
@@ -65,26 +76,26 @@
         android:layout_marginTop="10dp">
     </TextView>
 
-    <ImageView
-        android:id="@+id/imageDonationSummary"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/Donation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:clickable="false"
-        android:scaleType="centerCrop"></ImageView>
+            <ImageView
+                android:id="@+id/imageDonationSummary"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_below="@+id/Donation"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:scaleType="centerCrop"></ImageView>
 
-    <ImageView
-        android:id="@+id/contentSummary"
-        android:layout_width="375dp"
-        android:layout_height="320dp"
-        android:layout_below="@+id/imageDonationSummary"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:background="#ECECEC"
-        android:textAlignment="center"></ImageView>
+            <ImageView
+                android:id="@+id/contentSummary"
+                android:layout_width="385dp"
+                android:layout_height="350dp"
+                android:layout_below="@+id/imageDonationSummary"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:textAlignment="center"></ImageView>
 
     <TextView
         android:id="@+id/detailsSummary"
@@ -92,31 +103,32 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/contentSummary"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="15dp"
         android:text="Donation Details"
         android:textColor="@color/black"
         android:textStyle="bold">
     </TextView>
 
 <!--    Donation Details-->
-    <TextView
-        android:id="@+id/titleLabel"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/detailsSummary"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="5dp"
-        android:text="Title: "
-        android:textColor="@color/black">
-    </TextView>
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleLabel"
-        android:layout_marginLeft="33dp"
-        android:text="Insert Title">
-    </TextView>
+            <TextView
+                android:id="@+id/titleLabel"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detailsSummary"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="5dp"
+                android:text="Title: "
+                android:textColor="#6F6F6F"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleLabel"
+                android:layout_marginLeft="33dp"
+                android:text="Insert Title"
+                android:textColor="#4C91F8"></TextView>
 
     <TextView
         android:id="@+id/categoryLabel"
@@ -127,45 +139,48 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/titleLabel"
         android:text="Category:"
-        android:textColor="@color/black">
-    </TextView>
-    <TextView
-        android:id="@+id/categoryTextView"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/categoryLabel"
-        android:layout_toRightOf="@+id/titleTextView"
-        android:layout_marginLeft="10dp"
-        android:text="Insert Category">
+        android:textColor="#6F6F6F"
+        android:textStyle="bold">
     </TextView>
 
-    <TextView
-        android:id="@+id/amountNeededLabel"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleTextView"
-        android:layout_marginLeft="28dp"
-        android:text="Amount Needed:"
-        android:textColor="@color/black">
-    </TextView>
-    <TextView
-        android:id="@+id/amountNeededTextView"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/amountNeededLabel"
-        android:layout_marginLeft="33dp"
-        android:text="Insert Amount">
-    </TextView>
+            <TextView
+                android:id="@+id/categoryTextView"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/categoryLabel"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/titleTextView"
+                android:text="Insert Category"
+                android:textColor="#4C91F8"></TextView>
 
-    <TextView
-        android:id="@+id/descriptionLabel"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/amountNeededTextView"
-        android:layout_marginLeft="28dp"
-        android:text="Description:"
-        android:textColor="@color/black">
-    </TextView>
+            <TextView
+                android:id="@+id/amountNeededLabel"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTextView"
+                android:layout_marginLeft="28dp"
+                android:text="Amount Needed:"
+                android:textColor="#6F6F6F"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/amountNeededTextView"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/amountNeededLabel"
+                android:layout_marginLeft="33dp"
+                android:text="Insert Amount"
+                android:textColor="#4C91F8"></TextView>
+
+            <TextView
+                android:id="@+id/descriptionLabel"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/amountNeededTextView"
+                android:layout_marginLeft="28dp"
+                android:text="Description:"
+                android:textColor="#6F6F6F"
+                android:textStyle="bold"></TextView>
     <LinearLayout
         android:id="@+id/descriptionLinearLayout"
         android:layout_width="match_parent"
@@ -191,128 +206,136 @@
             android:maxLines="3"
             android:minLines="1"
             android:scrollbars="none"
-            android:text="Insert Description" />
+            android:text="Insert Description"
+            android:textColor="#4C91F8"/>
     </LinearLayout>
 
 
 <!--    Contact Information-->
 
-    <TextView
-        android:id="@+id/contactSummary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="2dp"
-        android:text="Contact Information "
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_below="@+id/descriptionLinearLayout">
-    </TextView>
+            <TextView
+                android:id="@+id/contactSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descriptionLinearLayout"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:text="Contact Information "
+                android:textColor="@color/black"
+                android:textStyle="bold"></TextView>
 
 
-    <TextView
-        android:id="@+id/fullNameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/contactSummary"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="5dp"
-        android:text="Full Name: "
-        android:textColor="@color/black">
-    </TextView>
-    <TextView
-        android:id="@+id/fullNameTextView"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/contactSummary"
-        android:layout_toEndOf="@+id/fullNameLabel"
-        android:layout_marginTop="5dp"
-        android:text="Insert Full Name">
-    </TextView>
+            <TextView
+                android:id="@+id/fullNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contactSummary"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="5dp"
+                android:text="Full Name: "
+                android:textColor="#6F6F6F"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/fullNameTextView"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contactSummary"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/fullNameLabel"
+                android:text="Insert Full Name"
+                android:textColor="#4C91F8"></TextView>
 
 
-    <TextView
-        android:id="@+id/emailLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fullNameLabel"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="5dp"
-        android:text="Email: "
-        android:textColor="@color/black">
-    </TextView>
-    <TextView
-        android:id="@+id/emailTextView"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fullNameTextView"
-        android:layout_toEndOf="@+id/emailLabel"
-        android:layout_marginTop="5dp"
-        android:text="Insert Email">
-    </TextView>
+            <TextView
+                android:id="@+id/emailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fullNameLabel"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="5dp"
+                android:text="Email: "
+                android:textColor="#6F6F6F"
+                android:textStyle="bold"></TextView>
 
-    <TextView
-        android:id="@+id/phoneNumberLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emailLabel"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="5dp"
-        android:text="Phone Number: "
-        android:textColor="@color/black">
-    </TextView>
-    <TextView
-        android:id="@+id/phoneNumberTextView"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emailTextView"
-        android:layout_toEndOf="@+id/phoneNumberLabel"
-        android:layout_marginTop="5dp"
-        android:text="Insert Phone Number">
-    </TextView>
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fullNameTextView"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/emailLabel"
+                android:text="Insert Email"
+                android:textColor="#4C91F8"></TextView>
 
-    <TextView
-        android:id="@+id/contactMethodLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phoneNumberLabel"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="5dp"
-        android:text="Preferred Contact Method: "
-        android:textColor="@color/black">
-    </TextView>
-    <TextView
-        android:id="@+id/contactMethodTextView"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phoneNumberTextView"
-        android:layout_toEndOf="@+id/contactMethodLabel"
-        android:layout_marginTop="5dp"
-        android:text="Insert Contact Method">
-    </TextView>
+            <TextView
+                android:id="@+id/phoneNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailLabel"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="5dp"
+                android:text="Phone Number: "
+                android:textColor="#6F6F6F"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/phoneNumberTextView"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailTextView"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/phoneNumberLabel"
+                android:text="Insert Phone Number"
+                android:textColor="#4C91F8"></TextView>
+
+            <TextView
+                android:id="@+id/contactMethodLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneNumberLabel"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="5dp"
+                android:text="Preferred Contact Method: "
+                android:textColor="#6F6F6F"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/contactMethodTextView"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneNumberTextView"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/contactMethodLabel"
+                android:text="Insert Contact Method"
+                android:textColor="#4C91F8"></TextView>
 
 
 <!--    Button Post Now-->
 
-    <Button
-        android:id="@+id/btn_postNow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/contentSummary"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="100dp"
-        android:background="@drawable/btn_continue"
-        android:text="Post Now"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:onClick="onPostNowClicked"></Button>
+            <Button
+                android:id="@+id/btn_postNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contentSummary"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="100dp"
+                android:layout_marginBottom="80dp"
+                android:background="@drawable/btn_continue"
+                android:onClick="onPostNowClicked"
+                android:text="Post Now"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold"></Button>
 
+        </RelativeLayout>
+    </ScrollView>
     <!--    nav sa ubos-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/navBot"
             android:layout_width="match_parent"

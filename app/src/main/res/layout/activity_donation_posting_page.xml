@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".screens.DonationCampaign.DonationCampaignPostingPageActivity">
 
-
+    <!--    nav sa top-->
     <ImageView
         android:id="@+id/navTop"
         android:layout_width="match_parent"
@@ -51,7 +51,20 @@
     </LinearLayout>
 
 
-<!--    CONTENT-->
+
+
+    <!--    CONTENT-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/navTop"
+        android:layout_above="@id/navBot"
+        tools:ignore="NotSibling">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/Donation"
@@ -78,74 +91,117 @@
         android:scaleType="centerCrop"
         android:src="@drawable/donation_createpost_image"></ImageButton>
 
-    <TextView
-        android:id="@+id/DonationDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnUploadImage"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Donation Details:"
-        android:textColor="@color/black"
-        android:textStyle="bold">
-    </TextView>
+        <TextView
+            android:id="@+id/DonationDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnUploadImage"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Donation Details:"
+            android:textColor="@color/black"
+            android:textStyle="bold"></TextView>
+
+
+        <LinearLayout
+            android:id="@+id/below_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/DonationDetails"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="Title : "
+
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="15dp"></TextView>
+
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="178dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp">
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/below_detail2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/below_details"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:text="Category :"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
+
+
+            <EditText
+                android:id="@+id/category"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp">
+            </EditText>
+
+        </LinearLayout>
+
+
 
     <LinearLayout
-        android:id="@+id/below_details"
+        android:id="@+id/below_details3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/DonationDetails"
+        android:layout_below="@+id/below_detail2"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
 
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="130dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Title"
+            android:text="Amount Needed : "
             android:layout_marginRight="5dp"
-            android:background="@drawable/bg_radius_ten_gray"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
-            android:paddingLeft="10dp">
-        </EditText>
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="15dp">
+        </TextView>
 
-
-        <EditText
-            android:id="@+id/category"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Category"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:layout_marginLeft="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp">
-        </EditText>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/below_details2"
-        android:layout_width="185dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/below_details"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
 
         <EditText
             android:id="@+id/amountNeeded"
-            android:layout_width="match_parent"
+            android:layout_width="102dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Amount Needed"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="50dp"
             android:background="@drawable/bg_radius_ten_gray"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
@@ -155,37 +211,47 @@
 
 
     </LinearLayout>
-    <EditText
-        android:id="@+id/desc"
-        android:layout_width="370dp"
-        android:layout_height="80dp"
-        android:hint="Description"
-        android:background="@drawable/bg_radius_ten_gray"
-        android:layout_below="@id/below_details2"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:paddingLeft="10dp"
-        android:gravity="top|left"
-        android:inputType="textMultiLine|textCapSentences"
-        android:lines="5"
-        android:maxLines="5"
-        android:minLines="1"
-        android:scrollbars="none">
-    </EditText>
 
     <TextView
-        android:id="@+id/contactInformation"
+        android:id="@+id/descText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/desc"
-        android:layout_marginLeft="20dp"
+        android:text="Description: "
+        android:layout_below="@+id/below_details3"
         android:layout_marginTop="5dp"
-        android:text="Contact Information:"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textColor="@color/black"
-        android:textStyle="bold">
-    </TextView>
+        android:textSize="15dp"></TextView>
+
+        <EditText
+            android:id="@+id/desc"
+            android:layout_width="370dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/descText"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_radius_ten_gray"
+            android:gravity="top|left"
+            android:inputType="textMultiLine|textCapSentences"
+            android:lines="5"
+            android:maxLines="5"
+            android:minLines="1"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:scrollbars="none"></EditText>
+
+        <TextView
+            android:id="@+id/contactInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Contact Information:"
+            android:textColor="@color/black"
+            android:textStyle="bold"></TextView>
 
     <LinearLayout
         android:id="@+id/belowContactInfo"
@@ -197,78 +263,168 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
 
-        <EditText
-            android:id="@+id/fullName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Full Name"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp">
-        </EditText>
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Email"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="Full Name : "
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
 
-        <EditText
-            android:id="@+id/phoneNum"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Phone Number"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </EditText>
+            <EditText
+                android:id="@+id/fullName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:inputType="text">
+            </EditText>
 
-        <EditText
-            android:id="@+id/contactMethod"
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Preferred Contact Method"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </EditText>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="Email : "
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:inputType="textEmailAddress">
+            </EditText>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Phone Number : "
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
+
+
+            <EditText
+                android:id="@+id/phoneNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:inputType="phone">
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Preferred Contact Method : "
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/contactMethod"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Email or Phone"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:inputType="text">
+            </EditText>
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-<!--    button continue-->
+    <!--    button continue-->
 
-    <Button
-        android:id="@+id/btn_continue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/belowContactInfo"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="100dp"
-        android:background="@drawable/btn_continue"
-        android:text="Continue"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        android:textStyle="bold">
-    </Button>
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/belowContactInfo"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/btn_continue"
+            android:text="Continue"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"></Button>
 
-    <!--    nav sa ubos-->
+    </RelativeLayout>
+    </ScrollView>
+
+    <!--    nav sa bottom-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
