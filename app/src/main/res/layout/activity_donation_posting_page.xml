@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".screens.DonationCampaign.DonationCampaignPostingPageActivity">
 
-
+    <!--    nav sa top-->
     <ImageView
         android:id="@+id/navTop"
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
     </LinearLayout>
 
 
-<!--    CONTENT-->
+    <!--    CONTENT-->
 
     <TextView
         android:id="@+id/Donation"
@@ -110,11 +110,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Title : "
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:paddingLeft="10dp"
-                android:layout_marginTop="1dp"></TextView>
+                android:textColor="@color/black"
+                android:textSize="15dp"></TextView>
 
             <EditText
                 android:id="@+id/title"
@@ -131,36 +132,38 @@
 
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="1">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Category :"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp">
-        </TextView>
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Category :"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
 
 
-        <EditText
-            android:id="@+id/category"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:layout_marginLeft="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp">
-        </EditText>
+            <EditText
+                android:id="@+id/category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp">
+            </EditText>
 
-    </LinearLayout>
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -176,14 +179,16 @@
         android:layout_marginRight="20dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="Amount Needed : "
             android:layout_marginRight="5dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
-            android:paddingLeft="10dp">
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="15dp">
         </TextView>
 
 
@@ -192,7 +197,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="Amount Needed"
             android:layout_marginRight="50dp"
             android:background="@drawable/bg_radius_ten_gray"
             android:paddingTop="2dp"
@@ -212,7 +216,9 @@
         android:layout_below="@+id/below_details2"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"></TextView>
+        android:layout_marginRight="20dp"
+        android:textColor="@color/black"
+        android:textSize="15dp"></TextView>
 
     <EditText
         android:id="@+id/desc"
@@ -267,7 +273,9 @@
                 android:text="Full Name : "
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:paddingLeft="10dp">
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
             </TextView>
 
             <EditText
@@ -285,105 +293,111 @@
         </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:text="Email : "
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </TextView>
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/email"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="Email : "
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp">
+            </EditText>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </EditText>
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Phone Number : "
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
+
+
+            <EditText
+                android:id="@+id/phoneNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp">
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Preferred Contact Method : "
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="15dp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/contactMethod"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Email or Phone"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp">
+            </EditText>
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="Phone Number : "
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </TextView>
-
-
-        <EditText
-            android:id="@+id/phoneNum"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </EditText>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Preferred Contact Method : "
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </TextView>
-
-        <EditText
-            android:id="@+id/contactMethod"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint=""
-            android:background="@drawable/bg_radius_ten_gray"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="5dp">
-        </EditText>
-
-
-    </LinearLayout>
-
-
-    </LinearLayout>
-
-<!--    button continue-->
+    <!--    button continue-->
 
     <Button
         android:id="@+id/btn_continue"
@@ -401,7 +415,7 @@
         android:textStyle="bold">
     </Button>
 
-    <!--    nav sa ubos-->
+    <!--    nav sa bottom-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
