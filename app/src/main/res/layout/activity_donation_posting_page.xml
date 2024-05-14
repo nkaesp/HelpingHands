@@ -51,7 +51,20 @@
     </LinearLayout>
 
 
+
+
     <!--    CONTENT-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/navTop"
+        android:layout_above="@id/navBot"
+        tools:ignore="NotSibling">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/Donation"
@@ -122,7 +135,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Title"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/bg_radius_ten_gray"
                 android:paddingLeft="10dp"
@@ -399,21 +411,24 @@
 
     <!--    button continue-->
 
-    <Button
-        android:id="@+id/btn_continue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/belowContactInfo"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="100dp"
-        android:background="@drawable/btn_continue"
-        android:text="Continue"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        android:textStyle="bold">
-    </Button>
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/belowContactInfo"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/btn_continue"
+            android:text="Continue"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"></Button>
+
+    </RelativeLayout>
+    </ScrollView>
 
     <!--    nav sa bottom-->
     <RelativeLayout
