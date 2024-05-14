@@ -54,7 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/navTop"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:text="Unspecialized Activity"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -92,7 +93,7 @@
         android:layout_below="@+id/titleTextView"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:background="#ECECEC">
+        android:background="@drawable/bg_radius_ten_gray">
 
         <TextView
             android:id="@+id/descriptionTextView"
@@ -129,7 +130,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/noOfParticipantsTextView"
-        android:background="#ECECEC"
+        android:background="@drawable/bg_radius_ten_gray"
         android:hint=" " />
     <TextView
         android:id="@+id/peopleWhoJoinedTextView"
@@ -147,7 +148,7 @@
         android:layout_below="@+id/peopleWhoJoinedTextView"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
-        android:background="#ECECEC">
+        android:background="@drawable/bg_radius_ten_gray">
 
         <ListView
             android:id="@+id/participantsListView"
@@ -159,62 +160,11 @@
     </LinearLayout>
 
     <!--    nav sa ubos-->
-    <RelativeLayout
+    <fragment
+        android:id="@+id/navBarFragment"
+        android:name="com.intprog.helpinghands.NavBarFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/navBot"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/navbottom" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/navBot"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/notificationsImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/bell" />
-
-            <ImageButton
-                android:id="@+id/homeImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/home" />
-
-            <ImageButton
-                android:id="@+id/menuImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/more" />
-        </LinearLayout>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

@@ -16,18 +16,19 @@
         android:theme="@style/Theme.HelpingHands"
         tools:targetApi="31" >
 
+
          <!-- Main Screens -->
         <activity
-            android:name=".screens.LaunchActivity"
+            android:name=".LaunchActivity"
             android:exported="true" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".screens.RegistrationActivity"
+            android:name=".RegistrationActivity"
             android:exported="true" />
         <activity
             android:name=".LoginPageActivity"
@@ -35,11 +36,7 @@
         <activity
             android:name=".HomePageActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".CampaignJoiningOptionsPageActivity"
@@ -56,12 +53,6 @@
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignPostingPageActivity"
             android:exported="true" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignSummaryPageActivity"

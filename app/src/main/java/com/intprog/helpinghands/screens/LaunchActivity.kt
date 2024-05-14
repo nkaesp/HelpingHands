@@ -1,9 +1,11 @@
-package com.intprog.helpinghands.screens
+package com.intprog.helpinghands
 
 import android.content.Intent
+import android.graphics.Paint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import com.intprog.helpinghands.LoginPageActivity
 import com.intprog.helpinghands.R
 
@@ -18,9 +20,10 @@ class LaunchActivity : AppCompatActivity() {
             startActivity(Intent)
         }
 
-        val signinButton = findViewById<Button>(R.id.signInButton)
-        signinButton.setOnClickListener {
-            val Intent = Intent(this, LoginPageActivity::class.java) //temporary ra ni
+        val signInButton = findViewById<TextView>(R.id.signInButton)
+        signInButton.paintFlags = signInButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        signInButton.setOnClickListener {
+            val Intent = Intent(this, LoginPageActivity::class.java)
             startActivity(Intent)
         }
     }

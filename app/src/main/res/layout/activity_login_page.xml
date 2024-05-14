@@ -18,17 +18,17 @@
             android:layout_height="200dp"
             android:layout_marginTop="50dp"
             android:layout_gravity="center"
-            android:src="@drawable/login_image">
+            android:src="@drawable/logo">
         </ImageView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="HelpingHands"
-            android:textSize="30sp"
+            android:textSize="38sp"
             android:textStyle="bold"
-            android:textColor="#4C91F8"
+            android:textColor="#63C7F1"
             android:textAlignment="center">
         </TextView>
 
@@ -36,10 +36,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Make a difference in your community"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:textAlignment="center"
-            android:textSize="20dp"
-            android:textColor="@color/black">
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:letterSpacing="0.05">
         </TextView>
 
 
@@ -66,7 +67,7 @@
                 android:paddingLeft="15dp"
                 android:hint="Email"
                 android:textColorHighlight="@color/black"
-                android:background="#EFEEEE">
+                android:background="@drawable/bg_radius_ten_gray">
 
             </EditText>
 
@@ -95,7 +96,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="25dp"
                 android:hint="Password"
-                android:background="#EFEEEE"
+                android:background="@drawable/bg_radius_ten_gray"
                 android:inputType="textPassword">
             </EditText>
         </LinearLayout>
@@ -111,11 +112,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textSize="9.6sp"
+                android:textSize="15sp"
                 android:textColor="#0066FF"
                 android:background="@android:color/transparent"
                 android:text="Sign Up"
-
                 android:layout_weight="1">
             </Button>
 
@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textSize="9.6sp"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:background="@android:color/transparent"
                 android:text="Forgot your password?"
@@ -142,7 +142,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:textSize="20dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="Log in"
             android:background="@drawable/bg_login_button"
             android:layout_gravity="center">
