@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
 
 class DonationCampaignStatusPageActivity : AppCompatActivity() {
@@ -25,15 +26,15 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         }
 
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
-        val titleInput = intent.getStringExtra("titleInput")
+        val titleInput = intent.getStringExtra("title")
         titleTextView.text = "$titleInput"
 
         val descTextView = findViewById<TextView>(R.id.descTextView)
-        val descInput= intent.getStringExtra("descInput")
+        val descInput= intent.getStringExtra("description")
         descTextView.text = "$descInput"
 
         val amountNeededTextView =  findViewById<TextView>(R.id.amountNeededTextView)
-        val amountNeededInput = intent.getStringExtra("amountNeededInput")
+        val amountNeededInput = intent.getStringExtra("amountNeeded")
         amountNeededTextView.text = "$amountNeededInput"
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
@@ -41,6 +42,12 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
             val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
 
     }

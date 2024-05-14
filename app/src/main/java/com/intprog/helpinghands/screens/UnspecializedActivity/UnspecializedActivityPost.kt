@@ -3,7 +3,7 @@ package com.intprog.helpinghands.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Post(
+data class UnspecializedActivityPost(
     val title: String,
     val noOfParticipants: String,
     val description: String,
@@ -27,12 +27,12 @@ data class Post(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Post> {
-        override fun createFromParcel(parcel: Parcel): Post {
-            return Post(parcel)
+    companion object CREATOR : Parcelable.Creator<UnspecializedActivityPost> {
+        override fun createFromParcel(parcel: Parcel): UnspecializedActivityPost {
+            return UnspecializedActivityPost(parcel)
         }
 
-        override fun newArray(size: Int): Array<Post?> {
+        override fun newArray(size: Int): Array<UnspecializedActivityPost?> {
             return arrayOfNulls(size)
         }
     }

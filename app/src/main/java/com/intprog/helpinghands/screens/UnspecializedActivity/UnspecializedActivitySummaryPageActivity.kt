@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
-import com.intprog.helpinghands.model.Post
+import com.intprog.helpinghands.model.UnspecializedActivityPost
 
 class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
 
@@ -46,7 +46,7 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         val postButton = findViewById<Button>(R.id.postButton)
         postButton.setOnClickListener {
             if (!title.isNullOrEmpty() && !noOfParticipants.isNullOrEmpty() && !description.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
-                val post = Post(title ?: "", noOfParticipants ?: "", description ?: "", imageUriString)
+                val post = UnspecializedActivityPost(title ?: "", noOfParticipants ?: "", description ?: "", imageUriString)
 
                 val intent = Intent(this, UnspecializedActivitySelectionPageActivity::class.java).apply {
                     putExtra("post", post)
@@ -61,11 +61,6 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
-        }
-
-        val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener{
-            onBackPressed()
         }
     }
 }

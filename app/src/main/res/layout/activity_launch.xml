@@ -12,7 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100px"
+            android:layout_marginTop="100dp"
             android:id="@+id/titleTextView">
 
             <TextView
@@ -71,9 +71,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="25dp"
-            android:id="@+id/signInLinearLayout"
-            android:layout_below="@id/getStartedLinearLayout">
+            android:layout_alignParentBottom="true"
+            android:id="@+id/signInLinearLayout">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

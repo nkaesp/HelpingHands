@@ -178,7 +178,7 @@
 
             <TextView
                 android:id="@+id/descriptionTextView"
-                android:layout_width="350dp"
+                android:layout_width="310dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
