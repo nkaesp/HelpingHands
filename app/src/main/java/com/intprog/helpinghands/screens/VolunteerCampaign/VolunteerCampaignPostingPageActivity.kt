@@ -45,7 +45,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
         val categoryEditText = findViewById<EditText>(R.id.categoryEditText)
         val descEditText = findViewById<EditText>(R.id.descEditText)
         val startDateEditText = findViewById<EditText>(R.id.startDateEditText)
-        val durationEditText = findViewById<EditText>(R.id.durationEditText)
+        val endDateEditText = findViewById<EditText>(R.id.endDateEditText)
         val ageEditText = findViewById<EditText>(R.id.ageEditText)
         val locationEditText = findViewById<EditText>(R.id.locationEditText)
 
@@ -62,7 +62,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             val category = categoryEditText.text.toString()
             val description = descEditText.text.toString()
             val startDate = startDateEditText.text.toString()
-            val duration = durationEditText.text.toString()
+            val duration = endDateEditText.text.toString()
             val age = ageEditText.text.toString()
             val location = locationEditText.text.toString()
 
@@ -91,7 +91,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 categoryEditText.text.clear()
                 descEditText.text.clear()
                 startDateEditText.text.clear()
-                durationEditText.text.clear()
+                endDateEditText.text.clear()
                 ageEditText.text.clear()
                 locationEditText.text.clear()
 

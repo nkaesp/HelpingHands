@@ -105,7 +105,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Volunteer Details:"
+            android:text="Campaign Details:"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:textSize="20sp"
@@ -114,107 +114,161 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title:"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"/>
 
         <EditText
             android:id="@+id/titleEditText"
-            android:layout_width="30dp"
+            android:layout_width="100dp"
             android:layout_height="24dp"
-            android:hint="Title"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/bg_rectangle"/>
+            android:layout_toRightOf="@id/titleTextView"
+            android:background="@drawable/bg_radius_ten_gray"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/categoryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/titleEditText"
+            android:text="Category:"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/categoryEditText"
-            android:layout_width="65dp"
+            android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:hint="Category"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_rectangle"/>
+            android:textSize="15sp"
+            android:layout_toRightOf="@id/categoryTextView"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_radius_ten_gray"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/descTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/titleEditText"
+            android:text="Description:"
+            android:textStyle="bold"
+            android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/descEditText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Description"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/bg_rectangle"/>
+        <EditText
+            android:id="@+id/descEditText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/descTextView"
+            android:background="@drawable/bg_radius_ten_gray"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        <TextView
+            android:id="@+id/startDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/descEditText"
+            android:text="Start Date:"
+            android:textStyle="bold"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/startDateEditText"
             android:layout_width="85dp"
             android:layout_height="24dp"
-            android:hint="Start Date"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/startDateTextView"
+            android:layout_below="@id/descEditText"
             android:inputType="date"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/bg_rectangle"/>
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_radius_ten_gray"/>
+
+        <TextView
+            android:id="@+id/endDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/descEditText"
+            android:layout_toRightOf="@id/startDateEditText"
+            android:text="End Date:"
+            android:textStyle="bold"
+            android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/durationEditText"
-            android:layout_width="120dp"
+            android:id="@+id/endDateEditText"
+            android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_rectangle"
-            android:hint="Duration"
-            android:textSize="18sp" />
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/endDateTextView"
+            android:layout_below="@id/descEditText"
+            android:inputType="date"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_radius_ten_gray"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        <TextView
+            android:id="@+id/ageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/startDateEditText"
+            android:text="Age:"
+            android:textStyle="bold"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/ageEditText"
-            android:layout_width="35dp"
+            android:layout_width="80dp"
             android:layout_height="24dp"
-            android:hint="Age"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/bg_rectangle"/>
+            android:layout_below="@id/startDateEditText"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/ageTextView"
+            android:background="@drawable/bg_radius_ten_gray" />
+
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/endDateEditText"
+            android:layout_toRightOf="@id/ageEditText"
+            android:text="Location:"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/locationEditText"
-            android:layout_width="70dp"
+            android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:hint="Location"
-            android:textSize="18sp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_rectangle"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/locationTextView"
+            android:layout_below="@id/endDateEditText"
+            android:background="@drawable/bg_radius_ten_gray"/>
 
 
+    </RelativeLayout>
 
-
-    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -231,7 +285,9 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:textStyle="bold"></Button>
+            android:textStyle="bold">
+        </Button>
+
     </RelativeLayout>
 
     <!--    nav sa ubos-->
