@@ -37,14 +37,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="-30dp"
+                android:layout_marginRight="50dp"
                 android:layout_weight="1"
-                android:text="Volunteer Campaign Summary"
+                android:text="Create Volunteer \nCampaign"
                 android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -53,7 +54,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Volunteer Campaign"
+        android:text="Summary"
         android:textSize="20sp"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -69,7 +70,7 @@
             android:id="@+id/uploadedImageView"
             android:layout_width="350dp"
             android:layout_height="180dp"
-            android:src="@drawable/volunteer"
+            android:src="@drawable/placeholder_image1"
             android:layout_gravity="center"
             android:scaleType="centerCrop" />
 
@@ -79,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="vertical"
-        android:background="@drawable/bg_rectangle"
+        android:background="@drawable/bg_radius_ten_gray"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
@@ -88,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Volunteer Details:"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:textSize="20sp"

@@ -37,19 +37,27 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="-30dp"
+                android:layout_marginRight="70dp"
                 android:layout_weight="1"
-                android:text="Volunteer Campaign"
+                android:text="Volunteer Campaign Status"
                 android:textColor="@color/black"
                 android:textSize="22dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center"/>
         </LinearLayout>
 
     </RelativeLayout>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volunteer Campaign"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +67,7 @@
             android:id="@+id/postedpic"
             android:layout_width="350dp"
             android:layout_height="180dp"
-            android:src="@drawable/placeholder"
+            android:src="@drawable/placeholder_image1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
@@ -73,7 +81,8 @@
             android:layout_below="@+id/postedpic"
             android:layout_centerHorizontal="true"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/numberOfVolunteers"
@@ -90,7 +99,7 @@
             android:id="@+id/totalNum"
             android:layout_width="50dp"
             android:layout_height="20dp"
-            android:background="@drawable/bg_rectangle"
+            android:background="@drawable/bg_radius_ten_gray"
             android:layout_toRightOf="@+id/numberOfVolunteers"
             android:layout_below="@id/title"
             android:layout_marginTop="10dp"
@@ -115,7 +124,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/bg_rectangle"
+        android:background="@drawable/bg_radius_ten_gray"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
