@@ -83,7 +83,9 @@
             android:exported="true" />
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivitySelectionPageActivity"
-            android:exported="true" /> <!-- Volunteer Activity -->
+            android:exported="true" /> 
+  
+      <!-- Volunteer Activity -->
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignPostingPageActivity"
             android:exported="true">
