@@ -77,9 +77,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:orientation="vertical"
-        android:background="@drawable/bg_rectangle"
+        android:background="@drawable/bg_radius_ten_gray"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
@@ -94,10 +94,9 @@
             android:textColor="@color/black"
             android:textStyle="bold"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp">
@@ -108,8 +107,8 @@
                 android:layout_height="wrap_content"
                 android:text="Title"
                 android:textSize="18sp"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"/>
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="10dp"/>
 
             <TextView
                 android:id="@+id/categoryTextView"
@@ -117,26 +116,27 @@
                 android:layout_height="wrap_content"
                 android:text="Category"
                 android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/titleTextView"/>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/descTextView"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Description"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/categoryTextView"/>
 
-        <TextView
-            android:id="@+id/descTextView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Description"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/startDateTextView"
@@ -160,7 +160,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp">
@@ -171,16 +171,19 @@
                 android:layout_height="wrap_content"
                 android:text="Age"
                 android:textSize="18sp"
-                android:layout_weight="1"
                 android:layout_marginRight="10dp"/>
+
             <TextView
                 android:id="@+id/locationTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location"
                 android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:layout_marginTop="5dp"/>
+  />
         </LinearLayout>
+
+
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"

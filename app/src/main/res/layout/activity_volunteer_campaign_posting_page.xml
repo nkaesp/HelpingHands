@@ -158,6 +158,7 @@
             android:layout_below="@id/titleTextView"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
+            android:textSize="15sp"
             android:background="@drawable/bg_radius_ten_gray"/>
 
         <TextView
@@ -175,6 +176,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="5dp"
+            android:textSize="15sp"
             android:layout_below="@id/descTextView"
             android:background="@drawable/bg_radius_ten_gray"/>
 
@@ -193,6 +195,7 @@
             android:layout_width="85dp"
             android:layout_height="24dp"
             android:layout_marginTop="10dp"
+            android:textSize="15sp"
             android:layout_toRightOf="@id/startDateTextView"
             android:layout_below="@id/descEditText"
             android:inputType="date"
@@ -219,6 +222,7 @@
             android:layout_toRightOf="@id/endDateTextView"
             android:layout_below="@id/descEditText"
             android:inputType="date"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/bg_radius_ten_gray"/>
 
@@ -257,6 +261,7 @@
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginTop="10dp"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/locationTextView"
             android:layout_below="@id/ageTextView"
