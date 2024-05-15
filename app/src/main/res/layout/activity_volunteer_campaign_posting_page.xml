@@ -235,6 +235,7 @@
             android:id="@+id/ageEditText"
             android:layout_width="80dp"
             android:layout_height="24dp"
+            android:hint="18 above"
             android:layout_below="@id/startDateEditText"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
