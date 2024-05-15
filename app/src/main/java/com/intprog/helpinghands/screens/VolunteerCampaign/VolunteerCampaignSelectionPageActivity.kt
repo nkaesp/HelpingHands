@@ -117,7 +117,7 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
                     putExtra("category", post?.category)
                     putExtra("description", post?.description)
                     putExtra("startDate", post?.startDate)
-                    putExtra("duration", post?.duration)
+                    putExtra("duration", post?.endDate)
                     putExtra("age", post?.age)
                     putExtra("imageUri", post?.imageUri)
                 }

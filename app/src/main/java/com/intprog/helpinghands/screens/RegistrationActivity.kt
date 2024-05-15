@@ -1,16 +1,16 @@
-package com.intprog.helpinghands.screens
+package com.intprog.helpinghands
+
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
-import com.intprog.helpinghands.LoginPageActivity
-import com.intprog.helpinghands.R
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
@@ -47,18 +47,25 @@ class RegistrationActivity : AppCompatActivity() {
             } else if (password.length < 8) {
                 Toast.makeText(this, "Password must be at least 8 characters long", Toast.LENGTH_SHORT).show()
             } else {
-                // Save user credentials to SharedPreferences
                 val editor = sharedPreferences.edit()
                 editor.putString("email", email)
                 editor.putString("password", password)
                 editor.apply()
 
-                // Registration successful, navigate to login page
-                startActivity(Intent(this, LoginPageActivity::class.java))
-                finish() // Finish current activity
+                showRegistrationSuccessDialog()
             }
-
         }
+    }
 
+    private fun showRegistrationSuccessDialog() {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Congratulations!")
+            .setMessage("Your account has been successfully created.")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                startActivity(Intent(this, LoginPageActivity::class.java))
+                finish()
+            }
+            .show()
     }
 }

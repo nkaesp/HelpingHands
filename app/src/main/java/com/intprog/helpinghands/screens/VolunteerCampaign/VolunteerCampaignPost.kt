@@ -8,7 +8,7 @@ data class VolunteerCampaignPost(
     val category: String,
     val description: String,
     val startDate: String,
-    val duration: String,
+    val endDate: String,
     val age: String,
     val imageUri: String?
 ) : Parcelable {
@@ -27,7 +27,7 @@ data class VolunteerCampaignPost(
         parcel.writeString(category)
         parcel.writeString(description)
         parcel.writeString(startDate)
-        parcel.writeString(duration)
+        parcel.writeString(endDate)
         parcel.writeString(age)
         parcel.writeString(imageUri)
     }

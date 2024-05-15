@@ -30,7 +30,7 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.categoryTextView).text = category
         findViewById<TextView>(R.id.descTextView).text = description
         findViewById<TextView>(R.id.startDateTextView).text = startDate
-        findViewById<TextView>(R.id.durationTextView).text = duration
+        findViewById<TextView>(R.id.endDateTextView).text = duration
         findViewById<TextView>(R.id.ageTextView).text = age
         findViewById<TextView>(R.id.locationTextView).text = location
 
