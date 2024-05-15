@@ -16,7 +16,6 @@
         android:theme="@style/Theme.HelpingHands"
         tools:targetApi="31" >
 
-
          <!-- Main Screens -->
         <activity
             android:name=".LaunchActivity"
@@ -36,7 +35,6 @@
         <activity
             android:name=".HomePageActivity"
             android:exported="true">
-
         </activity>
         <activity
             android:name=".CampaignJoiningOptionsPageActivity"
@@ -45,7 +43,6 @@
             android:name=".CampaignPostingOptionsPageActivity"
             android:exported="true" />
 
-
         <!-- Donation Campaign -->
         <activity
             android:name=".screens.DonationCampaign.DonationOptionPageActivity"
@@ -53,40 +50,28 @@
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignPostingPageActivity"
             android:exported="true" >
-
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignSummaryPageActivity"
             android:exported="true">
-
-
         </activity>
-
-
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignStatusPageActivity"
             android:exported="true">
-
         </activity>
-
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignStatusJoinPageActivity"
             android:exported="true" >
-
         </activity>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignSelectionPageActivity"
             android:exported="true">
-
         </activity>
         <activity
             android:name=".screens.DonationCampaign.TransactionPageActivity"
-            android:exported="true" /> <!-- Unspecialized Activity -->
+            android:exported="true" />
+      
+      <!-- Unspecialized Activity -->
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivityPostingPageActivity"
             android:exported="true" />
