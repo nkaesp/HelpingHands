@@ -11,9 +11,11 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Spinner
 import com.intprog.helpinghands.CampaignPostingOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
@@ -27,6 +29,15 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_volunteer_campaign_posting_page)
+
+        val ageSpinner = findViewById<Spinner>(R.id.ageSpinner)
+
+        // In your Activity or Fragment
+        val ageChoices = arrayOf("18+", "17+", "16+", "15+")
+        val adapter = AgeSpinnerAdapter(this, ageChoices)
+        ageSpinner.adapter = adapter
+
+
 
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -46,7 +57,6 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
         val descEditText = findViewById<EditText>(R.id.descEditText)
         val startDateEditText = findViewById<EditText>(R.id.startDateEditText)
         val endDateEditText = findViewById<EditText>(R.id.endDateEditText)
-        val ageEditText = findViewById<EditText>(R.id.ageEditText)
         val locationEditText = findViewById<EditText>(R.id.locationEditText)
 
         uploadedImageView = findViewById(R.id.uploadedImageView)
@@ -63,7 +73,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             val description = descEditText.text.toString()
             val startDate = startDateEditText.text.toString()
             val duration = endDateEditText.text.toString()
-            val age = ageEditText.text.toString()
+            val age = ageSpinner.selectedItem.toString()
             val location = locationEditText.text.toString()
 
             if (title.isEmpty() || category.isEmpty() || description.isEmpty() ||
@@ -92,7 +102,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 descEditText.text.clear()
                 startDateEditText.text.clear()
                 endDateEditText.text.clear()
-                ageEditText.text.clear()
+                ageSpinner.setSelection(0)
                 locationEditText.text.clear()
 
             }

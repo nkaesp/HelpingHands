@@ -3,13 +3,12 @@ package com.intprog.helpinghands
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Paint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
-import com.intprog.helpinghands.screens.RegistrationActivity
 
 class LoginPageActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
@@ -46,5 +45,8 @@ class LoginPageActivity : AppCompatActivity() {
         signUpButton.setOnClickListener {
             startActivity(Intent(this, RegistrationActivity::class.java))
         }
+
+        val forgotPasswordButton = findViewById<Button>(R.id.forgotPasswordButton)
+        forgotPasswordButton.paintFlags = forgotPasswordButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
     }
 }
