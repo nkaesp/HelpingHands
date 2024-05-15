@@ -5,6 +5,4 @@
     <corners android:radius="20dp" />
     <!-- You can also set a stroke (border) and fill color -->
     <solid android:color="#FFFFFF" />
-    <!-- Uncomment the following line to add a stroke -->
-    <!-- <stroke android:width="2dp" android:color="#000000" /> -->
 </shape>

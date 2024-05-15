@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".screens.RegistrationActivity">
+    tools:context=".RegistrationActivity">
 
 
     <LinearLayout
@@ -43,7 +43,7 @@
             android:id="@+id/img1"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:src="@drawable/launch_activity_img1" />
+            android:src="@drawable/logo" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         android:layout_below="@id/registrationImgRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/grey_rounded_corner"
+        android:background="@drawable/bg_radius_ten_gray"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="50dp">
         <EditText
@@ -79,8 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Email"
-            android:layout_marginLeft="15dp"
-            android:background="#EFEEEE"
+            android:layout_marginHorizontal="15dp"
             android:paddingLeft="20dp"
             android:inputType="textEmailAddress"/>
     </LinearLayout>
@@ -89,17 +88,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/emailLinearLayout"
-        android:background="@drawable/grey_rounded_corner"
-        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_radius_ten_gray"
+        android:layout_marginTop="15dp"
         android:layout_marginHorizontal="50dp">
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Password"
+            android:layout_marginHorizontal="15dp"
             android:inputType="textPassword"
-            android:layout_marginLeft="15dp"
-            android:background="#EFEEEE"
             android:paddingLeft="20dp"/>
     </LinearLayout>
     <LinearLayout
@@ -107,17 +105,17 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/passwordLinearLayout"
-        android:background="@drawable/grey_rounded_corner"
-        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_radius_ten_gray"
+        android:layout_marginTop="15dp"
         android:layout_marginHorizontal="50dp">
         <EditText
             android:id="@+id/confirmPasswordEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Confirm Password"
+            android:layout_marginHorizontal="15dp"
             android:inputType="textPassword"
             android:layout_marginLeft="15dp"
-            android:background="#EFEEEE"
             android:paddingLeft="20dp"/>
     </LinearLayout>
     <LinearLayout

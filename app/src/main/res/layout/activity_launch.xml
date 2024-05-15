@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".screens.LaunchActivity">
+    tools:context=".LaunchActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,17 +40,19 @@
                 android:textSize="15dp"/>
 
         </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/launchImageView"
-            android:layout_below="@+id/subtitleTextView">
+            android:layout_below="@+id/subtitleTextView"
+            android:layout_marginTop="25dp">
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/launch_activity_img1" />
-        </LinearLayout>
-        <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:src="@drawable/logo"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -58,34 +60,43 @@
             android:id="@+id/getStartedLinearLayout"
             android:layout_below="@+id/launchImageView">
             <Button
-                android:layout_width="350dp"
-                android:layout_height="match_parent"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
                 android:text="Get Started"
                 android:background="@drawable/rounded_corner"
                 android:textColor="@color/white"
+                android:textSize="15dp"
+                android:layout_marginTop="20dp"
                 android:padding="18dp"
                 android:id="@+id/getStartedButton" />
-        </LinearLayout>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_alignParentBottom="true"
-            android:id="@+id/signInLinearLayout">
+            android:id="@+id/signInLinearLayout"
+            android:layout_marginBottom="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Already a member?"
+                android:textSize="15dp"
                 android:textColor="@color/black"/>
-            <Button
-                android:layout_width="76dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-12dp"
+                android:layout_marginLeft="3dp"
                 android:background="@android:color/transparent"
                 android:text="Sign in"
+                android:textSize="15dp"
                 android:textAllCaps="false"
-                android:id="@+id/signInButton"/>
+                android:id="@+id/signInButton"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+
         </LinearLayout>
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>
