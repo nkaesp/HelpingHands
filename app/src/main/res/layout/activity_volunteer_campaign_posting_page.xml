@@ -135,7 +135,7 @@
 
         <EditText
             android:id="@+id/titleEditText"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_toRightOf="@id/titleTextView"
             android:background="@drawable/bg_radius_ten_gray"
@@ -146,19 +146,21 @@
             android:id="@+id/categoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/titleEditText"
+            android:layout_below="@id/titleTextView"
             android:text="Category:"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"
-            android:layout_marginLeft="10dp"
             android:textSize="15sp" />
 
         <EditText
             android:id="@+id/categoryEditText"
             android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:textSize="15sp"
             android:layout_toRightOf="@id/categoryTextView"
+            android:layout_below="@id/titleTextView"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
             android:background="@drawable/bg_radius_ten_gray"/>
 
         <TextView
@@ -166,8 +168,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/titleEditText"
-            android:text="Description:"
+            android:layout_below="@id/categoryTextView"
+            android:text="Campaign Description:"
             android:textStyle="bold"
             android:textSize="15sp" />
 
@@ -176,6 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="5dp"
+            android:textSize="15sp"
             android:layout_below="@id/descTextView"
             android:background="@drawable/bg_radius_ten_gray"/>
 
@@ -194,6 +197,7 @@
             android:layout_width="85dp"
             android:layout_height="24dp"
             android:layout_marginTop="10dp"
+            android:textSize="15sp"
             android:layout_toRightOf="@id/startDateTextView"
             android:layout_below="@id/descEditText"
             android:inputType="date"
@@ -220,6 +224,7 @@
             android:layout_toRightOf="@id/endDateTextView"
             android:layout_below="@id/descEditText"
             android:inputType="date"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/bg_radius_ten_gray"/>
 
@@ -230,20 +235,16 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/startDateEditText"
             android:text="Age:"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/ageEditText"
-            android:layout_width="80dp"
-            android:layout_height="24dp"
-            android:hint="18 above"
+        <Spinner
+            android:id="@+id/ageSpinner"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/startDateEditText"
-            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_toRightOf="@id/ageTextView"
             android:background="@drawable/bg_radius_ten_gray" />
 
@@ -252,9 +253,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@id/endDateEditText"
-            android:layout_toRightOf="@id/ageEditText"
+            android:layout_below="@id/ageTextView"
             android:text="Location:"
             android:textStyle="bold"
             android:textSize="15sp"/>
@@ -264,9 +263,10 @@
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginTop="10dp"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/locationTextView"
-            android:layout_below="@id/endDateEditText"
+            android:layout_below="@id/ageTextView"
             android:background="@drawable/bg_radius_ten_gray"/>
 
 
