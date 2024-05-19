@@ -79,17 +79,17 @@
         android:layout_marginTop="10dp">
     </TextView>
 
-    <ImageButton
-        android:id="@+id/btnUploadImage"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/Donation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:onClick="onUploadImageButtonClick"
-        android:scaleType="centerCrop"
-        android:src="@drawable/donation_createpost_image"></ImageButton>
+        <ImageButton
+            android:id="@+id/btnUploadImage"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/Donation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:onClick="onUploadImageButtonClick"
+            android:scaleType="centerCrop"
+            android:src="@drawable/donation_createpost_image"></ImageButton>
 
         <TextView
             android:id="@+id/DonationDetails"
