@@ -79,8 +79,8 @@
 
             <ImageView
                 android:id="@+id/campaignImageView"
-                android:layout_width="250dp"
-                android:layout_height="100dp"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
                 android:layout_below="@+id/Donation"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
@@ -304,7 +304,7 @@
             <TextView
                 android:id="@+id/fullNameLabel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/contactSummary"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="15dp"
@@ -315,8 +315,8 @@
 
             <TextView
                 android:id="@+id/fullNameTextView"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
+                android:layout_width="265dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/contactSummary"
                 android:layout_marginTop="18dp"
                 android:layout_toEndOf="@+id/fullNameLabel"
@@ -328,7 +328,7 @@
             <TextView
                 android:id="@+id/emailLabel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/fullNameLabel"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="5dp"
@@ -339,8 +339,8 @@
 
             <TextView
                 android:id="@+id/emailTextView"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/fullNameTextView"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@+id/emailLabel"
@@ -351,7 +351,7 @@
             <TextView
                 android:id="@+id/phoneNumberLabel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/emailLabel"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="5dp"
@@ -362,8 +362,8 @@
 
             <TextView
                 android:id="@+id/phoneNumberTextView"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
+                android:layout_width="228dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/emailTextView"
                 android:layout_marginTop="9dp"
                 android:layout_toEndOf="@+id/phoneNumberLabel"
@@ -374,7 +374,7 @@
             <TextView
                 android:id="@+id/contactMethodLabel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/phoneNumberLabel"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="5dp"
@@ -385,8 +385,8 @@
 
             <TextView
                 android:id="@+id/contactMethodTextView"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/phoneNumberTextView"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@+id/contactMethodLabel"
