@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_centerVertical="true"
     tools:context=".LoginPageActivity">
 
     <LinearLayout
@@ -54,20 +56,23 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginLeft="30dp"
-                android:src="@drawable/email">
+                android:src="@drawable/email"
+                android:elevation="10dp">
             </ImageView>
 
             <EditText
                 android:id="@+id/emailEditText"
-                android:layout_width="290dp"
+                android:layout_width="250dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginRight="20dp"
                 android:paddingLeft="15dp"
                 android:hint="Email"
                 android:textColorHighlight="@color/black"
-                android:background="@drawable/bg_radius_ten_gray">
+                android:background="@drawable/bg_login_white_radius"
+                android:elevation="5dp">
 
             </EditText>
 
@@ -84,20 +89,23 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginLeft="33dp"
-                android:src="@drawable/lock">
+                android:src="@drawable/lock"
+                android:elevation="10dp">
             </ImageView>
 
             <EditText
                 android:id="@+id/passwordEditText"
-                android:layout_width="290dp"
+                android:layout_width="250dp"
                 android:layout_height="48dp"
                 android:paddingLeft="15dp"
-                android:layout_marginStart="18dp"
+                android:layout_marginLeft="18dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="25dp"
                 android:hint="Password"
-                android:background="@drawable/bg_radius_ten_gray"
-                android:inputType="textPassword">
+                android:background="@drawable/bg_login_white_radius"
+                android:inputType="textPassword"
+                android:elevation="5dp">
             </EditText>
         </LinearLayout>
 
@@ -116,7 +124,8 @@
                 android:textColor="#0066FF"
                 android:background="@android:color/transparent"
                 android:text="Sign Up"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:elevation="10dp">
             </Button>
 
             <Button
@@ -129,23 +138,25 @@
                 android:background="@android:color/transparent"
                 android:text="Forgot your password?"
                 android:textAllCaps="false"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:elevation="10dp">
             </Button>
         </LinearLayout>
 
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textSize="20dp"
-            android:textColor="@color/white"
-            android:text="Log in"
+            android:layout_marginRight="50dp"
             android:background="@drawable/bg_login_button"
-            android:layout_gravity="center">
+            android:text="Log in"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:elevation="10dp">
 
         </Button>
 
@@ -153,4 +164,4 @@
 
 
 
-</LinearLayout>
+</RelativeLayout>
