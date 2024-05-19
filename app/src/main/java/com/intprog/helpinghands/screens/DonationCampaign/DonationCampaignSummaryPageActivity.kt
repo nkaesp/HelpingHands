@@ -84,6 +84,5 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 }
