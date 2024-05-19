@@ -81,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_weight="1"
@@ -89,7 +90,8 @@
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:textAllCaps="false"></Button>
+            android:textAllCaps="false"
+            android:elevation="10dp"></Button>
 
 
         <Button
@@ -98,6 +100,7 @@
             android:layout_height="60dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="50dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="50dp"
             android:layout_weight="1"
             android:background="@drawable/bg_radius_ten_lightblue"
@@ -105,7 +108,8 @@
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:textAllCaps="false"></Button>
+            android:textAllCaps="false"
+            android:elevation="10dp"></Button>
 
         <Button
             android:id="@+id/donationCampaignButton"
@@ -113,6 +117,7 @@
             android:layout_height="60dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="50dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="50dp"
             android:layout_weight="1"
             android:background="@drawable/bg_radius_ten_lightblue"
@@ -120,7 +125,8 @@
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:textAllCaps="false"></Button>
+            android:textAllCaps="false"
+            android:elevation="10dp"></Button>
     </LinearLayout>
 
 
