@@ -128,7 +128,7 @@
                 android:layout_below="@+id/titleLabel"
                 android:layout_marginLeft="33dp"
                 android:text="Insert Title"
-                android:textColor="#4C91F8"></TextView>
+                android:textColor="@color/black"></TextView>
 
     <TextView
         android:id="@+id/categoryLabel"
@@ -151,7 +151,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/titleTextView"
                 android:text="Insert Category"
-                android:textColor="#4C91F8"></TextView>
+                android:textColor="@color/black"></TextView>
 
             <TextView
                 android:id="@+id/amountNeededLabel"
@@ -170,7 +170,7 @@
                 android:layout_below="@+id/amountNeededLabel"
                 android:layout_marginLeft="33dp"
                 android:text="Insert Amount"
-                android:textColor="#4C91F8"></TextView>
+                android:textColor="@color/black"></TextView>
 
             <TextView
                 android:id="@+id/descriptionLabel"
@@ -207,7 +207,7 @@
             android:minLines="1"
             android:scrollbars="none"
             android:text="Insert Description"
-            android:textColor="#4C91F8"/>
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 
@@ -244,7 +244,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/fullNameLabel"
                 android:text="Insert Full Name"
-                android:textColor="#4C91F8"></TextView>
+                android:textColor="@color/black"></TextView>
 
 
             <TextView
@@ -266,7 +266,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/emailLabel"
                 android:text="Insert Email"
-                android:textColor="#4C91F8"></TextView>
+                android:textColor="@color/black"></TextView>
 
             <TextView
                 android:id="@+id/phoneNumberLabel"
@@ -287,7 +287,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/phoneNumberLabel"
                 android:text="Insert Phone Number"
-                android:textColor="#4C91F8"></TextView>
+                android:textColor="@color/black"></TextView>
 
             <TextView
                 android:id="@+id/contactMethodLabel"
@@ -308,7 +308,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/contactMethodLabel"
                 android:text="Insert Contact Method"
-                android:textColor="#4C91F8"></TextView>
+                android:textColor="@color/black"></TextView>
 
 
 <!--    Button Post Now-->
