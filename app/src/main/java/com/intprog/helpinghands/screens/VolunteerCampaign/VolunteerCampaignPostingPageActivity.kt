@@ -2,6 +2,7 @@ package com.intprog.helpinghands.screens.VolunteerCampaign
 
 import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -19,6 +20,7 @@ import android.widget.Spinner
 import com.intprog.helpinghands.CampaignPostingOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
+import java.util.Calendar
 
 class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
 
@@ -31,13 +33,9 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_volunteer_campaign_posting_page)
 
         val ageSpinner = findViewById<Spinner>(R.id.ageSpinner)
-
-        // In your Activity or Fragment
         val ageChoices = arrayOf("18+", "17+", "16+", "15+")
         val adapter = AgeSpinnerAdapter(this, ageChoices)
         ageSpinner.adapter = adapter
-
-
 
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -51,12 +49,21 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             )
         }
 
+        val startDateEditText = findViewById<Button>(R.id.startDateEditText)
+        val endDateEditText = findViewById<Button>(R.id.endDateEditText)
+
+        startDateEditText.setOnClickListener {
+            showDatePickerDialog(startDateEditText)
+        }
+
+        endDateEditText.setOnClickListener {
+            showDatePickerDialog(endDateEditText)
+        }
+
         val button = findViewById<Button>(R.id.continueButton)
         val titleEditText = findViewById<EditText>(R.id.titleEditText)
         val categoryEditText = findViewById<EditText>(R.id.categoryEditText)
         val descEditText = findViewById<EditText>(R.id.descEditText)
-        val startDateEditText = findViewById<EditText>(R.id.startDateEditText)
-        val endDateEditText = findViewById<EditText>(R.id.endDateEditText)
         val locationEditText = findViewById<EditText>(R.id.locationEditText)
 
         uploadedImageView = findViewById(R.id.uploadedImageView)
@@ -65,6 +72,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             uploadedImageView.setImageResource(android.R.color.transparent) // Clear the image
             selectedImageUri = null
         }
+
 
 
         button.setOnClickListener {
@@ -83,6 +91,12 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                     .setMessage("Please fill in all fields.")
                     .setPositiveButton("OK", null)
                     .show()
+            } else if (selectedImageUri == null) {
+                AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage("Please select an image.")
+                    .setPositiveButton("OK", null)
+                    .show()
             } else {
                 val intent = Intent(this, VolunteerCampaignSummaryPageActivity::class.java)
                 intent.putExtra("title", title)
@@ -92,21 +106,20 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 intent.putExtra("duration", duration)
                 intent.putExtra("age", age)
                 intent.putExtra("location", location)
-                if (selectedImageUri != null) {
-                    intent.putExtra("imageUri", selectedImageUri.toString())
-                }
+                intent.putExtra("imageUri", selectedImageUri.toString())
                 startActivity(intent)
 
                 titleEditText.text.clear()
                 categoryEditText.text.clear()
                 descEditText.text.clear()
-                startDateEditText.text.clear()
-                endDateEditText.text.clear()
+                startDateEditText.text = ""
+                endDateEditText.text = ""
                 ageSpinner.setSelection(0)
                 locationEditText.text.clear()
 
             }
         }
+
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
@@ -120,6 +133,25 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun showDatePickerDialog(button: Button) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                // Update the button text with the selected date
+                button.text = "$dayOfMonth/${monthOfYear + 1}/$year"
+            },
+            year,
+            month,
+            day
+        )
+        datePickerDialog.show()
     }
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

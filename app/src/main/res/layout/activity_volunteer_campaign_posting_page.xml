@@ -192,16 +192,16 @@
             android:textStyle="bold"
             android:textSize="15sp" />
 
-        <EditText
+        <Button
             android:id="@+id/startDateEditText"
-            android:layout_width="85dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginTop="10dp"
-            android:textSize="15sp"
+            android:text="Select Date"
+            android:textSize="12sp"
             android:layout_toRightOf="@id/startDateTextView"
             android:layout_below="@id/descEditText"
-            android:inputType="date"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_radius_ten_gray"/>
 
         <TextView
@@ -216,16 +216,16 @@
             android:textStyle="bold"
             android:textSize="15sp" />
 
-        <EditText
+        <Button
             android:id="@+id/endDateEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginTop="10dp"
+            android:text="Select Date"
+            android:textSize="12sp"
             android:layout_toRightOf="@id/endDateTextView"
             android:layout_below="@id/descEditText"
-            android:inputType="date"
-            android:textSize="15sp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_radius_ten_gray"/>
 
         <TextView
