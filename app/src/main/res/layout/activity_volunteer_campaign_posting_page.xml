@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,7 @@
     tools:context=".screens.VolunteerCampaign.VolunteerCampaignPostingPageActivity">
 
     <RelativeLayout
+        android:id="@+id/navTopRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="68dp">
         <ImageView
@@ -76,279 +77,285 @@
 <!--            android:textColor="@color/black"/>-->
 
 <!--    </RelativeLayout>-->
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Volunteer Campaign"
-        android:textSize="25sp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageButton
-            android:id="@+id/uploadedImageView"
-            android:layout_width="350dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center"
-            android:src="@drawable/placeholder_image1"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/bg_rectangle"
-            android:onClick="openGallery"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Campaign Details:"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
-
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Title:"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"/>
-
-        <EditText
-            android:id="@+id/titleEditText"
+        android:layout_height="match_parent"
+        android:layout_below="@id/navTopRelativeLayout"
+        android:layout_above="@id/navBot"
+        tools:ignore="NotSibling">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_toRightOf="@id/titleTextView"
-            android:background="@drawable/bg_radius_ten_gray"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/volunteerCampaignTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Volunteer Campaign"
+                android:textSize="25sp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/categoryTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/titleTextView"
-            android:text="Category:"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            <LinearLayout
+                android:id="@+id/imageLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/volunteerCampaignTextView">
 
-        <EditText
-            android:id="@+id/categoryEditText"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_toRightOf="@id/categoryTextView"
-            android:layout_below="@id/titleTextView"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:textSize="15sp"
-            android:background="@drawable/bg_radius_ten_gray"/>
+                <ImageButton
+                    android:id="@+id/uploadedImageView"
+                    android:layout_width="350dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/placeholder_image1"
+                    android:scaleType="centerCrop"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_rectangle"
+                    android:onClick="openGallery"/>
 
-        <TextView
-            android:id="@+id/descTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/categoryTextView"
-            android:text="Campaign Description:"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Campaign Details:"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/descEditText"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
-            android:textSize="15sp"
-            android:layout_below="@id/descTextView"
-            android:background="@drawable/bg_radius_ten_gray"/>
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/startDateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/descEditText"
-            android:text="Start Date:"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            <RelativeLayout
+                android:id="@+id/volunteerCampaignDetailsRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@id/imageLinearLayout">
+                <LinearLayout
+                    android:id="@+id/titleLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:text="Title : "
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"/>
 
-        <Button
-            android:id="@+id/startDateEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:text="Select Date"
-            android:textSize="12sp"
-            android:layout_toRightOf="@id/startDateTextView"
-            android:layout_below="@id/descEditText"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_radius_ten_gray"/>
+                    <EditText
+                        android:id="@+id/titleEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/bg_radius_ten_gray"
+                        android:textSize="15sp"
+                        android:hint="max. 30 characters"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:elevation="3dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:maxLength="25">
+                    </EditText>
 
-        <TextView
-            android:id="@+id/endDateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@id/descEditText"
-            android:layout_toRightOf="@id/startDateEditText"
-            android:text="End Date:"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+                </LinearLayout>
 
-        <Button
-            android:id="@+id/endDateEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:text="Select Date"
-            android:textSize="12sp"
-            android:layout_toRightOf="@id/endDateTextView"
-            android:layout_below="@id/descEditText"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_radius_ten_gray"/>
+                <LinearLayout
+                    android:id="@+id/categoryLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/titleLinearLayout"
+                    android:layout_marginTop="5dp">
 
-        <TextView
-            android:id="@+id/ageTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/startDateEditText"
-            android:text="Age:"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/ageSpinner"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/startDateEditText"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/ageTextView"
-            android:background="@drawable/bg_radius_ten_gray" />
-
-        <TextView
-            android:id="@+id/locationTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/ageTextView"
-            android:text="Location:"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-
-        <EditText
-            android:id="@+id/locationEditText"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginTop="10dp"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/locationTextView"
-            android:layout_below="@id/ageTextView"
-            android:background="@drawable/bg_radius_ten_gray"/>
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:text="Category :"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:textColor="@color/black"
+                        android:textSize="15dp">
+                    </TextView>
 
 
-    </RelativeLayout>
+                    <EditText
+                        android:id="@+id/categoryEditText"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_radius_ten_gray"
+                        android:layout_marginLeft="5dp"
+                        android:hint="Tag"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="10dp"
+                        android:elevation="3dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="15sp">
+                    </EditText>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+                </LinearLayout>
 
-        <Button
-            android:id="@+id/continueButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/btn_continue"
-            android:text="Continue"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold">
-        </Button>
+                <TextView
+                    android:id="@+id/descTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/categoryLinearLayout"
+                    android:text="Campaign Description:"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"/>
 
-    </RelativeLayout>
+                <EditText
+                    android:id="@+id/descEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_below="@id/descTextView"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/bg_radius_ten_gray"
+                    android:elevation="5dp"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:hint="Enter Description"
+                    android:lines="5"
+                    android:maxLines="5"
+                    android:minLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="2dp"
+                    android:scrollbars="none"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/startDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/descEditText"
+                    android:text="Start Date:"
+                    android:textColor="@color/black"/>
+
+                <Button
+                    android:id="@+id/startDateEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Select Date"
+                    android:textSize="15sp"
+                    android:layout_toRightOf="@id/startDateTextView"
+                    android:layout_below="@id/descEditText"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_radius_ten_gray"
+                    android:textAllCaps="false"/>
+
+                <TextView
+                    android:id="@+id/endDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_below="@id/startDateTextView"
+                    android:text="End Date:"
+                    android:textColor="@color/black"/>
+
+                <Button
+                    android:id="@+id/endDateEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Select Date"
+                    android:textSize="15sp"
+                    android:layout_toRightOf="@id/endDateTextView"
+                    android:layout_below="@id/startDateEditText"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_radius_ten_gray"
+                    android:textAllCaps="false"/>
+
+                <TextView
+                    android:id="@+id/ageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_below="@id/endDateTextView"
+                    android:text="Age:"
+                    android:textColor="@color/black"/>
+
+                <Spinner
+                    android:id="@+id/ageSpinner"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/endDateEditText"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/ageTextView"
+                    android:background="@drawable/bg_radius_ten_gray" />
+
+                <TextView
+                    android:id="@+id/locationTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/ageTextView"
+                    android:text="Location:"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/locationEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/locationTextView"
+                    android:layout_below="@id/ageTextView"
+                    android:background="@drawable/bg_radius_ten_gray"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="80dp"
+                android:layout_below="@id/volunteerCampaignDetailsRelativeLayout">
+
+                <Button
+                    android:id="@+id/continueButton"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/btn_continue"
+                    android:text="Continue"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold"></Button>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <!--    nav sa ubos-->
-    <RelativeLayout
+    <fragment
+        android:id="@+id/navBarFragment"
+        android:name="com.intprog.helpinghands.NavBarFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/navBot"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/navbottom" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/navBot"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/notificationsImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/bell" />
-
-            <ImageButton
-                android:id="@+id/homeImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/home" />
-
-            <ImageButton
-                android:id="@+id/menuImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/more" />
-        </LinearLayout>
-    </RelativeLayout>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

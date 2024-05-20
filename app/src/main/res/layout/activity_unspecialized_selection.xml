@@ -63,69 +63,18 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:clipToPadding="false"
-            android:divider="@null"
-            android:dividerHeight="0dp"
+            android:divider="@color/black"
+            android:dividerHeight="2dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             tools:listitem="@layout/activity_unspecialized_selection_item" />
     </RelativeLayout>
 
     <!--    nav sa ubos-->
-    <RelativeLayout
+    <fragment
+        android:id="@+id/navBarFragment"
+        android:name="com.intprog.helpinghands.NavBarFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/navBot"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/navbottom" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/navBot"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/notificationsImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/bell" />
-
-            <ImageButton
-                android:id="@+id/homeImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/home" />
-
-            <ImageButton
-                android:id="@+id/menuImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/more" />
-        </LinearLayout>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
