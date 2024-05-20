@@ -18,9 +18,21 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
 
         // Retrieve data from intent extras
         val title = intent.getStringExtra("title")
+        val category = intent.getStringExtra("category")
+        val description = intent.getStringExtra("description")
+        val startDate = intent.getStringExtra("startDate")
+        val duration = intent.getStringExtra("duration")
+        val age = intent.getStringExtra("age")
+        val location = intent.getStringExtra("location")
 
         // Populate views with the retrieved data
         findViewById<TextView>(R.id.title).text = title
+        findViewById<TextView>(R.id.categoryTextView).text = category
+        findViewById<TextView>(R.id.descTextView).text = description
+        findViewById<TextView>(R.id.startDateTextView).text = startDate
+        findViewById<TextView>(R.id.endDateTextView).text = duration
+        findViewById<TextView>(R.id.ageTextView).text = age
+        findViewById<TextView>(R.id.locationTextView).text = location
 
         // Retrieve and set image if available
         val imageUriString = intent.getStringExtra("imageUri")
