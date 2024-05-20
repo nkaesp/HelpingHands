@@ -110,7 +110,8 @@
         android:layout_marginTop="15dp"
         android:text="Donation Details"
         android:textColor="@color/black"
-        android:textStyle="bold">
+        android:textStyle="bold"
+        android:elevation="5dp">
     </TextView>
 
 <!--    Donation Details-->
@@ -123,7 +124,8 @@
                 android:layout_marginTop="5dp"
                 android:text="Title: "
                 android:textColor="#6F6F6F"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/titleTextView"
@@ -132,7 +134,8 @@
                 android:layout_below="@+id/titleLabel"
                 android:layout_marginLeft="33dp"
                 android:text="Insert Title"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black"
+                android:elevation="5dp"></TextView>
 
     <TextView
         android:id="@+id/categoryLabel"
@@ -144,7 +147,8 @@
         android:layout_toRightOf="@+id/titleLabel"
         android:text="Category:"
         android:textColor="#6F6F6F"
-        android:textStyle="bold">
+        android:textStyle="bold"
+        android:elevation="5dp">
     </TextView>
 
             <TextView
@@ -155,7 +159,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/titleTextView"
                 android:text="Insert Category"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/amountNeededLabel"
@@ -165,7 +170,8 @@
                 android:layout_marginLeft="28dp"
                 android:text="Amount Needed:"
                 android:textColor="#6F6F6F"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/amountNeededTextView"
@@ -174,7 +180,8 @@
                 android:layout_below="@+id/amountNeededLabel"
                 android:layout_marginLeft="33dp"
                 android:text="Insert Amount"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/descriptionLabel"
@@ -184,7 +191,8 @@
                 android:layout_marginLeft="28dp"
                 android:text="Description:"
                 android:textColor="#6F6F6F"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:elevation="5dp"></TextView>
     <LinearLayout
         android:id="@+id/descriptionLinearLayout"
         android:layout_width="match_parent"
@@ -193,7 +201,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="#ECECEC"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:elevation="5dp">
 
         <TextView
             android:id="@+id/descriptionTextView"
@@ -211,7 +220,8 @@
             android:minLines="1"
             android:scrollbars="none"
             android:text="Insert Description"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:elevation="5dp"/>
     </LinearLayout>
 
 
@@ -226,7 +236,8 @@
                 android:layout_marginTop="10dp"
                 android:text="Contact Information "
                 android:textColor="@color/black"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:elevation="5dp"></TextView>
 
 
             <TextView
@@ -238,7 +249,8 @@
                 android:layout_marginTop="5dp"
                 android:text="Full Name: "
                 android:textColor="#6F6F6F"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/fullNameTextView"
@@ -248,7 +260,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/fullNameLabel"
                 android:text="Insert Full Name"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black"
+                android:elevation="5dp"></TextView>
 
 
             <TextView
@@ -260,7 +273,8 @@
                 android:layout_marginTop="5dp"
                 android:text="Email: "
                 android:textColor="#6F6F6F"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/emailTextView"
@@ -270,7 +284,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/emailLabel"
                 android:text="Insert Email"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/phoneNumberLabel"
@@ -281,7 +296,8 @@
                 android:layout_marginTop="5dp"
                 android:text="Phone Number: "
                 android:textColor="#6F6F6F"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/phoneNumberTextView"
@@ -291,7 +307,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/phoneNumberLabel"
                 android:text="Insert Phone Number"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/contactMethodLabel"
@@ -302,7 +319,8 @@
                 android:layout_marginTop="5dp"
                 android:text="Preferred Contact Method: "
                 android:textColor="#6F6F6F"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:elevation="5dp"></TextView>
 
             <TextView
                 android:id="@+id/contactMethodTextView"
@@ -312,7 +330,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/contactMethodLabel"
                 android:text="Insert Contact Method"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black"
+                android:elevation="5dp"></TextView>
 
 
 <!--    Button Post Now-->
