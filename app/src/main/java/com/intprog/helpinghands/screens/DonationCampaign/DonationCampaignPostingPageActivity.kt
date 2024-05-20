@@ -39,19 +39,22 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
         val title = findViewById<EditText>(R.id.title)
         title.filters = arrayOf(InputFilter.LengthFilter(25))
         val desc = findViewById<EditText>(R.id.desc)
-        desc.filters = arrayOf(InputFilter.LengthFilter(35))
+        desc.filters = arrayOf(InputFilter.LengthFilter(99))
         val amountNeeded = findViewById<EditText>(R.id.amountNeeded)
         amountNeeded.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        amountNeeded.filters = arrayOf(InputFilter.LengthFilter(9))
         val category = findViewById<EditText>(R.id.category)
         category.filters = arrayOf(InputFilter.LengthFilter(20))
 
         val fullName = findViewById<EditText>(R.id.fullName)
+        fullName.filters = arrayOf(InputFilter.LengthFilter(30))
         val email = findViewById<EditText>(R.id.email)
+        email.filters = arrayOf(InputFilter.LengthFilter(30))
         val phoneNum = findViewById<EditText>(R.id.phoneNum)
         phoneNum.inputType = InputType.TYPE_CLASS_NUMBER
         phoneNum.filters = arrayOf(InputFilter.LengthFilter(15))
         val contactMethod = findViewById<EditText>(R.id.contactMethod)
-        contactMethod.filters = arrayOf(InputFilter.LengthFilter(35))
+        contactMethod.filters = arrayOf(InputFilter.LengthFilter(5))
 
         val btnUploadImage = findViewById<ImageButton>(R.id.btnUploadImage)
         btnUploadImage.setOnClickListener {

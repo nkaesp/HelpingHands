@@ -30,12 +30,28 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         titleTextView.text = "$titleInput"
 
         val descTextView = findViewById<TextView>(R.id.descTextView)
-        val descInput= intent.getStringExtra("description")
+        val descInput = intent.getStringExtra("description")
         descTextView.text = "$descInput"
 
-        val amountNeededTextView =  findViewById<TextView>(R.id.amountNeededTextView)
+        val amountNeededTextView = findViewById<TextView>(R.id.amountNeededTextView)
         val amountNeededInput = intent.getStringExtra("amountNeeded")
         amountNeededTextView.text = "$amountNeededInput"
+
+        val fullNameTextView = findViewById<TextView>(R.id.fullNameTextView)
+        val fullNameInput = intent.getStringExtra("fullName")
+        fullNameTextView.text = "$fullNameInput"
+
+        val emailTextView = findViewById<TextView>(R.id.emailTextView)
+        val emailInput = intent.getStringExtra("email")
+        emailTextView.text = "$emailInput"
+
+        val phoneNumberTextView = findViewById<TextView>(R.id.phoneNumberTextView)
+        val phoneNumberInput = intent.getStringExtra("phoneNumber")
+        phoneNumberTextView.text = "$phoneNumberInput"
+
+        val contactMethodTextView = findViewById<TextView>(R.id.contactMethodTextView)
+        val contactMethodInput = intent.getStringExtra("contactMethod")
+        contactMethodTextView.text = "$contactMethodInput"
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
@@ -49,7 +65,5 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
-
     }
-
 }

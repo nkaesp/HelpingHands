@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="100dp"
     tools:context=".screens.DonationCampaign.DonationCampaignPostingPageActivity">
 
     <!--    nav sa top-->
@@ -64,7 +65,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
     <TextView
         android:id="@+id/Donation"
@@ -79,17 +82,18 @@
         android:layout_marginTop="10dp">
     </TextView>
 
-    <ImageButton
-        android:id="@+id/btnUploadImage"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/Donation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:onClick="onUploadImageButtonClick"
-        android:scaleType="centerCrop"
-        android:src="@drawable/donation_createpost_image"></ImageButton>
+        <ImageButton
+            android:id="@+id/btnUploadImage"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/Donation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:elevation="8dp"
+            android:onClick="onUploadImageButtonClick"
+            android:scaleType="centerCrop"
+            android:src="@drawable/donation_createpost_image"></ImageButton>
 
         <TextView
             android:id="@+id/DonationDetails"
@@ -117,12 +121,12 @@
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:text="Title : "
-
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:paddingLeft="10dp"
                 android:textColor="@color/black"
-                android:textSize="15dp"></TextView>
+                android:textSize="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"></TextView>
 
             <EditText
                 android:id="@+id/title"
@@ -132,7 +136,10 @@
                 android:background="@drawable/bg_radius_ten_gray"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
-                android:paddingBottom="2dp">
+                android:paddingBottom="2dp"
+                android:elevation="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
             </EditText>
 
         </LinearLayout>
@@ -151,9 +158,10 @@
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:text="Category :"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:paddingLeft="10dp"
                 android:textColor="@color/black"
                 android:textSize="15dp">
             </TextView>
@@ -167,7 +175,10 @@
                 android:layout_marginLeft="5dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:paddingLeft="10dp">
+                android:paddingLeft="10dp"
+                android:elevation="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
             </EditText>
 
         </LinearLayout>
@@ -188,10 +199,11 @@
             android:layout_width="130dp"
             android:layout_height="match_parent"
             android:text="Amount Needed : "
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
-            android:paddingLeft="10dp"
             android:textColor="@color/black"
             android:textSize="15dp">
         </TextView>
@@ -205,7 +217,10 @@
             android:background="@drawable/bg_radius_ten_gray"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
-            android:paddingLeft="10dp">
+            android:paddingLeft="10dp"
+            android:elevation="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
         </EditText>
 
 
@@ -226,12 +241,15 @@
 
         <EditText
             android:id="@+id/desc"
-            android:layout_width="370dp"
+            android:layout_width="350dp"
             android:layout_height="80dp"
             android:layout_below="@id/descText"
+            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/bg_radius_ten_gray"
+            android:elevation="5dp"
             android:gravity="top|left"
             android:inputType="textMultiLine|textCapSentences"
             android:lines="5"
@@ -271,8 +289,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:text="Full Name : "
+                android:layout_marginTop="5dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:paddingLeft="10dp"
@@ -289,7 +308,10 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:paddingLeft="10dp"
-                android:inputType="text">
+                android:inputType="text"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="3dp">
             </EditText>
 
 
@@ -304,7 +326,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="4"
                 android:text="Email : "
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
@@ -324,7 +346,9 @@
                 android:paddingBottom="2dp"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:inputType="textEmailAddress">
+                android:layout_marginBottom="5dp"
+                android:inputType="textEmailAddress"
+                android:elevation="3dp">
             </EditText>
 
         </LinearLayout>
@@ -339,7 +363,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:text="Phone Number : "
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
@@ -360,7 +384,9 @@
                 android:paddingBottom="2dp"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:inputType="phone">
+                android:layout_marginBottom="5dp"
+                android:inputType="phone"
+                android:elevation="3dp">
             </EditText>
 
         </LinearLayout>
@@ -388,13 +414,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Email or Phone"
+                android:hint="Ex. Phone"
                 android:background="@drawable/bg_radius_ten_gray"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:inputType="text">
+                android:layout_marginBottom="5dp"
+                android:inputType="text"
+                android:elevation="3dp"
+                >
             </EditText>
 
 
@@ -419,7 +448,8 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:textStyle="bold"></Button>
+            android:textStyle="bold"
+            android:elevation="10dp"></Button>
 
     </RelativeLayout>
     </ScrollView>

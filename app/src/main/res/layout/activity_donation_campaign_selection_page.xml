@@ -56,14 +56,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="70dp"
             android:clipToPadding="false"
-            android:divider="@null"
-            android:dividerHeight="0dp"
+           android:divider="@color/black"
+            android:dividerHeight="2dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            tools:listitem="@layout/activity_donation_campaign_selection_item" />
-    </RelativeLayout>
+
+            tools:listitem="@layout/activity_donation_campaign_selection_item"
+            />
+
+</RelativeLayout>
 
 
 
@@ -71,6 +74,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/navBot"
             android:layout_width="match_parent"
