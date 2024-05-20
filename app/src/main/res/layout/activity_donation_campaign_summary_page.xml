@@ -62,8 +62,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp">
+            android:layout_marginHorizontal="30dp">
 
     <TextView
         android:id="@+id/Donation"
@@ -92,7 +91,7 @@
 
             <ImageView
                 android:id="@+id/contentSummary"
-                android:layout_width="385dp"
+                android:layout_width="365dp"
                 android:layout_height="400dp"
                 android:layout_below="@+id/imageDonationSummary"
                 android:layout_centerHorizontal="true"
@@ -106,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/contentSummary"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="17dp"
         android:layout_marginTop="15dp"
         android:text="Donation Details"
         android:textColor="@color/black"
@@ -120,7 +119,7 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detailsSummary"
-                android:layout_marginLeft="28dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:text="Title: "
                 android:textColor="#6F6F6F"
@@ -132,17 +131,17 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titleLabel"
-                android:layout_marginLeft="33dp"
+                android:layout_marginLeft="25dp"
                 android:text="Insert Title"
                 android:textColor="@color/black"
                 android:elevation="5dp"></TextView>
 
     <TextView
         android:id="@+id/categoryLabel"
-        android:layout_width="175dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/detailsSummary"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/titleLabel"
         android:text="Category:"
@@ -153,10 +152,10 @@
 
             <TextView
                 android:id="@+id/categoryTextView"
-                android:layout_width="175dp"
+                android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/categoryLabel"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/titleTextView"
                 android:text="Insert Category"
                 android:textColor="@color/black"
@@ -167,7 +166,7 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titleTextView"
-                android:layout_marginLeft="28dp"
+                android:layout_marginLeft="20dp"
                 android:text="Amount Needed:"
                 android:textColor="#6F6F6F"
                 android:textStyle="bold"
@@ -178,7 +177,7 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/amountNeededLabel"
-                android:layout_marginLeft="33dp"
+                android:layout_marginLeft="25dp"
                 android:text="Insert Amount"
                 android:textColor="@color/black"
                 android:elevation="5dp"></TextView>
@@ -188,7 +187,7 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/amountNeededTextView"
-                android:layout_marginLeft="28dp"
+                android:layout_marginLeft="20dp"
                 android:text="Description:"
                 android:textColor="#6F6F6F"
                 android:textStyle="bold"
@@ -198,7 +197,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_below="@+id/descriptionLabel"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginRight="20dp"
         android:background="#ECECEC"
         android:orientation="vertical"
@@ -210,7 +209,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="13dp"
             android:autoLink="all"
             android:background="@null"
             android:gravity="top|left"
@@ -232,7 +230,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/descriptionLinearLayout"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="17dp"
                 android:layout_marginTop="10dp"
                 android:text="Contact Information "
                 android:textColor="@color/black"
@@ -245,7 +243,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contactSummary"
-                android:layout_marginLeft="28dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:text="Full Name: "
                 android:textColor="#6F6F6F"
@@ -254,7 +252,7 @@
 
             <TextView
                 android:id="@+id/fullNameTextView"
-                android:layout_width="175dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contactSummary"
                 android:layout_marginTop="5dp"
@@ -269,7 +267,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fullNameLabel"
-                android:layout_marginLeft="28dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:text="Email: "
                 android:textColor="#6F6F6F"
@@ -278,7 +276,7 @@
 
             <TextView
                 android:id="@+id/emailTextView"
-                android:layout_width="175dp"
+                android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fullNameTextView"
                 android:layout_marginTop="5dp"
@@ -293,7 +291,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/emailLabel"
-                android:layout_marginLeft="28dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:text="Phone Number: "
                 android:textColor="#6F6F6F"
@@ -316,7 +314,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/phoneNumberLabel"
-                android:layout_marginLeft="28dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:text="Preferred Contact Method: "
                 android:textColor="#6F6F6F"
@@ -325,7 +323,7 @@
 
             <TextView
                 android:id="@+id/contactMethodTextView"
-                android:layout_width="175dp"
+                android:layout_width="155dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/phoneNumberTextView"
                 android:layout_marginTop="5dp"
