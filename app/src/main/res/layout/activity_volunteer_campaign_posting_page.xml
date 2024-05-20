@@ -106,8 +106,8 @@
 
                 <ImageButton
                     android:id="@+id/uploadedImageView"
-                    android:layout_width="350dp"
-                    android:layout_height="180dp"
+                    android:layout_width="300dp"
+                    android:layout_height="200dp"
                     android:layout_gravity="center"
                     android:src="@drawable/placeholder_image1"
                     android:scaleType="centerCrop"
