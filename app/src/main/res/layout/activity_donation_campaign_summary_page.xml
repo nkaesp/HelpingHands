@@ -93,7 +93,7 @@
             <ImageView
                 android:id="@+id/contentSummary"
                 android:layout_width="385dp"
-                android:layout_height="350dp"
+                android:layout_height="400dp"
                 android:layout_below="@+id/imageDonationSummary"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
@@ -196,7 +196,7 @@
     <LinearLayout
         android:id="@+id/descriptionLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="120dp"
         android:layout_below="@+id/descriptionLabel"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -215,8 +215,8 @@
             android:background="@null"
             android:gravity="top|left"
             android:inputType="textMultiLine|textCapSentences"
-            android:lines="3"
-            android:maxLines="3"
+            android:lines="5"
+            android:maxLines="5"
             android:minLines="1"
             android:scrollbars="none"
             android:text="Insert Description"
@@ -285,7 +285,8 @@
                 android:layout_toEndOf="@+id/emailLabel"
                 android:text="Insert Email"
                 android:textColor="@color/black"
-                android:elevation="5dp"></TextView>
+                android:elevation="5dp"
+                ></TextView>
 
             <TextView
                 android:id="@+id/phoneNumberLabel"
@@ -356,62 +357,10 @@
         </RelativeLayout>
     </ScrollView>
     <!--    nav sa ubos-->
-    <RelativeLayout
+    <fragment
+        android:id="@+id/navBarFragment"
+        android:name="com.intprog.helpinghands.NavBarFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/navBot"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/navbottom" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/navBot"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/notificationsImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/bell" />
-
-            <ImageButton
-                android:id="@+id/homeImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/home" />
-
-            <ImageButton
-                android:id="@+id/menuImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/more" />
-        </LinearLayout>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

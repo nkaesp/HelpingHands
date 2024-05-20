@@ -104,6 +104,7 @@
             android:layout_marginTop="15dp"
             android:text="Donation Details:"
             android:textColor="@color/black"
+            android:textSize="15sp"
             android:textStyle="bold"></TextView>
 
 
@@ -124,22 +125,25 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"></TextView>
 
             <EditText
                 android:id="@+id/title"
-                android:layout_width="178dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/bg_radius_ten_gray"
+                android:hint="max. 30 characters"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:elevation="3dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:maxLength="25"
+                android:textSize="15sp">
             </EditText>
 
         </LinearLayout>
@@ -169,7 +173,7 @@
 
             <EditText
                 android:id="@+id/category"
-                android:layout_width="150dp"
+                android:layout_width="152dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_radius_ten_gray"
                 android:layout_marginLeft="5dp"
@@ -178,7 +182,8 @@
                 android:paddingLeft="10dp"
                 android:elevation="3dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp">
             </EditText>
 
         </LinearLayout>
@@ -220,7 +225,8 @@
             android:paddingLeft="10dp"
             android:elevation="3dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:textSize="15sp">
         </EditText>
 
 
@@ -241,8 +247,8 @@
 
         <EditText
             android:id="@+id/desc"
-            android:layout_width="350dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:layout_below="@id/descText"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -252,13 +258,16 @@
             android:elevation="5dp"
             android:gravity="top|left"
             android:inputType="textMultiLine|textCapSentences"
+            android:hint="Enter Description"
             android:lines="5"
             android:maxLines="5"
             android:minLines="1"
             android:paddingLeft="10dp"
-            android:paddingTop="2dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
             android:paddingBottom="2dp"
-            android:scrollbars="none"></EditText>
+            android:scrollbars="none"
+            android:textSize="15sp"></EditText>
 
         <TextView
             android:id="@+id/contactInformation"
@@ -267,6 +276,7 @@
             android:layout_below="@+id/desc"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
+            android:textSize="15sp"
             android:text="Contact Information:"
             android:textColor="@color/black"
             android:textStyle="bold"></TextView>
@@ -311,7 +321,8 @@
                 android:inputType="text"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:elevation="3dp">
+                android:elevation="3dp"
+                android:textSize="15sp">
             </EditText>
 
 
@@ -348,7 +359,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:inputType="textEmailAddress"
-                android:elevation="3dp">
+                android:elevation="3dp"
+                android:textSize="15sp">
             </EditText>
 
         </LinearLayout>
@@ -386,7 +398,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:inputType="phone"
-                android:elevation="3dp">
+                android:elevation="3dp"
+                android:textSize="15sp">
             </EditText>
 
         </LinearLayout>
@@ -423,6 +436,7 @@
                 android:layout_marginBottom="5dp"
                 android:inputType="text"
                 android:elevation="3dp"
+                android:textSize="15sp"
                 >
             </EditText>
 
@@ -455,62 +469,10 @@
     </ScrollView>
 
     <!--    nav sa bottom-->
-    <RelativeLayout
+    <fragment
+        android:id="@+id/navBarFragment"
+        android:name="com.intprog.helpinghands.NavBarFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/navBot"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/navbottom" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/navBot"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/notificationsImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/bell" />
-
-            <ImageButton
-                android:id="@+id/homeImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/home" />
-
-            <ImageButton
-                android:id="@+id/menuImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="#F4F5F5"
-                android:scaleType="fitCenter"
-                android:src="@drawable/more" />
-        </LinearLayout>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
