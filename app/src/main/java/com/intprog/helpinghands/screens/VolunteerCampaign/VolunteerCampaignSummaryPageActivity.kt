@@ -51,9 +51,17 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
                 && !startDate.isNullOrEmpty() && !duration.isNullOrEmpty() && !age.isNullOrEmpty()
                 && !location.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
                 val post = VolunteerCampaignPost(title ?: "",  category ?: "",  description ?: "", startDate ?: "" ,  duration ?: "",  age ?: "", imageUriString)
-
                 val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java).apply {
                     putExtra("post", post)
+
+                    putExtra("title", title)
+                    putExtra("category", category)
+                    putExtra("description", description)
+                    putExtra("startDate", startDate)
+                    putExtra("duration", duration)
+                    putExtra("age", age)
+                    putExtra("location", location)
+                    putExtra("imageUri", imageUriString)
                 }
                 startActivity(intent)
             } else {
