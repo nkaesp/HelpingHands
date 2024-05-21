@@ -2,7 +2,7 @@ package com.intprog.helpinghands.screens.DonationCampaign
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageButton
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
