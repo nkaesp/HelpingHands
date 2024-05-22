@@ -38,6 +38,12 @@ class CampaignPostingOptionsPageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
+        profileImageButton.setOnClickListener {
+            val intent = Intent(this, ProfilePageActivity::class.java)
+            startActivity(intent)
+        }
+
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)

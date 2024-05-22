@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.intprog.helpinghands.CampaignPostingOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.R
@@ -25,9 +26,7 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
-            val intent = Intent(this, CampaignPostingOptionsPageActivity::class.java)
-            startActivity(intent)
-            finish()
+            showConfirmationDialog()
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
@@ -35,6 +34,8 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
+
+
 
         val title = findViewById<EditText>(R.id.title)
         title.filters = arrayOf(InputFilter.LengthFilter(25))
@@ -115,5 +116,14 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun showConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Confirmation")
+            .setMessage("Are you sure you want discard your post?")
+            .setPositiveButton("Yes") { _, _ ->
+                super.onBackPressed()
+            }
+            .setNegativeButton("No", null)
+            .show()
+    }
 }
