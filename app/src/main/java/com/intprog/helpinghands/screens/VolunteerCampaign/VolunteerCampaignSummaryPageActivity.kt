@@ -10,6 +10,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.intprog.helpinghands.HomePageActivity
+import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivitySelectionPageActivity
 
@@ -42,7 +44,19 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
-            showConfirmationDialog()
+            onBackPressed()
+        }
+
+        val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeImageButton.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+
+        val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
+        profileImageButton.setOnClickListener {
+            val intent = Intent(this, ProfilePageActivity::class.java)
+            startActivity(intent)
         }
 
         val postButton = findViewById<Button>(R.id.postButton)
@@ -69,16 +83,5 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    private fun showConfirmationDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("Confirmation")
-            .setMessage("Are you sure you want discard your post?")
-            .setPositiveButton("Yes") { _, _ ->
-                super.onBackPressed()
-            }
-            .setNegativeButton("No", null)
-            .show()
     }
 }

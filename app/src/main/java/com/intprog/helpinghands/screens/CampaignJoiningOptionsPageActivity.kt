@@ -45,5 +45,11 @@ class CampaignJoiningOptionsPageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
+        profileImageButton.setOnClickListener {
+            val intent = Intent(this, ProfilePageActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

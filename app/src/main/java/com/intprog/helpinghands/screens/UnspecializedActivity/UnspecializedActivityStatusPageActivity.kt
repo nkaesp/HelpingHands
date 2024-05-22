@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.intprog.helpinghands.HomePageActivity
+import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignSelectionPageActivity
 
@@ -36,6 +37,12 @@ class UnspecializedActivityStatusPageActivity : AppCompatActivity() {
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+
+        val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
+        profileImageButton.setOnClickListener {
+            val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
         }
 
