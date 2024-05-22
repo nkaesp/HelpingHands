@@ -68,7 +68,8 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
 
         val filterFields = linkedMapOf(
             "title" to true,
-            "imageUri" to true
+            "imageUri" to true,
+            "type" to true
         ) as LinkedHashMap<String, Boolean>
         savePostsToSharedPreferences(posts, "VolunteerCampaignPrefs", filterFields)
     }
@@ -91,6 +92,8 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         val gson = Gson()
         val json = gson.toJson(posts)
+
+
         editor.putString("posts", json)
         editor.apply()
 

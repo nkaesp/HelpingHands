@@ -1,6 +1,7 @@
 // HomePageActivity.kt
 package com.intprog.helpinghands
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -8,12 +9,21 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.intprog.helpinghands.models.Campaign
 import com.intprog.helpinghands.models.CampaignType
+import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignStatusPageActivity
 import com.intprog.helpinghands.screens.FeaturedOpportunitiesAdapter
+import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivityStatusPageActivity
+import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignPost
+import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignStatusPageActivity
+import org.json.JSONArray
+import org.json.JSONObject
 
 class HomePageActivity : AppCompatActivity() {
 
+    private val campaigns = mutableListOf<Campaign>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FeaturedOpportunitiesAdapter
 
@@ -21,9 +31,14 @@ class HomePageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
-        val campaigns = loadCampaigns()
+
+
         recyclerView = findViewById(R.id.featuredOpportunitiesRecyclerView)
-        adapter = FeaturedOpportunitiesAdapter(campaigns)
+        adapter = FeaturedOpportunitiesAdapter(campaigns) { campaign ->
+            navigateToStatusPage(campaign)
+        }
+
+        loadCampaignsFromPreferences()
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
@@ -47,13 +62,26 @@ class HomePageActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadCampaigns(): List<Campaign> {
-        // Load campaigns from your data source (e.g., database, shared preferences, API)
-        // Here, we'll create some sample data
-        return listOf(
-            Campaign(1, "Campaign 1", "Donation", "https://example.com/image1.jpg", CampaignType.DONATION),
-            Campaign(2, "Campaign 2", "Volunteer", "https://example.com/image2.jpg", CampaignType.VOLUNTEER),
-            // Add more campaigns
-        )
+    private fun loadCampaignsFromPreferences() {
+        val sharedPrefs = getSharedPreferences("CampaignPrefs", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPrefs.getString("posts", null)
+        val type = object : TypeToken<List<Campaign>>() {}.type
+        val loadedPosts: List<Campaign>? = gson.fromJson(json, type)
+        if (loadedPosts != null) {
+            campaigns.clear()
+            campaigns.addAll(loadedPosts)
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun navigateToStatusPage(campaign: Campaign) {
+        val intent = when (campaign.type) {
+            CampaignType.VOLUNTEER -> Intent(this, VolunteerCampaignStatusPageActivity::class.java)
+            CampaignType.DONATION -> Intent(this, DonationCampaignStatusPageActivity::class.java)
+            CampaignType.UNSPECIALIZED -> Intent(this, UnspecializedActivityStatusPageActivity::class.java)
+        }
+        intent.putExtra("campaignTitle", campaign.title)
+        startActivity(intent)
     }
 }
