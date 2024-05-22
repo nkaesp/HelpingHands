@@ -10,9 +10,11 @@ data class VolunteerCampaignPost(
     val startDate: String,
     val endDate: String,
     val age: String,
+    val location: String,
     val imageUri: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
@@ -29,6 +31,7 @@ data class VolunteerCampaignPost(
         parcel.writeString(startDate)
         parcel.writeString(endDate)
         parcel.writeString(age)
+        parcel.writeString(location)
         parcel.writeString(imageUri)
     }
 

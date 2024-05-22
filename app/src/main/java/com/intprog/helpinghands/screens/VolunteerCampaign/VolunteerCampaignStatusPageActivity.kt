@@ -44,9 +44,7 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
-            val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java)
-            startActivity(intent)
-            finish()
+            onBackPressed()
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)

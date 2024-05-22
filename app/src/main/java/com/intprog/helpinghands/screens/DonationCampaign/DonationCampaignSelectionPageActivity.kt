@@ -66,7 +66,11 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
         posts.add(post)
         adapter.notifyDataSetChanged()
 
-        savePostsToSharedPreferences()
+        val filterFields = linkedMapOf(
+            "title" to true,
+            "imageUri" to true
+        ) as LinkedHashMap<String, Boolean>
+        savePostsToSharedPreferences(posts, "DonationCampaignPrefs", filterFields)
     }
 
     private fun loadPostsFromSharedPreferences() {
@@ -82,14 +86,44 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun savePostsToSharedPreferences() {
-        val sharedPreferences = getSharedPreferences("DonationCampaignPrefs", Context.MODE_PRIVATE)
+    private fun savePostsToSharedPreferences(posts: List<Any>, sharedPreferencesName: String, filterFields: LinkedHashMap<String, Boolean>) {
+        val sharedPreferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val gson = Gson()
         val json = gson.toJson(posts)
         editor.putString("posts", json)
         editor.apply()
+
+        // Process and save to additional shared preferences
+        if (posts.isNotEmpty()) {
+            val additionalSharedPreferences = getSharedPreferences("CampaignPrefs", Context.MODE_PRIVATE)
+            val existingJson = additionalSharedPreferences.getString("posts", "[]")
+            val type = object : TypeToken<List<LinkedHashMap<String, Any?>>>() {}.type
+            val existingPosts: MutableList<LinkedHashMap<String, Any?>> = gson.fromJson(existingJson, type) ?: mutableListOf()
+
+            val newPosts = posts.map { post ->
+                val postMap = gson.fromJson(gson.toJson(post), Map::class.java) as Map<String, Any?>
+                val orderedPostMap = LinkedHashMap<String, Any?>()
+                filterFields.forEach { (key, _) ->
+                    orderedPostMap[key] = postMap[key]
+                }
+                orderedPostMap
+            }
+
+            // Add only unique new posts
+            for (newPost in newPosts) {
+                if (!existingPosts.contains(newPost)) {
+                    existingPosts.add(newPost)
+                }
+            }
+
+            val combinedJson = gson.toJson(existingPosts)
+            val additionalEditor = additionalSharedPreferences.edit()
+            additionalEditor.putString("posts", combinedJson)
+            additionalEditor.apply()
+        }
     }
+
 
     override fun onResume() {
         super.onResume()
