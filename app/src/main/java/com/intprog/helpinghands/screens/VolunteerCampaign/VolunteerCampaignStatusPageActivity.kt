@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
-import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignSelectionPageActivity
+import com.squareup.picasso.Picasso
 
 class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +25,7 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
         val duration = intent.getStringExtra("duration")
         val age = intent.getStringExtra("age")
         val location = intent.getStringExtra("location")
+        val imageUriString = intent.getStringExtra("imageUri")
 
         // Populate views with the retrieved data
         findViewById<TextView>(R.id.title).text = title
@@ -35,18 +36,15 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.ageTextView).text = age
         findViewById<TextView>(R.id.locationTextView).text = location
 
-        // Retrieve and set image if available
-        val imageUriString = intent.getStringExtra("imageUri")
+        // Set image using Picasso
+        val imageView = findViewById<ImageView>(R.id.postedpic)
         if (imageUriString != null) {
-            val imageUri = Uri.parse(imageUriString)
-            findViewById<ImageView>(R.id.postedpic).setImageURI(imageUri)
+            Picasso.get().load(imageUriString).into(imageView)
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
-            val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java)
-            startActivity(intent)
-            finish()
+            onBackPressed()
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)

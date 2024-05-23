@@ -48,9 +48,7 @@ class UnspecializedActivityStatusPageActivity : AppCompatActivity() {
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
-            val intent = Intent(this, UnspecializedActivitySelectionPageActivity::class.java)
-            startActivity(intent)
-            finish()
+            onBackPressed()
         }
     }
 }
