@@ -15,7 +15,8 @@ class ProfilePageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_page)
 
-        // Initialize SharedPreferences
+       // Initialize SharedPreferences
+
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
         val loggedInEmail = sharedPreferences.getString("loggedInEmail", "")
