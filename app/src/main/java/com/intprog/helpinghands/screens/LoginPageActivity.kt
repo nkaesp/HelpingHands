@@ -5,9 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Paint
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 
 class LoginPageActivity : AppCompatActivity() {
@@ -40,6 +42,21 @@ class LoginPageActivity : AppCompatActivity() {
                 Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val passwordVisibilityToggle = findViewById<ImageView>(R.id.passwordVisibilityToggle)
+        passwordVisibilityToggle.setOnClickListener {
+            val isPasswordVisible = passwordEditText.transformationMethod == null
+            if (isPasswordVisible) {
+                // Hide password
+                passwordVisibilityToggle.setImageResource(R.drawable.pw_visibility_off)
+                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            } else {
+                // Show password
+                passwordVisibilityToggle.setImageResource(R.drawable.pw_visibility_on)
+                passwordEditText.transformationMethod = null
+            }
+        }
+
 
         val signUpButton = findViewById<Button>(R.id.signUpButton)
         signUpButton.setOnClickListener {
