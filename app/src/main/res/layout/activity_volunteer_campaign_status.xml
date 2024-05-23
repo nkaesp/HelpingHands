@@ -303,8 +303,7 @@
             android:layout_below="@id/peopleWhoVolunteered"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="80dp">
+            android:layout_marginRight="30dp">
             <ListView
                 android:id="@+id/peopleWhoVolunteeredListView"
                 android:layout_width="wrap_content"

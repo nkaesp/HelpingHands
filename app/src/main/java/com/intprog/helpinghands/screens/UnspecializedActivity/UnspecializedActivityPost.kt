@@ -2,21 +2,18 @@ package com.intprog.helpinghands.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.intprog.helpinghands.models.CampaignType
 
 data class UnspecializedActivityPost(
     val title: String,
     val noOfParticipants: String,
     val description: String,
-    val imageUri: String?,
-    val type: CampaignType
+    val imageUri: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readString(),
-        CampaignType.valueOf(parcel.readString() ?: CampaignType.UNSPECIALIZED.name)
+        parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -24,7 +21,6 @@ data class UnspecializedActivityPost(
         parcel.writeString(noOfParticipants)
         parcel.writeString(description)
         parcel.writeString(imageUri)
-        parcel.writeString(type.name)
     }
 
     override fun describeContents(): Int {

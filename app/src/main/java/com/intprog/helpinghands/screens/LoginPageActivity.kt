@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class LoginPageActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
@@ -30,16 +28,16 @@ class LoginPageActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
+            val savedEmail = sharedPreferences.getString("email", "")
+            val savedPassword = sharedPreferences.getString("password", "")
 
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+            } else if  (email == savedEmail && password == savedPassword) {
+                startActivity(Intent(this, HomePageActivity::class.java))
+                finish()
             } else {
-                if (isValidCredentials(email, password)) {
-                    startActivity(Intent(this, HomePageActivity::class.java))
-                    finish()
-                } else {
-                    Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -50,18 +48,5 @@ class LoginPageActivity : AppCompatActivity() {
 
         val forgotPasswordButton = findViewById<Button>(R.id.forgotPasswordButton)
         forgotPasswordButton.paintFlags = forgotPasswordButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-    }
-
-    private fun isValidCredentials(email: String, password: String): Boolean {
-        val accountsJson = sharedPreferences.getString("accounts", null)
-        val type = object : TypeToken<Map<String, String>>() {}.type
-        val accounts: Map<String, String> = if (accountsJson != null) {
-            Gson().fromJson(accountsJson, type)
-        } else {
-            mapOf()
-        }
-
-        val storedPassword = accounts[email]
-        return storedPassword != null && storedPassword == password
     }
 }

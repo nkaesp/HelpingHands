@@ -400,8 +400,7 @@
                 android:layout_marginBottom="5dp"
                 android:inputType="phone"
                 android:elevation="3dp"
-                android:textSize="15sp"
-                android:maxLength="11">
+                android:textSize="15sp">
             </EditText>
 
         </LinearLayout>
