@@ -1,6 +1,5 @@
 package com.intprog.helpinghands
 
-
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,6 +10,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
@@ -33,6 +34,7 @@ class RegistrationActivity : AppCompatActivity() {
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText)
         createAccountButton = findViewById(R.id.createAccountButton)
         sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+
         createAccountButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
@@ -47,13 +49,28 @@ class RegistrationActivity : AppCompatActivity() {
             } else if (password.length < 8) {
                 Toast.makeText(this, "Password must be at least 8 characters long", Toast.LENGTH_SHORT).show()
             } else {
-                val editor = sharedPreferences.edit()
-                editor.putString("email", email)
-                editor.putString("password", password)
-                editor.apply()
-
-                showRegistrationSuccessDialog()
+                registerAccount(email, password)
             }
+        }
+    }
+
+    private fun registerAccount(email: String, password: String) {
+        val accountsJson = sharedPreferences.getString("accounts", null)
+        val type = object : TypeToken<MutableMap<String, String>>() {}.type
+        val accounts: MutableMap<String, String> = if (accountsJson != null) {
+            Gson().fromJson(accountsJson, type)
+        } else {
+            mutableMapOf()
+        }
+
+        if (accounts.containsKey(email)) {
+            Toast.makeText(this, "An account with this email already exists", Toast.LENGTH_SHORT).show()
+        } else {
+            accounts[email] = password
+            val editor = sharedPreferences.edit()
+            editor.putString("accounts", Gson().toJson(accounts))
+            editor.apply()
+            showRegistrationSuccessDialog()
         }
     }
 
