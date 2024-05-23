@@ -120,7 +120,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/bg_radius_ten_gray"
-                        android:hint="Enter Title"
+                        android:hint="max. 30 characters"
                         android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         android:paddingLeft="10dp"

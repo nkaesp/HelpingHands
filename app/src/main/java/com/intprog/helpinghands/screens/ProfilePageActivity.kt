@@ -1,5 +1,4 @@
 package com.intprog.helpinghands
-
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -17,6 +16,7 @@ class ProfilePageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile_page)
 
        // Initialize SharedPreferences
+
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
         val loggedInEmail = sharedPreferences.getString("loggedInEmail", "")
@@ -41,13 +41,11 @@ class ProfilePageActivity : AppCompatActivity() {
         backTop.setOnClickListener {
             onBackPressed()
         }
-
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
-
         // Adding OnClickListener to the logout button
         val logoutButton = findViewById<Button>(R.id.logoutButton)
         logoutButton.setOnClickListener {
