@@ -1,6 +1,5 @@
 package com.intprog.helpinghands
 
-
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -13,6 +12,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
@@ -50,7 +51,6 @@ class RegistrationActivity : AppCompatActivity() {
         confirmPasswordToggle.setOnClickListener {
             togglePasswordVisibility(confirmPasswordEditText, confirmPasswordToggle)
         }
-
 
         createAccountButton.setOnClickListener {
             val email = emailEditText.text.toString()
