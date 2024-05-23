@@ -63,6 +63,15 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/rounded_rectangle"
             android:elevation="10dp">
+            <View
+                android:id="@+id/topBackground"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:backgroundTint="#FBC77B"
+                android:background="@drawable/rounded_rectangle_top"
+                android:layout_height="90dp"
+                android:clipToOutline="true"/>
 
             <ImageView
                 android:id="@+id/pfp"
@@ -72,7 +81,10 @@
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/person_placeholder"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/circular_shape"
+                android:elevation="10dp"/>
+
 
             <Button
                 android:id="@+id/editProfileButton"
@@ -138,7 +150,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:elevation="200dp"
-            android:background="@drawable/bg_login_button" />
+            android:background="@drawable/bg_radius_ten_lightblue" />
     </RelativeLayout>
 
     <fragment
