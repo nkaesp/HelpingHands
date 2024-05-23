@@ -88,4 +88,5 @@ class EditProfileActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 }
