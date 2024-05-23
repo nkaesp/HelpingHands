@@ -33,7 +33,6 @@ class RegistrationActivity : AppCompatActivity() {
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText)
         createAccountButton = findViewById(R.id.createAccountButton)
         sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-
         createAccountButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
