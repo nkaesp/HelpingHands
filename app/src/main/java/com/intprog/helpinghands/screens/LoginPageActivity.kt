@@ -67,6 +67,8 @@ class LoginPageActivity : AppCompatActivity() {
 
         val forgotPasswordButton = findViewById<Button>(R.id.forgotPasswordButton)
         forgotPasswordButton.paintFlags = forgotPasswordButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+
+
     }
 
     private fun isValidCredentials(email: String, password: String): Boolean {
