@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.models.CampaignType
 import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivitySelectionPageActivity
 
 class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
@@ -64,7 +65,7 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
             if (!title.isNullOrEmpty() && !category.isNullOrEmpty() && !description.isNullOrEmpty()
                 && !startDate.isNullOrEmpty() && !duration.isNullOrEmpty() && !age.isNullOrEmpty()
                 && !location.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
-                val post = VolunteerCampaignPost(title ?: "",  category ?: "",  description ?: "", startDate ?: "" ,  duration ?: "",  age ?: "", imageUriString)
+                val post = VolunteerCampaignPost(title ?: "",  category ?: "",  description ?: "", startDate ?: "" ,  duration ?: "",  age ?: "", location ?: "", imageUriString, CampaignType.VOLUNTEER)
                 val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java).apply {
                     putExtra("post", post)
 
@@ -76,6 +77,7 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
                     putExtra("age", age)
                     putExtra("location", location)
                     putExtra("imageUri", imageUriString)
+                    putExtra("type", post.type.name)
                 }
                 startActivity(intent)
             } else {
