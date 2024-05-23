@@ -56,9 +56,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
-            val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
-            startActivity(intent)
-            finish()
+            onBackPressed()
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
