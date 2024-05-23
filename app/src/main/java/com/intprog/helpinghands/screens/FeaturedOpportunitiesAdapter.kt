@@ -1,7 +1,6 @@
 // FeaturedOpportunitiesAdapter.kt
 package com.intprog.helpinghands.screens
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

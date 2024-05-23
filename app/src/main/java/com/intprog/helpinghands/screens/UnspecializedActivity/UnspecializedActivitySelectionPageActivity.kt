@@ -70,7 +70,8 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
         val filterFields = linkedMapOf(
             "title" to true,
-            "imageUri" to true
+            "imageUri" to true,
+            "type" to true
         ) as LinkedHashMap<String, Boolean>
         savePostsToSharedPreferences(posts, "UnspecializedActivityPrefs", filterFields)
     }

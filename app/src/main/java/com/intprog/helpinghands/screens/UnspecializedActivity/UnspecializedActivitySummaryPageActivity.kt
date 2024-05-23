@@ -13,6 +13,7 @@ import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.model.UnspecializedActivityPost
+import com.intprog.helpinghands.models.CampaignType
 
 class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
 
@@ -48,7 +49,7 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         val postButton = findViewById<Button>(R.id.postButton)
         postButton.setOnClickListener {
             if (!title.isNullOrEmpty() && !noOfParticipants.isNullOrEmpty() && !description.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
-                val post = UnspecializedActivityPost(title ?: "", noOfParticipants ?: "", description ?: "", imageUriString)
+                val post = UnspecializedActivityPost(title ?: "", noOfParticipants ?: "", description ?: "", imageUriString, CampaignType.UNSPECIALIZED)
 
                 val intent = Intent(this, UnspecializedActivitySelectionPageActivity::class.java).apply {
                     putExtra("post", post)

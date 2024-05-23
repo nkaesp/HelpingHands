@@ -277,7 +277,7 @@
                 android:src="@drawable/home" />
 
             <ImageButton
-                android:id="@+id/menuImageButton"
+                android:id="@+id/profileImageButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
@@ -287,7 +287,7 @@
                 android:layout_weight="1"
                 android:background="#F4F5F5"
                 android:scaleType="fitCenter"
-                android:src="@drawable/more" />
+                android:src="@drawable/profile" />
         </LinearLayout>
     </RelativeLayout>
 
