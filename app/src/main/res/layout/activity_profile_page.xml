@@ -160,7 +160,7 @@
 
 
 
-<!--    nav sa ubos-->
+<!--    nav bottom-->
     <fragment
         android:id="@+id/navBarFragment"
         android:name="com.intprog.helpinghands.NavBarFragment"
