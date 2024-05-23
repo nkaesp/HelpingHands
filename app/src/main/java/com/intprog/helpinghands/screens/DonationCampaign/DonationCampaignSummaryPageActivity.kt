@@ -13,7 +13,6 @@ import android.widget.Toast
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
-import com.intprog.helpinghands.models.CampaignType
 
 class DonationCampaignSummaryPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +81,7 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
                 && !fullName.isNullOrEmpty() && !email.isNullOrEmpty() && !phoneNumber.isNullOrEmpty() && !contactMethod.isNullOrEmpty()
                 && !imageUriString.isNullOrEmpty()) {
                 val post = DonationCampaignPost(title ?: "", description ?: "", amountNeeded ?: "", category ?: "", fullName ?: "",
-                    email ?: "", phoneNumber ?: "", contactMethod ?: "", imageUriString, CampaignType.DONATION)
+                    email ?: "", phoneNumber ?: "", contactMethod ?: "", imageUriString)
 
                 val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java).apply {
                     putExtra("post", post)

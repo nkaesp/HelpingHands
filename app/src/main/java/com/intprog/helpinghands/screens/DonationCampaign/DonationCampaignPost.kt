@@ -2,7 +2,6 @@ package com.intprog.helpinghands.screens.DonationCampaign
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.intprog.helpinghands.models.CampaignType
 
 data class DonationCampaignPost(
     val title: String,
@@ -13,8 +12,7 @@ data class DonationCampaignPost(
     val email: String,
     val phoneNumber: String,
     val contactMethod: String,
-    val imageUri: String?,
-    val type: CampaignType
+    val imageUri: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -25,8 +23,7 @@ data class DonationCampaignPost(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readString(),
-        CampaignType.valueOf(parcel.readString() ?: CampaignType.DONATION.name)
+        parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -39,7 +36,6 @@ data class DonationCampaignPost(
         parcel.writeString(phoneNumber)
         parcel.writeString(contactMethod)
         parcel.writeString(imageUri)
-        parcel.writeString(type.name)
     }
 
     override fun describeContents(): Int {
