@@ -48,7 +48,7 @@
 
 
 
-<!--CONTENT-->
+    <!--CONTENT-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -160,7 +160,7 @@
 
 
 
-<!--    nav bottom-->
+    <!--    nav bottom-->
     <fragment
         android:id="@+id/navBarFragment"
         android:name="com.intprog.helpinghands.NavBarFragment"
