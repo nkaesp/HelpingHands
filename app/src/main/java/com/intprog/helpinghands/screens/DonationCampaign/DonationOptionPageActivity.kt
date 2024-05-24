@@ -10,6 +10,7 @@ import com.intprog.helpinghands.CampaignJoiningOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.screens.PaymentPageActivity
 
 class DonationOptionPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +38,7 @@ class DonationOptionPageActivity : AppCompatActivity() {
 
         val supportOurCauseButton = findViewById<Button>(R.id.supportOurCauseButton)
         supportOurCauseButton.setOnClickListener {
-            val Intent = Intent( this, TransactionPageActivity::class.java)
+            val Intent = Intent( this, PaymentPageActivity::class.java)
             startActivity(Intent)
         }
 
