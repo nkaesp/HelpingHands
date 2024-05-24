@@ -84,7 +84,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             -->
-        </activity> <!-- Donation Campaign -->
+        </activity>
+        <!-- Donation Campaign -->
         <activity
             android:name=".screens.DonationCampaign.DonationOptionPageActivity"
             android:exported="true" />
@@ -100,7 +101,11 @@
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignSelectionPageActivity"
             android:exported="true" />
- <!-- Unspecialized Activity -->
+            android:exported="true"></activity>
+        <activity
+            android:name=".screens.PaymentPageActivity"
+            android:exported="true" />
+        <!-- Unspecialized Activity -->
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivityPostingPageActivity"
             android:exported="true" />
