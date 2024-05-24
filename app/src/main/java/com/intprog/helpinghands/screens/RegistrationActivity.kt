@@ -80,6 +80,7 @@ class RegistrationActivity : AppCompatActivity() {
                     accounts[email] = password
                     val editor = sharedPreferences.edit()
                     editor.putString("accounts", Gson().toJson(accounts))
+                    editor.putString("loggedInEmail", email) // Save logged in email
                     editor.apply()
                     showRegistrationSuccessDialog()
                 }
