@@ -91,6 +91,7 @@ class RegistrationActivity : AppCompatActivity() {
                         }
                     }
 
+
                 val accountsJson = sharedPreferences.getString("accounts", null)
                 val type = object : TypeToken<MutableMap<String, String>>() {}.type
                 val accounts: MutableMap<String, String> = if (accountsJson != null) {
