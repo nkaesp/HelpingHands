@@ -424,6 +424,20 @@
                 android:text="Insert Preferred"
                 android:textColor="@color/black"></TextView>
 
+            <Button
+                android:id="@+id/deletePostButton"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/contentSummary"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="80dp"
+                android:background="@drawable/option_buttons"
+                android:backgroundTint="#FF0011"
+                android:text="DELETE POST"
+                android:elevation="10dp"
+                android:textSize="12dp"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

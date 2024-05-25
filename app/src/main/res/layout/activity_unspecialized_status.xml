@@ -153,12 +153,13 @@
                 android:textColor="@color/black"/>
 
             <LinearLayout
+                android:id="@+id/peopleWhoJoinedLinearLayout"
                 android:layout_width="370dp"
                 android:layout_height="120dp"
                 android:layout_below="@+id/peopleWhoJoinedTextView"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="80dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/bg_radius_ten_gray">
 
                 <ListView
@@ -169,6 +170,19 @@
                     android:layout_marginTop="0dp"
                     android:text="" />
             </LinearLayout>
+            <Button
+                android:id="@+id/deletePostButton"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/peopleWhoJoinedLinearLayout"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="80dp"
+                android:background="@drawable/option_buttons"
+                android:backgroundTint="#FF0011"
+                android:text="DELETE POST"
+                android:elevation="10dp"
+                android:textSize="12dp"/>
         </RelativeLayout>
     </ScrollView>
 
