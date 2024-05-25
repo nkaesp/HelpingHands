@@ -90,6 +90,25 @@ class RegistrationActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT).show()
                         }
                     }
+
+                val accountsJson = sharedPreferences.getString("accounts", null)
+                val type = object : TypeToken<MutableMap<String, String>>() {}.type
+                val accounts: MutableMap<String, String> = if (accountsJson != null) {
+                    Gson().fromJson(accountsJson, type)
+                } else {
+                    mutableMapOf()
+                }
+
+                if (accounts.containsKey(email)) {
+                    Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show()
+                } else {
+                    accounts[email] = password
+                    val editor = sharedPreferences.edit()
+                    editor.putString("accounts", Gson().toJson(accounts))
+                    editor.putString("loggedInEmail", email) // Save logged in email
+                    editor.apply()
+                    showRegistrationSuccessDialog()
+                }
             }
         }
     }
