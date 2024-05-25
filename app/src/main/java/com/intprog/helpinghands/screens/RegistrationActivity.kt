@@ -1,5 +1,6 @@
 package com.intprog.helpinghands
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -16,7 +17,12 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+
 class RegistrationActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var confirmPasswordEditText: EditText
@@ -32,6 +38,7 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
+        auth = Firebase.auth
 
         val backButton: ImageView = findViewById(R.id.backTop)
         backButton.setOnClickListener {
@@ -68,6 +75,22 @@ class RegistrationActivity : AppCompatActivity() {
             } else if (password.length < 8) {
                 Toast.makeText(this, "Password must be at least 8 characters long", Toast.LENGTH_SHORT).show()
             } else {
+                // Create user with email and password
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success
+                            Log.d(TAG, "createUserWithEmail:success")
+                            val user = auth.currentUser
+                            showRegistrationSuccessDialog()
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            Toast.makeText(baseContext, "Registration failed. ${task.exception?.message}",
+                                Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
                 val accountsJson = sharedPreferences.getString("accounts", null)
                 val type = object : TypeToken<MutableMap<String, String>>() {}.type
                 val accounts: MutableMap<String, String> = if (accountsJson != null) {
@@ -82,6 +105,7 @@ class RegistrationActivity : AppCompatActivity() {
                     accounts[email] = password
                     val editor = sharedPreferences.edit()
                     editor.putString("accounts", Gson().toJson(accounts))
+                    editor.putString("loggedInEmail", email) // Save logged in email
                     editor.apply()
                     showRegistrationSuccessDialog()
                 }
