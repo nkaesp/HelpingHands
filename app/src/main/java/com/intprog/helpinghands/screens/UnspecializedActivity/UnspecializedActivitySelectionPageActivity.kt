@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.intprog.helpinghands.CampaignJoiningOptionsPageActivity
@@ -46,12 +47,14 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
@@ -59,6 +62,7 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
             val intent = Intent(this, CampaignJoiningOptionsPageActivity::class.java)
             startActivity(intent)
             finish()
+            overridePendingTransition(0, 0)
         }
 
 
@@ -153,7 +157,9 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
             titleTextView.text = post?.title
 
-            Picasso.get().load(post?.imageUri).into(imageView)
+            Glide.with(context)
+                .load(post?.imageUri)
+                .into(imageView)
 
             viewDetailsButton.setOnClickListener {
                 val intent = Intent(context, UnspecializedActivityStatusPageActivity::class.java).apply {
@@ -163,6 +169,7 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
                     putExtra("imageUri", post?.imageUri)
                 }
                 context.startActivity(intent)
+                overridePendingTransition(0, 0)
             }
 
             return itemView

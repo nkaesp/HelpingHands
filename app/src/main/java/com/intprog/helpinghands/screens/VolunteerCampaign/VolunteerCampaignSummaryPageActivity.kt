@@ -46,18 +46,21 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
             onBackPressed()
+            overridePendingTransition(0, 0)
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val postButton = findViewById<Button>(R.id.postButton)
@@ -80,6 +83,7 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
                     putExtra("type", post.type.name)
                 }
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             } else {
                 Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
             }

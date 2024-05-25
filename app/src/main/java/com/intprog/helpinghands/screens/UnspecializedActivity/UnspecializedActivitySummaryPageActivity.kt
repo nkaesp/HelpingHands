@@ -24,6 +24,7 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         val backButton: ImageButton = findViewById(R.id.backTop)
         backButton.setOnClickListener {
             onBackPressed()
+            overridePendingTransition(0, 0)
         }
 
         val summaryImageButton: ImageButton = findViewById(R.id.summaryImageButton)
@@ -55,6 +56,7 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
                     putExtra("post", post)
                 }
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             } else {
                 Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
             }
@@ -64,12 +66,14 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 

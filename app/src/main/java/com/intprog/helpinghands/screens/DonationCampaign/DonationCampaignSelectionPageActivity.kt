@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 
 class DonationCampaignSelectionPageActivity : AppCompatActivity() {
 
@@ -44,12 +44,14 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
@@ -57,9 +59,8 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
             val intent = Intent(this, DonationOptionPageActivity::class.java)
             startActivity(intent)
             finish()
+            overridePendingTransition(0, 0)
         }
-
-
     }
 
     fun addPost(post: DonationCampaignPost) {
@@ -125,7 +126,6 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
@@ -151,7 +151,9 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
 
             titleTextView.text = post?.title
 
-            Picasso.get().load(post?.imageUri).into(imageView)
+            Glide.with(context)
+                .load(post?.imageUri)
+                .into(imageView)
 
             viewDetailsButton.setOnClickListener {
                 val intent = Intent(context, DonationCampaignStatusPageActivity::class.java).apply {
@@ -166,12 +168,10 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
                     putExtra("imageUri", post?.imageUri)
                 }
                 context.startActivity(intent)
+                overridePendingTransition(0, 0)
             }
 
             return itemView
         }
-
-
-
     }
 }
