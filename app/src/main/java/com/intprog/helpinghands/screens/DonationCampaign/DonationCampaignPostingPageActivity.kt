@@ -33,6 +33,7 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
 
@@ -94,6 +95,7 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
                     putExtra("imageUri", imageUri.toString())
                 }
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
@@ -104,6 +106,7 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
+        overridePendingTransition(0, 0)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -122,6 +125,7 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
             .setMessage("Are you sure you want discard your post?")
             .setPositiveButton("Yes") { _, _ ->
                 super.onBackPressed()
+                overridePendingTransition(0, 0)
             }
             .setNegativeButton("No", null)
             .show()

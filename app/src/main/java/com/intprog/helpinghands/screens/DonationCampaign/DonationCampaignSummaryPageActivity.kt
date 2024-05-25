@@ -25,6 +25,7 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
             val intent = Intent(this, DonationCampaignPostingPageActivity::class.java)
             startActivity(intent)
             finish()
+            overridePendingTransition(0, 0)
         }
 
         val summaryImageButton: ImageView = findViewById(R.id.imageDonationSummary)
@@ -67,12 +68,15 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
+
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
 
@@ -88,6 +92,7 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
                     putExtra("post", post)
                 }
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             } else {
                 Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
             }

@@ -41,11 +41,13 @@ class ProfilePageActivity : AppCompatActivity() {
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
             onBackPressed()
+            overridePendingTransition(0, 0)
         }
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
         // Adding OnClickListener to the logout button
         val logoutButton = findViewById<Button>(R.id.logoutButton)
@@ -61,6 +63,7 @@ class ProfilePageActivity : AppCompatActivity() {
         val editProfileButton = findViewById<Button>(R.id.editProfileButton)
         editProfileButton.setOnClickListener {
             startActivity(Intent(this, EditProfileActivity::class.java))
+            overridePendingTransition(0, 0)
         }
     }
 }

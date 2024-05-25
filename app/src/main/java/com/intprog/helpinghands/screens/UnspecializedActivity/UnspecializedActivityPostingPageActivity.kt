@@ -74,6 +74,7 @@ class UnspecializedActivityPostingPageActivity : AppCompatActivity() {
                 }
 
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             }
         }
 
@@ -81,12 +82,14 @@ class UnspecializedActivityPostingPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
@@ -100,6 +103,7 @@ class UnspecializedActivityPostingPageActivity : AppCompatActivity() {
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1)
+        overridePendingTransition(0, 0)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -130,6 +134,7 @@ class UnspecializedActivityPostingPageActivity : AppCompatActivity() {
             .setMessage("Are you sure you want discard your post?")
             .setPositiveButton("Yes") { _, _ ->
                 super.onBackPressed()
+                overridePendingTransition(0, 0)
             }
             .setNegativeButton("No", null)
             .show()

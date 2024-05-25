@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/helpinghands_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HelpingHands"
+        android:theme="@style/NoAnimationTheme"
         tools:targetApi="31">
 
         <!-- Main Screens -->

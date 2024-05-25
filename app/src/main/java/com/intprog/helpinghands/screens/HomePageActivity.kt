@@ -51,18 +51,21 @@ class HomePageActivity : AppCompatActivity() {
         createCampaignButton.setOnClickListener {
             val intent = Intent(this, CampaignPostingOptionsPageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val joinCampaignButton = findViewById<Button>(R.id.joinCampaignButton)
         joinCampaignButton.setOnClickListener {
             val intent = Intent(this, CampaignJoiningOptionsPageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 
@@ -99,6 +102,7 @@ class HomePageActivity : AppCompatActivity() {
                         putExtra("imageUri", volunteerDetails.imageUri)
                     }
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                 } else {
                     Log.d("HomePageActivity", "Volunteer details not found for title: ${campaign.title}")
                 }
@@ -118,6 +122,7 @@ class HomePageActivity : AppCompatActivity() {
                         putExtra("imageUri", donationDetails.imageUri)
                     }
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                 } else {
                     Log.d("HomePageActivity", "Donation details not found for title: ${campaign.title}")
                 }
@@ -132,6 +137,7 @@ class HomePageActivity : AppCompatActivity() {
                         putExtra("imageUri", unspecializedDetails.imageUri)
                     }
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                 } else {
                     Log.d("HomePageActivity", "Unspecialized details not found for title: ${campaign.title}")
                 }
