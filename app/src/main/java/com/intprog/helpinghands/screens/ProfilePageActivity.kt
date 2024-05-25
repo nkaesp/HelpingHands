@@ -3,6 +3,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageButton
@@ -16,6 +18,13 @@ class ProfilePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_page)
+
+        val profileButton = findViewById<ImageButton>(R.id.profileImageButton)
+        profileButton.isSelected = true
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            profileButton.isSelected = false
+        }, 100) // Delay in milliseconds (500ms = 0.5 seconds)
 
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
