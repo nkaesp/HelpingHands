@@ -1,42 +1,38 @@
 package com.intprog.helpinghands.screens.VolunteerCampaign
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
-import com.intprog.helpinghands.models.Campaign
-import com.intprog.helpinghands.models.CampaignType
-import com.squareup.picasso.Picasso
 
 class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_volunteer_campaign_status)
 
-        val currentPost = VolunteerCampaignPost(
-            title = intent.getStringExtra("title") ?: "",
-            category = intent.getStringExtra("category") ?: "",
-            description = intent.getStringExtra("description") ?: "",
-            startDate = intent.getStringExtra("startDate") ?: "",
-            endDate = intent.getStringExtra("endDate") ?: "",
-            age = intent.getStringExtra("age") ?: "",
-            location = intent.getStringExtra("location") ?: "",
-            imageUri = intent.getStringExtra("imageUri"),
-            type = CampaignType.VOLUNTEER  // Provide a valid CampaignType value
-        )
-        val currentPostTitle = intent.getStringExtra("title") ?: ""
+        val titleTextView = findViewById<TextView>(R.id.title)
+        val categoryTextView = findViewById<TextView>(R.id.categoryTextView)
+        val descTextView = findViewById<TextView>(R.id.descTextView)
+        val startDateTextView = findViewById<TextView>(R.id.startDateTextView)
+        val endDateTextView = findViewById<TextView>(R.id.endDateTextView)
+        val ageTextView = findViewById<TextView>(R.id.ageTextView)
+        val locationTextView = findViewById<TextView>(R.id.locationTextView)
+        val imageView = findViewById<ImageView>(R.id.postedpic)
+        val deletePostButton = findViewById<Button>(R.id.deletePostButton)
 
-        // Retrieve data from intent extras
         val title = intent.getStringExtra("title")
         val category = intent.getStringExtra("category")
         val description = intent.getStringExtra("description")
@@ -44,33 +40,46 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
         val endDate = intent.getStringExtra("endDate")
         val age = intent.getStringExtra("age")
         val location = intent.getStringExtra("location")
-        val imageUriString = intent.getStringExtra("imageUri")
+        val imageUri = intent.getStringExtra("imageUri")
 
-        // Populate views with the retrieved data
-        findViewById<TextView>(R.id.title).text = title
-        findViewById<TextView>(R.id.categoryTextView).text = category
-        findViewById<TextView>(R.id.descTextView).text = description
-        findViewById<TextView>(R.id.startDateTextView).text = startDate
-        findViewById<TextView>(R.id.endDateTextView).text = endDate
-        findViewById<TextView>(R.id.ageTextView).text = age
-        findViewById<TextView>(R.id.locationTextView).text = location
+        titleTextView.text = title
+        categoryTextView.text = category
+        descTextView.text = description
+        startDateTextView.text = startDate
+        endDateTextView.text = endDate
+        ageTextView.text = age
+        locationTextView.text = location
 
-        // Set image using Picasso
-        val imageView = findViewById<ImageView>(R.id.postedpic)
-        if (imageUriString != null) {
-            Picasso.get().load(imageUriString).into(imageView)
+        if (imageUri != null) {
+            Glide.with(this)
+                .load(Uri.parse(imageUri))
+                .into(imageView)
         }
 
-        val deletePostButton = findViewById<Button>(R.id.deletePostButton)
         deletePostButton.setOnClickListener {
-            deletePost(currentPost)
-            deletePostFromCampaignPrefs(currentPostTitle)
-        }
+            val documentId = intent.getStringExtra("documentId")
 
-        val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener {
-            onBackPressed()
-            overridePendingTransition(0, 0)
+            if (documentId != null) {
+                // Delete the post from Firestore
+                db.collection("volunteer_campaign_posts").document(documentId)
+                    .delete()
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Post deleted successfully", Toast.LENGTH_SHORT).show()
+
+                        // Navigate back to the home page
+                        val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        overridePendingTransition(0, 0)
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(
+                            this,
+                            "Failed to delete post: ${exception.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
@@ -86,47 +95,11 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
-    }
 
-    private fun deletePost(post: VolunteerCampaignPost?) {
-        if (post == null) return
-
-        val sharedPreferences = getSharedPreferences("VolunteerCampaignPrefs", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPreferences.getString("posts", null)
-        val type = object : TypeToken<MutableList<VolunteerCampaignPost>>() {}.type
-        val posts: MutableList<VolunteerCampaignPost> = gson.fromJson(json, type) ?: mutableListOf()
-
-        posts.remove(post)
-
-        // Update shared preferences
-        val editor = sharedPreferences.edit()
-        val updatedJson = gson.toJson(posts)
-        editor.putString("posts", updatedJson)
-        editor.apply()
-
-        // Remove the post from the list displayed in the home page
-        val intent = Intent(this, HomePageActivity::class.java)
-        intent.putExtra("deletedPostTitle", post.title)
-        setResult(RESULT_OK, intent)
-
-        finish()
-        overridePendingTransition(0, 0)
-    }
-
-    private fun deletePostFromCampaignPrefs(postTitle: String) {
-        val sharedPrefs = getSharedPreferences("CampaignPrefs", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPrefs.getString("posts", null)
-        val type = object : TypeToken<MutableList<Campaign>>() {}.type
-        val posts: MutableList<Campaign> = gson.fromJson(json, type) ?: mutableListOf()
-
-        val postToRemove = posts.find { it.title == postTitle }
-        posts.remove(postToRemove)
-
-        val editor = sharedPrefs.edit()
-        val updatedJson = gson.toJson(posts)
-        editor.putString("posts", updatedJson)
-        editor.apply()
+        val backTop = findViewById<ImageButton>(R.id.backTop)
+        backTop.setOnClickListener {
+            onBackPressed()
+            overridePendingTransition(0, 0)
+        }
     }
 }

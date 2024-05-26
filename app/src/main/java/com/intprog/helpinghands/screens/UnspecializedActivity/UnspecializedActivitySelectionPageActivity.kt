@@ -1,6 +1,5 @@
 package com.intprog.helpinghands.screens.UnspecializedActivity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,20 +12,19 @@ import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.google.firebase.firestore.FirebaseFirestore
 import com.intprog.helpinghands.CampaignJoiningOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.model.UnspecializedActivityPost
-import com.squareup.picasso.Picasso
 
 class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
     private val posts = mutableListOf<UnspecializedActivityPost>()
     private lateinit var listView: ListView
     private lateinit var adapter: PostAdapter
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +34,9 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
         adapter = PostAdapter(this, R.layout.activity_unspecialized_selection_item, posts)
         listView.adapter = adapter
 
-        loadPostsFromSharedPreferences()
+        db = FirebaseFirestore.getInstance()
 
-        val post = intent.getParcelableExtra<UnspecializedActivityPost>("post")
-        if (post != null) {
-            addPost(post)
-        }
+        fetchPostsFromFirestore()
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
@@ -64,73 +59,23 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
             finish()
             overridePendingTransition(0, 0)
         }
-
-
     }
 
-    fun addPost(post: UnspecializedActivityPost) {
-        posts.add(post)
-        adapter.notifyDataSetChanged()
-
-        val filterFields = linkedMapOf(
-            "title" to true,
-            "imageUri" to true,
-            "type" to true
-        ) as LinkedHashMap<String, Boolean>
-        savePostsToSharedPreferences(posts, "UnspecializedActivityPrefs", filterFields)
-    }
-
-    private fun loadPostsFromSharedPreferences() {
-        val sharedPreferences = getSharedPreferences("UnspecializedActivityPrefs", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPreferences.getString("posts", null)
-        val type = object : TypeToken<List<UnspecializedActivityPost>>() {}.type
-        val loadedPosts: List<UnspecializedActivityPost>? = gson.fromJson(json, type)
-        if (loadedPosts != null) {
-            posts.clear()
-            posts.addAll(loadedPosts)
-            adapter.notifyDataSetChanged()
-        }
-    }
-
-    private fun savePostsToSharedPreferences(posts: List<Any>, sharedPreferencesName: String, filterFields: LinkedHashMap<String, Boolean>) {
-        val sharedPreferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val gson = Gson()
-        val json = gson.toJson(posts)
-        editor.putString("posts", json)
-        editor.apply()
-
-        // Process and save to additional shared preferences
-        if (posts.isNotEmpty()) {
-            val additionalSharedPreferences = getSharedPreferences("CampaignPrefs", Context.MODE_PRIVATE)
-            val existingJson = additionalSharedPreferences.getString("posts", "[]")
-            val type = object : TypeToken<List<LinkedHashMap<String, Any?>>>() {}.type
-            val existingPosts: MutableList<LinkedHashMap<String, Any?>> = gson.fromJson(existingJson, type) ?: mutableListOf()
-
-            val newPosts = posts.map { post ->
-                val postMap = gson.fromJson(gson.toJson(post), Map::class.java) as Map<String, Any?>
-                val orderedPostMap = LinkedHashMap<String, Any?>()
-                filterFields.forEach { (key, _) ->
-                    orderedPostMap[key] = postMap[key]
+    private fun fetchPostsFromFirestore() {
+        db.collection("unspecialized_activity_posts")
+            .get()
+            .addOnSuccessListener { result ->
+                posts.clear()
+                for (document in result) {
+                    val post = document.toObject(UnspecializedActivityPost::class.java)
+                    posts.add(post)
                 }
-                orderedPostMap
+                adapter.notifyDataSetChanged()
             }
-
-            // Add only unique new posts
-            for (newPost in newPosts) {
-                if (!existingPosts.contains(newPost)) {
-                    existingPosts.add(newPost)
-                }
+            .addOnFailureListener { exception ->
+                // Handle any errors here
             }
-
-            val combinedJson = gson.toJson(existingPosts)
-            val additionalEditor = additionalSharedPreferences.edit()
-            additionalEditor.putString("posts", combinedJson)
-            additionalEditor.apply()
-        }
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -138,7 +83,7 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
     }
 
     private inner class PostAdapter(
-        context: Context,
+        context: AppCompatActivity,
         resource: Int,
         objects: MutableList<UnspecializedActivityPost>
     ) : ArrayAdapter<UnspecializedActivityPost>(context, resource, objects) {
@@ -167,6 +112,9 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
                     putExtra("description", post?.description)
                     putExtra("noOfParticipants", post?.noOfParticipants)
                     putExtra("imageUri", post?.imageUri)
+                    putExtra("type", post?.type.toString()) // Pass campaign type
+                    putExtra("documentId", post?.documentId)
+                    // Add other data fields as needed
                 }
                 context.startActivity(intent)
                 overridePendingTransition(0, 0)
@@ -174,9 +122,5 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
             return itemView
         }
-
-
-
     }
-
 }

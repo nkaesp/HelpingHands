@@ -58,6 +58,11 @@ class ProfilePageActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
+
+        val logoutButton = findViewById<Button>(R.id.logoutButton)
+        logoutButton.setOnClickListener {
+            logout()
+        }
     }
 
     private fun displayUserDetails() {
@@ -99,5 +104,14 @@ class ProfilePageActivity : AppCompatActivity() {
                     // Log error message or show error toast
                 }
         }
+    }
+
+    private fun logout() {
+        auth.signOut()
+        val intent = Intent(this, LoginPageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+        overridePendingTransition(0, 0)
     }
 }
