@@ -3,6 +3,8 @@ package com.intprog.helpinghands
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
@@ -37,6 +39,13 @@ class HomePageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
+        val homeButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeButton.isSelected = true
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            homeButton.isSelected = false
+        }, 100) // Delay in milliseconds (500ms = 0.5 seconds)
+
         recyclerView = findViewById(R.id.featuredOpportunitiesRecyclerView)
         adapter = FeaturedOpportunitiesAdapter(campaigns) { campaign ->
             navigateToStatusPage(campaign)
@@ -51,18 +60,21 @@ class HomePageActivity : AppCompatActivity() {
         createCampaignButton.setOnClickListener {
             val intent = Intent(this, CampaignPostingOptionsPageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val joinCampaignButton = findViewById<Button>(R.id.joinCampaignButton)
         joinCampaignButton.setOnClickListener {
             val intent = Intent(this, CampaignJoiningOptionsPageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 
@@ -99,6 +111,7 @@ class HomePageActivity : AppCompatActivity() {
                         putExtra("imageUri", volunteerDetails.imageUri)
                     }
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                 } else {
                     Log.d("HomePageActivity", "Volunteer details not found for title: ${campaign.title}")
                 }
@@ -118,6 +131,7 @@ class HomePageActivity : AppCompatActivity() {
                         putExtra("imageUri", donationDetails.imageUri)
                     }
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                 } else {
                     Log.d("HomePageActivity", "Donation details not found for title: ${campaign.title}")
                 }
@@ -132,6 +146,7 @@ class HomePageActivity : AppCompatActivity() {
                         putExtra("imageUri", unspecializedDetails.imageUri)
                     }
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                 } else {
                     Log.d("HomePageActivity", "Unspecialized details not found for title: ${campaign.title}")
                 }
@@ -175,6 +190,33 @@ class HomePageActivity : AppCompatActivity() {
         }
         val posts: List<UnspecializedActivityPost> = Gson().fromJson(json, object : TypeToken<List<UnspecializedActivityPost>>() {}.type)
         return posts.find { it.title == title }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == DELETE_REQUEST_CODE && resultCode == RESULT_OK) {
+            val deletedPostTitle = data?.getStringExtra("deletedPostTitle")
+            if (!deletedPostTitle.isNullOrEmpty()) {
+                removeDeletedPost(deletedPostTitle)
+            }
+        }
+    }
+
+    private fun removeDeletedPost(deletedPostTitle: String) {
+        val iterator = campaigns.iterator()
+        while (iterator.hasNext()) {
+            val campaign = iterator.next()
+            if (campaign.title == deletedPostTitle) {
+                iterator.remove()
+                adapter.notifyDataSetChanged()
+                return
+            }
+        }
+    }
+
+    companion object {
+        private const val DELETE_REQUEST_CODE = 123
     }
 
 }

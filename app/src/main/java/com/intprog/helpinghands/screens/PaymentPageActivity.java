@@ -45,6 +45,7 @@ public class PaymentPageActivity extends AppCompatActivity {
                 Intent intent = new Intent(PaymentPageActivity.this, DonationOptionPageActivity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -55,6 +56,7 @@ public class PaymentPageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PaymentPageActivity.this, HomePageActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -65,6 +67,7 @@ public class PaymentPageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PaymentPageActivity.this, ProfilePageActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 

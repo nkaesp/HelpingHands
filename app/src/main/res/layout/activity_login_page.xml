@@ -178,6 +178,14 @@
 
         </Button>
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleSigninButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+
     </LinearLayout>
 
 

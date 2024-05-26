@@ -18,30 +18,35 @@ class CampaignPostingOptionsPageActivity : AppCompatActivity() {
         volunteerCampaignButton.setOnClickListener {
             val Intent = Intent(this, VolunteerCampaignPostingPageActivity::class.java)
             startActivity(Intent)
+            overridePendingTransition(0, 0)
         }
 
         val unspecializedActivityButton = findViewById<Button>(R.id.unspecializedActivityButton)
         unspecializedActivityButton.setOnClickListener {
             val Intent = Intent(this, UnspecializedActivityPostingPageActivity::class.java)
             startActivity(Intent)
+            overridePendingTransition(0, 0)
         }
 
         val donationCampaignButton = findViewById<Button>(R.id.donationCampaignButton)
         donationCampaignButton.setOnClickListener {
             val Intent = Intent(this, DonationCampaignPostingPageActivity::class.java)
             startActivity(Intent)
+            overridePendingTransition(0, 0)
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
@@ -49,6 +54,7 @@ class CampaignPostingOptionsPageActivity : AppCompatActivity() {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
             finish()
+            overridePendingTransition(0, 0)
         }
 
     }

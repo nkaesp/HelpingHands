@@ -1,7 +1,10 @@
 package com.intprog.helpinghands
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageButton
@@ -11,14 +14,21 @@ import android.widget.TextView
 class ProfilePageActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_page)
 
-       // Initialize SharedPreferences
+        val profileButton = findViewById<ImageButton>(R.id.profileImageButton)
+        profileButton.isSelected = true
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            profileButton.isSelected = false
+        }, 100) // Delay in milliseconds (500ms = 0.5 seconds)
 
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
+        // Retrieve logged in email from SharedPreferences
         val loggedInEmail = sharedPreferences.getString("loggedInEmail", "")
 
         // Retrieve views
@@ -26,25 +36,27 @@ class ProfilePageActivity : AppCompatActivity() {
         val nameTextView = findViewById<TextView>(R.id.nameTextView)
         val phoneTextView = findViewById<TextView>(R.id.phoneTextview)
 
-        // Retrieve user data from SharedPreferences
-        val registeredEmail = sharedPreferences.getString("email", "")
+        // Display the logged-in email
+        emailTextView.text = loggedInEmail
+
+        // Other code to retrieve and display name and phone from SharedPreferences
         val registeredName = sharedPreferences.getString("name", "")
         val registeredPhone = sharedPreferences.getString("phone", "")
 
         // Display user data in TextViews
-        emailTextView.text = registeredEmail
         nameTextView.text = registeredName
         phoneTextView.text = registeredPhone
-
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
             onBackPressed()
+            overridePendingTransition(0, 0)
         }
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
         // Adding OnClickListener to the logout button
         val logoutButton = findViewById<Button>(R.id.logoutButton)
@@ -60,6 +72,7 @@ class ProfilePageActivity : AppCompatActivity() {
         val editProfileButton = findViewById<Button>(R.id.editProfileButton)
         editProfileButton.setOnClickListener {
             startActivity(Intent(this, EditProfileActivity::class.java))
+            overridePendingTransition(0, 0)
         }
     }
 }

@@ -38,17 +38,20 @@ class UnspecializedActivityStatusPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
             onBackPressed()
+            overridePendingTransition(0, 0)
         }
     }
 }

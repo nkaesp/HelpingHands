@@ -22,30 +22,35 @@ class DonationOptionPageActivity : AppCompatActivity() {
         buttonBack.setOnClickListener {
             val Intent = Intent( this, CampaignJoiningOptionsPageActivity::class.java)
             startActivity(Intent)
+            overridePendingTransition(0, 0)
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val supportOurCauseButton = findViewById<Button>(R.id.supportOurCauseButton)
         supportOurCauseButton.setOnClickListener {
             val Intent = Intent( this, PaymentPageActivity::class.java)
             startActivity(Intent)
+            overridePendingTransition(0, 0)
         }
 
         val fundraisingCampaignButton = findViewById<Button>(R.id.fundraisingCampaignButton)
         fundraisingCampaignButton.setOnClickListener {
             val Intent = Intent( this, DonationCampaignSelectionPageActivity::class.java)
             startActivity(Intent)
+            overridePendingTransition(0, 0)
         }
     }
 }

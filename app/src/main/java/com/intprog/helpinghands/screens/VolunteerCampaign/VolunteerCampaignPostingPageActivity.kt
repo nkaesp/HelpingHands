@@ -109,6 +109,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 intent.putExtra("location", location)
                 intent.putExtra("imageUri", selectedImageUri.toString())
                 startActivity(intent)
+                overridePendingTransition(0, 0)
 
                 titleEditText.text.clear()
                 categoryEditText.text.clear()
@@ -131,12 +132,14 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileImageButton.setOnClickListener {
             val intent = Intent(this, ProfilePageActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 
@@ -161,6 +164,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_IMAGE_GALLERY)
+        overridePendingTransition(0, 0)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -177,6 +181,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             .setMessage("Are you sure you want discard your post?")
             .setPositiveButton("Yes") { _, _ ->
                 super.onBackPressed()
+                overridePendingTransition(0, 0)
             }
             .setNegativeButton("No", null)
             .show()
