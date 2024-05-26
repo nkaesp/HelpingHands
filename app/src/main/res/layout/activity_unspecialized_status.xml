@@ -170,6 +170,20 @@
                     android:layout_marginTop="0dp"
                     android:text="" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/joinButton"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/peopleWhoJoinedLinearLayout"
+                android:background="@drawable/option_buttons"
+                android:backgroundTint="#03A9F4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="120dp"
+                android:text="JOIN ACTIVITY"
+                android:textSize="12dp"/>
+
             <Button
                 android:id="@+id/deletePostButton"
                 android:layout_width="100dp"
@@ -177,12 +191,12 @@
                 android:layout_below="@+id/peopleWhoJoinedLinearLayout"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="80dp"
+                android:layout_marginBottom="120dp"
                 android:background="@drawable/option_buttons"
                 android:backgroundTint="#FF0011"
-                android:text="DELETE POST"
                 android:elevation="10dp"
-                android:textSize="12dp"/>
+                android:text="DELETE POST"
+                android:textSize="12dp" />
         </RelativeLayout>
     </ScrollView>
 

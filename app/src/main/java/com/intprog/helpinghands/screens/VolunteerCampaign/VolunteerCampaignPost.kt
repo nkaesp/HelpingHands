@@ -8,10 +8,12 @@ data class VolunteerCampaignPost(
     val title: String = "",
     val category: String = "",
     val description: String = "",
+    val noOfVolunteers: String = "",
     val startDate: String = "",
     val endDate: String = "",
     val age: String = "",
     val location: String = "",
+    val email: String? = "",
     val imageUri: String? = null,
     val type: CampaignType = CampaignType.VOLUNTEER,
     var documentId: String = ""
@@ -20,6 +22,7 @@ data class VolunteerCampaignPost(
         title = parcel.readString() ?: "",
         category = parcel.readString() ?: "",
         description = parcel.readString() ?: "",
+        noOfVolunteers = parcel.readString() ?: "",
         startDate = parcel.readString() ?: "",
         endDate = parcel.readString() ?: "",
         age = parcel.readString() ?: "",
@@ -32,6 +35,7 @@ data class VolunteerCampaignPost(
         parcel.writeString(title)
         parcel.writeString(category)
         parcel.writeString(description)
+        parcel.writeString(noOfVolunteers)
         parcel.writeString(startDate)
         parcel.writeString(endDate)
         parcel.writeString(age)

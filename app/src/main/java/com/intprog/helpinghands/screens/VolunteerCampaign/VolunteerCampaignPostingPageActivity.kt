@@ -70,6 +70,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
         val titleEditText = findViewById<EditText>(R.id.titleEditText)
         val categoryEditText = findViewById<EditText>(R.id.categoryEditText)
         val descEditText = findViewById<EditText>(R.id.descEditText)
+        val noOfVolunteersEditText = findViewById<EditText>(R.id.noOfVolunteersEditText)
         val locationEditText = findViewById<EditText>(R.id.locationEditText)
 
         uploadedImageView = findViewById(R.id.uploadedImageView)
@@ -83,6 +84,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             val title = titleEditText.text.toString()
             val category = categoryEditText.text.toString()
             val description = descEditText.text.toString()
+            val noOfVolunteers = noOfVolunteersEditText.text.toString()
             val startDateText = startDateButton.text.toString()
             val endDateText = endDateButton.text.toString()
             val age = ageSpinner.selectedItem.toString()
@@ -100,6 +102,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 intent.putExtra("title", title)
                 intent.putExtra("category", category)
                 intent.putExtra("description", description)
+                intent.putExtra("noOfVolunteers", noOfVolunteers)
                 intent.putExtra("startDate", startDateText)
                 intent.putExtra("endDate", endDateText)
                 intent.putExtra("age", age)
@@ -111,6 +114,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 titleEditText.text.clear()
                 categoryEditText.text.clear()
                 descEditText.text.clear()
+                noOfVolunteersEditText.text.clear()
                 startDateButton.text = ""
                 endDateButton.text = ""
                 ageSpinner.setSelection(0)

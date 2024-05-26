@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -41,6 +42,7 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         val titleTextView: TextView = findViewById(R.id.titleTextView)
         val categoryTextView: TextView = findViewById(R.id.categoryTextView)
         val descTextView: TextView = findViewById(R.id.descTextView)
+        val noOfVolunteersTextView: TextView = findViewById(R.id.noOfVolunteersTextView)
         val startDateTextView: TextView = findViewById(R.id.startDateTextView)
         val endDateTextView: TextView = findViewById(R.id.endDateTextView)
         val ageTextView: TextView = findViewById(R.id.ageTextView)
@@ -57,6 +59,7 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         val title = intent.getStringExtra("title")
         val category = intent.getStringExtra("category")
         val description = intent.getStringExtra("description")
+        val noOfVolunteers = intent.getStringExtra("noOfVolunteers")
         val startDate = intent.getStringExtra("startDate")
         val endDate = intent.getStringExtra("endDate")
         val age = intent.getStringExtra("age")
@@ -65,6 +68,7 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         titleTextView.text = title
         categoryTextView.text = category
         descTextView.text = description
+        noOfVolunteersTextView.text = noOfVolunteers
         startDateTextView.text = startDate
         endDateTextView.text = endDate
         ageTextView.text = age
@@ -101,24 +105,27 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         val titleTextView: TextView = findViewById(R.id.titleTextView)
         val categoryTextView: TextView = findViewById(R.id.categoryTextView)
         val descTextView: TextView = findViewById(R.id.descTextView)
+        val noOfVolunteersTextView: TextView = findViewById(R.id.noOfVolunteersTextView)
         val startDateTextView: TextView = findViewById(R.id.startDateTextView)
         val endDateTextView: TextView = findViewById(R.id.endDateTextView)
         val ageTextView: TextView = findViewById(R.id.ageTextView)
         val locationTextView: TextView = findViewById(R.id.locationTextView)
+        val email = FirebaseAuth.getInstance().currentUser?.email
 
         val title = titleTextView.text.toString()
         val category = categoryTextView.text.toString()
         val description = descTextView.text.toString()
+        val noOfVolunteers = noOfVolunteersTextView.text.toString()
         val startDate = startDateTextView.text.toString()
         val endDate = endDateTextView.text.toString()
         val age = ageTextView.text.toString()
         val location = locationTextView.text.toString()
         val imageUriString = intent.getStringExtra("imageUri")
 
-        return if (!title.isNullOrEmpty() && !category.isNullOrEmpty() && !description.isNullOrEmpty()
+        return if (!title.isNullOrEmpty() && !category.isNullOrEmpty() && !description.isNullOrEmpty() && !noOfVolunteers.isNullOrEmpty()
             && !startDate.isNullOrEmpty() && !endDate.isNullOrEmpty() && !age.isNullOrEmpty()
             && !location.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
-            VolunteerCampaignPost( title, category, description, startDate, endDate, age, location, imageUriString, CampaignType.VOLUNTEER)
+            VolunteerCampaignPost( title, category, description, noOfVolunteers, startDate, endDate, age, location, email, imageUriString, CampaignType.VOLUNTEER)
         } else {
             null
         }

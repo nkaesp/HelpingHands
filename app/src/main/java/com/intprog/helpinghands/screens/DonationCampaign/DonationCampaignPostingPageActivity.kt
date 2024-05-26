@@ -12,8 +12,10 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.auth.FirebaseAuth
 import com.intprog.helpinghands.CampaignPostingOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
+import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
 
 class DonationCampaignPostingPageActivity : AppCompatActivity() {
@@ -36,6 +38,13 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
         }
 
+        val profileImageButton = findViewById<ImageButton>(R.id.profileImageButton)
+        profileImageButton.setOnClickListener {
+            val intent = Intent(this, ProfilePageActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
+
 
 
         val title = findViewById<EditText>(R.id.title)
@@ -51,7 +60,10 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
         val fullName = findViewById<EditText>(R.id.fullName)
         fullName.filters = arrayOf(InputFilter.LengthFilter(30))
         val email = findViewById<EditText>(R.id.email)
-        email.filters = arrayOf(InputFilter.LengthFilter(30))
+        // Set user's email in EditText and make it unmodifiable
+        email.setText(FirebaseAuth.getInstance().currentUser?.email)
+        email.isEnabled = false
+
         val phoneNum = findViewById<EditText>(R.id.phoneNum)
         phoneNum.inputType = InputType.TYPE_CLASS_NUMBER
         phoneNum.filters = arrayOf(InputFilter.LengthFilter(15))
@@ -80,7 +92,7 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
             val theContactMethod = contactMethod.text.toString()
 
             if (theTitle.isNotEmpty() && theDesc.isNotEmpty() && theAmountNeeded.isNotEmpty() &&
-                theCategory.isNotEmpty() && theFullName.isNotEmpty() && theEmail.isNotEmpty() &&
+                theCategory.isNotEmpty() && theFullName.isNotEmpty() &&
                 thePhoneNum.isNotEmpty() && theContactMethod.isNotEmpty()
             ) {
                 val intent = Intent(this, DonationCampaignSummaryPageActivity::class.java).apply {
