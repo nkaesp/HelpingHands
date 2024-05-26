@@ -75,7 +75,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
         uploadedImageView = findViewById(R.id.uploadedImageView)
         uploadedImageView.setOnClickListener {
             openGallery()
-            uploadedImageView.setImageResource(android.R.color.transparent) // Clear the image
+            uploadedImageView.setImageResource(android.R.color.transparent)
             selectedImageUri = null
         }
 
