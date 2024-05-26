@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -16,11 +17,23 @@
         android:supportsRtl="true"
         android:theme="@style/NoAnimationTheme"
         tools:targetApi="31">
+        <activity
+            android:name=".EmailVerificationActivity"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <!-- Main Screens -->
         <activity
             android:name=".LaunchActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".RegistrationActivity"
@@ -32,10 +45,7 @@
             android:name=".HomePageActivity"
             android:exported="true">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+            
         </activity>
         <activity
             android:name=".ProfilePageActivity"
@@ -72,8 +82,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             -->
-        </activity>
-        <!-- Donation Campaign -->
+        </activity> <!-- Donation Campaign -->
         <activity
             android:name=".screens.DonationCampaign.DonationOptionPageActivity"
             android:exported="true" />
@@ -92,12 +101,8 @@
         <activity
             android:name=".screens.PaymentPageActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+      
         <!-- Unspecialized Activity -->
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivityPostingPageActivity"

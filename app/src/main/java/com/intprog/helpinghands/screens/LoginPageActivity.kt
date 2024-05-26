@@ -1,27 +1,32 @@
 package com.intprog.helpinghands
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginPageActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
 
         auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         emailEditText = findViewById(R.id.emailEditText)
         passwordEditText = findViewById(R.id.passwordEditText)
@@ -59,7 +64,7 @@ class LoginPageActivity : AppCompatActivity() {
 
         val forgotPasswordButton = findViewById<Button>(R.id.forgotPasswordButton)
         forgotPasswordButton.setOnClickListener {
-            // Implement forgot password functionality if needed
+            showForgotPasswordDialog()
         }
     }
 
@@ -67,14 +72,61 @@ class LoginPageActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
-                    startActivity(Intent(this, HomePageActivity::class.java))
-                    finish()
+                    if (user != null) {
+                        firestore.collection("users").document(user.uid)
+                            .get()
+                            .addOnSuccessListener { document ->
+                                if (document != null && document.exists()) {
+                                    val isVerified = document.getBoolean("verified") ?: false
+                                    if (isVerified) {
+                                        startActivity(Intent(this, HomePageActivity::class.java))
+                                        finish()
+                                    } else {
+                                        Toast.makeText(baseContext, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show()
+                                        auth.signOut()  // Sign out the user since the account is not verified
+                                    }
+                                } else {
+                                    Toast.makeText(baseContext, "User data not found.", Toast.LENGTH_SHORT).show()
+                                    auth.signOut()
+                                }
+                            }
+                            .addOnFailureListener { exception ->
+                                Toast.makeText(baseContext, "Error accessing user data: ${exception.message}", Toast.LENGTH_SHORT).show()
+                                auth.signOut()
+                            }
+                    }
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, "Authentication failed. ${task.exception?.message}",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, "Authentication failed. ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun showForgotPasswordDialog() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = LayoutInflater.from(this)
+        val dialogView = inflater.inflate(R.layout.forgot_password_dialog, null)
+        val emailEditText = dialogView.findViewById<EditText>(R.id.emailEditText)
+
+        builder.setView(dialogView)
+            .setTitle("Forgot Password")
+            .setPositiveButton("Send Email") { dialogInterface: DialogInterface, i: Int ->
+                val email = emailEditText.text.toString()
+                sendPasswordResetEmail(email)
+            }
+            .setNegativeButton("Cancel") { dialogInterface: DialogInterface, i: Int ->
+                // Do nothing
+            }
+            .show()
+    }
+
+    private fun sendPasswordResetEmail(email: String) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Password reset email sent", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Failed to send password reset email", Toast.LENGTH_SHORT).show()
                 }
             }
     }

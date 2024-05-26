@@ -1,78 +1,103 @@
 package com.intprog.helpinghands
-import android.content.Context
+
 import android.content.Intent
-import android.content.SharedPreferences
+import android.graphics.Paint
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import de.hdodenhof.circleimageview.CircleImageView
 
 class ProfilePageActivity : AppCompatActivity() {
 
-    private lateinit var sharedPreferences: SharedPreferences
+    // Firebase
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_page)
 
+        // Initialize Firebase
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+
         val profileButton = findViewById<ImageButton>(R.id.profileImageButton)
         profileButton.isSelected = true
 
-        Handler(Looper.getMainLooper()).postDelayed({
+        // Delay to remove selection effect
+        profileButton.postDelayed({
             profileButton.isSelected = false
-        }, 100) // Delay in milliseconds (500ms = 0.5 seconds)
+        }, 100)
 
-        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val editProfileButton = findViewById<Button>(R.id.editProfileButton)
+        editProfileButton.paintFlags = editProfileButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
-        // Retrieve logged in email from SharedPreferences
-        val loggedInEmail = sharedPreferences.getString("loggedInEmail", "")
+        editProfileButton.setOnClickListener {
+            val intent = Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
 
-        // Retrieve views
-        val emailTextView = findViewById<TextView>(R.id.emailTextview)
-        val nameTextView = findViewById<TextView>(R.id.nameTextView)
-        val phoneTextView = findViewById<TextView>(R.id.phoneTextview)
-
-        // Display the logged-in email
-        emailTextView.text = loggedInEmail
-
-        // Other code to retrieve and display name and phone from SharedPreferences
-        val registeredName = sharedPreferences.getString("name", "")
-        val registeredPhone = sharedPreferences.getString("phone", "")
-
-        // Display user data in TextViews
-        nameTextView.text = registeredName
-        phoneTextView.text = registeredPhone
+        // Display user details from Firestore
+        displayUserDetails()
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
             onBackPressed()
             overridePendingTransition(0, 0)
         }
+
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
-        // Adding OnClickListener to the logout button
-        val logoutButton = findViewById<Button>(R.id.logoutButton)
-        logoutButton.setOnClickListener {
-            // Clear any session data if needed
-            // For example, you might clear saved user data here
-            // Start the LoginActivity
-            startActivity(Intent(this, LoginPageActivity::class.java))
-            // Finish the current activity to remove it from the stack
-            finish()
-        }
+    }
 
-        val editProfileButton = findViewById<Button>(R.id.editProfileButton)
-        editProfileButton.setOnClickListener {
-            startActivity(Intent(this, EditProfileActivity::class.java))
-            overridePendingTransition(0, 0)
+    private fun displayUserDetails() {
+        val currentUser = auth.currentUser
+        val userId = currentUser?.uid
+
+        if (userId != null) {
+            val userRef = db.collection("users").document(userId)
+            userRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val name = document.getString("name") ?: "No name"
+                        val email = document.getString("email") ?: "No email"
+                        val phone = document.getString("phone") ?: "No phone"
+                        val imageUri = document.getString("imageUrl")
+
+                        val profilePictureImageView = findViewById<CircleImageView>(R.id.profilePictureImageView)
+                        val nameTextView = findViewById<TextView>(R.id.nameTextView)
+                        val emailTextView = findViewById<TextView>(R.id.emailTextView)
+                        val phoneTextView = findViewById<TextView>(R.id.phoneTextView)
+
+                        // Set user details to views
+                        nameTextView.text = name
+                        emailTextView.text = email
+                        phoneTextView.text = phone
+
+                        // Load profile picture using Glide library if imageUri is not null
+                        if (!imageUri.isNullOrEmpty()) {
+                            Glide.with(this)
+                                .load(imageUri)
+                                .placeholder(R.drawable.person_placeholder)
+                                .error(R.drawable.person_placeholder)
+                                .into(profilePictureImageView)
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    // Handle failure
+                    // Log error message or show error toast
+                }
         }
     }
 }
