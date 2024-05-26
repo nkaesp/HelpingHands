@@ -30,12 +30,11 @@
         <!-- Main Screens -->
         <activity
             android:name=".LaunchActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".RegistrationActivity"
@@ -49,7 +48,10 @@
             android:name=".HomePageActivity"
             android:exported="true"
             android:screenOrientation="portrait">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             
         </activity>
         <activity
@@ -114,8 +116,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.PaymentPageActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
+            android:exported="true">
         </activity>
       
         <!-- Unspecialized Activity -->
@@ -139,13 +140,10 @@
             android:name=".screens.VolunteerCampaign.VolunteerCampaignPostingPageActivity"
             android:exported="true"
             android:screenOrientation="portrait">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignSummaryPageActivity"
@@ -154,13 +152,7 @@
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignStatusPageActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignSelectionPageActivity"
             android:exported="true"

@@ -32,7 +32,7 @@ class ProfilePageActivity : AppCompatActivity() {
         // Delay to remove selection effect
         profileButton.postDelayed({
             profileButton.isSelected = false
-        }, 100)
+        }, 200)
 
         val editProfileButton = findViewById<Button>(R.id.editProfileButton)
         editProfileButton.paintFlags = editProfileButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
