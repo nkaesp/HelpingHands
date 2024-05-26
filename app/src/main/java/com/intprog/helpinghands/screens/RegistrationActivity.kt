@@ -8,17 +8,16 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class RegistrationActivity : AppCompatActivity() {
@@ -30,15 +29,14 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var passwordToggle: ImageView
     private lateinit var confirmPasswordToggle: ImageView
-
-    private var isPasswordVisible = false
-    private var isConfirmPasswordVisible = false
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
         auth = Firebase.auth
+        firestore = Firebase.firestore
 
         val backButton: ImageView = findViewById(R.id.backTop)
         backButton.setOnClickListener {
@@ -75,40 +73,25 @@ class RegistrationActivity : AppCompatActivity() {
             } else if (password.length < 8) {
                 Toast.makeText(this, "Password must be at least 8 characters long", Toast.LENGTH_SHORT).show()
             } else {
-                // Create user with email and password
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            // Sign in success
-                            Log.d(TAG, "createUserWithEmail:success")
                             val user = auth.currentUser
-                            showRegistrationSuccessDialog()
+                            user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
+                                if (verificationTask.isSuccessful) {
+                                    Log.d(TAG, "Verification email sent to $email")
+                                    saveUserToFirestore(user.uid, email)
+                                    showVerificationDialog()
+                                } else {
+                                    Log.e(TAG, "sendEmailVerification", verificationTask.exception)
+                                    Toast.makeText(baseContext, "Failed to send verification email.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                            Toast.makeText(baseContext, "Registration failed. ${task.exception?.message}",
-                                Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, "Registration failed. ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
-
-                val accountsJson = sharedPreferences.getString("accounts", null)
-                val type = object : TypeToken<MutableMap<String, String>>() {}.type
-                val accounts: MutableMap<String, String> = if (accountsJson != null) {
-                    Gson().fromJson(accountsJson, type)
-                } else {
-                    mutableMapOf()
-                }
-
-                if (accounts.containsKey(email)) {
-                    Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show()
-                } else {
-                    accounts[email] = password
-                    val editor = sharedPreferences.edit()
-                    editor.putString("accounts", Gson().toJson(accounts))
-                    editor.putString("loggedInEmail", email) // Save logged in email
-                    editor.apply()
-                    showRegistrationSuccessDialog()
-                }
             }
         }
     }
@@ -124,13 +107,30 @@ class RegistrationActivity : AppCompatActivity() {
         editText.setSelection(editText.text.length)
     }
 
-    private fun showRegistrationSuccessDialog() {
+    private fun saveUserToFirestore(userId: String, email: String) {
+        val user = hashMapOf(
+            "userId" to userId,
+            "email" to email,
+            "verified" to false
+        )
+
+        firestore.collection("users").document(userId)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d(TAG, "User added to Firestore with ID: $userId")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding user to Firestore", e)
+            }
+    }
+
+    private fun showVerificationDialog() {
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Congratulations!")
-            .setMessage("Your account has been successfully created.")
+            .setTitle("Verify Your Email")
+            .setMessage("A verification email has been sent to your email address. Please verify your email to complete the registration process.")
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
-                startActivity(Intent(this, LoginPageActivity::class.java))
+                startActivity(Intent(this, EmailVerificationActivity::class.java))
                 finish()
             }
             .show()

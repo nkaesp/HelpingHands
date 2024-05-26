@@ -178,4 +178,5 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
 
 
     }
+
 }
