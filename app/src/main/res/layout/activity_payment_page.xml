@@ -34,6 +34,7 @@
                 android:src="@drawable/back1"/>
 
             <TextView
+                android:id="@+id/paymentTV"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="60dp"
@@ -47,7 +48,20 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
-    
+
+    <EditText
+        android:id="@+id/donationAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter amount"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="280dp"
+        android:layout_centerHorizontal="true"/>
+
+
+
     <Button
         android:id="@+id/btn_pay"
         android:layout_width="wrap_content"
