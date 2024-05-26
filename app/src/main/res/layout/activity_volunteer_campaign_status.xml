@@ -252,21 +252,21 @@
             android:text="Number of Volunteers:"
             android:layout_below="@+id/campaignDetails"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/totalNum"
-            android:layout_width="50dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg_radius_ten_gray"
             android:layout_toRightOf="@+id/numberOfVolunteers"
             android:layout_below="@id/campaignDetails"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginLeft="20dp"
-            android:text="#"
+            android:text=" "
             android:textSize="15sp"
             android:gravity="center"/>
 
@@ -284,7 +284,7 @@
         <RelativeLayout
             android:id="@+id/peopleWhoVolunteeredRelativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:background="@drawable/bg_radius_ten_gray"
             android:layout_below="@id/peopleWhoVolunteered"
             android:layout_marginTop="10dp"
@@ -296,6 +296,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
+
+        <Button
+            android:id="@+id/joinButton"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/peopleWhoVolunteeredRelativeLayout"
+            android:background="@drawable/option_buttons"
+            android:backgroundTint="#03A9F4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="120dp"
+            android:text="JOIN CAMPAIGN"
+            android:textSize="12dp"/>
+
         <Button
             android:id="@+id/deletePostButton"
             android:layout_width="100dp"
@@ -303,12 +317,12 @@
             android:layout_below="@+id/peopleWhoVolunteeredRelativeLayout"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="120dp"
             android:background="@drawable/option_buttons"
             android:backgroundTint="#FF0011"
-            android:text="DELETE POST"
             android:elevation="10dp"
-            android:textSize="12dp"/>
+            android:text="DELETE POST"
+            android:textSize="12dp" />
     </RelativeLayout>
     </ScrollView>
 

@@ -111,6 +111,7 @@ class UnspecializedActivitySelectionPageActivity : AppCompatActivity() {
                     putExtra("title", post?.title)
                     putExtra("description", post?.description)
                     putExtra("noOfParticipants", post?.noOfParticipants)
+                    putExtra("email", post?.email)
                     putExtra("imageUri", post?.imageUri)
                     putExtra("type", post?.type.toString()) // Pass campaign type
                     putExtra("documentId", post?.documentId)

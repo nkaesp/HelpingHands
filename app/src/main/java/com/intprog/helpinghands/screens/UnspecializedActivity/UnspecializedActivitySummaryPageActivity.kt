@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -89,13 +90,14 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         val titleTextView: TextView = findViewById(R.id.titleTextView)
         val noOfParticipantsTextView: TextView = findViewById(R.id.noOfParticipantsTextView)
         val descriptionTextView: TextView = findViewById(R.id.descriptionTextView)
+        val email = FirebaseAuth.getInstance().currentUser?.email
         val imageUriString = intent.getStringExtra("imageUri")
         val title = titleTextView.text.toString()
         val noOfParticipants = noOfParticipantsTextView.text.toString()
         val description = descriptionTextView.text.toString()
 
         return if (!title.isNullOrEmpty() && !noOfParticipants.isNullOrEmpty() && !description.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
-            UnspecializedActivityPost(title, noOfParticipants, description, imageUriString, CampaignType.UNSPECIALIZED)
+            UnspecializedActivityPost(title, noOfParticipants, description, email, imageUriString, CampaignType.UNSPECIALIZED)
         } else {
             null
         }
