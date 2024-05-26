@@ -1,10 +1,7 @@
 package com.intprog.helpinghands
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
@@ -12,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.intprog.helpinghands.model.UnspecializedActivityPost
 import com.intprog.helpinghands.models.Campaign
 import com.intprog.helpinghands.models.CampaignType
@@ -21,9 +16,6 @@ import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignStatusP
 import com.intprog.helpinghands.screens.FeaturedOpportunitiesAdapter
 import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivityStatusPageActivity
 import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignStatusPageActivity
-import com.intprog.helpinghands.models.DonationCampaignDetails
-import com.intprog.helpinghands.models.UnspecializedActivityDetails
-import com.intprog.helpinghands.models.VolunteerCampaignDetails
 import com.intprog.helpinghands.screens.DonationCampaign.DonationCampaignPost
 import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignPost
 
@@ -37,6 +29,14 @@ class HomePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
+
+        val homeButton = findViewById<ImageButton>(R.id.homeImageButton)
+        homeButton.isSelected = true
+
+        // Delay to remove selection effect
+        homeButton.postDelayed({
+            homeButton.isSelected = false
+        }, 200)
 
         recyclerView = findViewById(R.id.featuredOpportunitiesRecyclerView)
         adapter = FeaturedOpportunitiesAdapter(campaigns) { campaign ->
