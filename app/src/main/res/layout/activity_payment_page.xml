@@ -49,6 +49,29 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/donateTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your donations help us improve our app and provide better services to everyone. Thank you for your support!"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="285dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:text="₱:"
+        android:layout_toStartOf="@+id/amountEditText"/>
+
+
+
     <EditText
         android:id="@+id/amountEditText"
         android:layout_width="wrap_content"
@@ -63,11 +86,15 @@
 
     <Button
         android:id="@+id/stripeButton"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        android:text="Pay now" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_continue"
+        android:text="Pay now"
+        android:layout_below="@id/amountEditText"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <fragment
         android:id="@+id/navBarFragment"
