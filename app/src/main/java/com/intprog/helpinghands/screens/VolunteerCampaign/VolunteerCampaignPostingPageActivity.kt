@@ -81,12 +81,12 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             val category = categoryEditText.text.toString()
             val description = descEditText.text.toString()
             val startDate = startDateEditText.text.toString()
-            val duration = endDateEditText.text.toString()
+            val endDate = endDateEditText.text.toString()
             val age = ageSpinner.selectedItem.toString()
             val location = locationEditText.text.toString()
 
             if (title.isEmpty() || category.isEmpty() || description.isEmpty() ||
-                startDate.isEmpty() || duration.isEmpty() || age.isEmpty() || location.isEmpty()) {
+                startDate.isEmpty() || endDate.isEmpty() || age.isEmpty() || location.isEmpty()) {
                 AlertDialog.Builder(this)
                     .setTitle("Error")
                     .setMessage("Please fill in all fields.")
@@ -104,7 +104,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 intent.putExtra("category", category)
                 intent.putExtra("description", description)
                 intent.putExtra("startDate", startDate)
-                intent.putExtra("duration", duration)
+                intent.putExtra("endDate", endDate)
                 intent.putExtra("age", age)
                 intent.putExtra("location", location)
                 intent.putExtra("imageUri", selectedImageUri.toString())

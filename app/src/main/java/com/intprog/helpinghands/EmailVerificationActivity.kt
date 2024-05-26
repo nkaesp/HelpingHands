@@ -55,14 +55,11 @@ class EmailVerificationActivity : AppCompatActivity() {
         user?.reload()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 if (user.isEmailVerified) {
+                    // Update "verified" status to true in Firestore
                     firestore.collection("users").document(user.uid)
                         .update("verified", true)
-//                        .addOnSuccessListener {
-//                            Log.d(TAG, "User email verified status updated in Firestore")
-//                        }
-//                        .addOnFailureListener { e ->
-//                            Log.w(TAG, "Error updating user verified status", e)
-//                        }
+
+                    // Navigate to the login page
                     Toast.makeText(this, "Email verified successfully.", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, LoginPageActivity::class.java))
                     finish()
