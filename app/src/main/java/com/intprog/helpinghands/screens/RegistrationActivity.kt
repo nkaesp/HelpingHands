@@ -8,14 +8,16 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class RegistrationActivity : AppCompatActivity() {
@@ -27,12 +29,14 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var passwordToggle: ImageView
     private lateinit var confirmPasswordToggle: ImageView
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
         auth = Firebase.auth
+        firestore = Firebase.firestore
 
         val backButton: ImageView = findViewById(R.id.backTop)
         backButton.setOnClickListener {
@@ -76,6 +80,7 @@ class RegistrationActivity : AppCompatActivity() {
                             user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
                                 if (verificationTask.isSuccessful) {
                                     Log.d(TAG, "Verification email sent to $email")
+                                    saveUserToFirestore(user.uid, email)
                                     showVerificationDialog()
                                 } else {
                                     Log.e(TAG, "sendEmailVerification", verificationTask.exception)
@@ -100,6 +105,23 @@ class RegistrationActivity : AppCompatActivity() {
             toggleButton.setImageResource(R.drawable.pw_visibility_off)
         }
         editText.setSelection(editText.text.length)
+    }
+
+    private fun saveUserToFirestore(userId: String, email: String) {
+        val user = hashMapOf(
+            "userId" to userId,
+            "email" to email,
+            "verified" to false
+        )
+
+        firestore.collection("users").document(userId)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d(TAG, "User added to Firestore with ID: $userId")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding user to Firestore", e)
+            }
     }
 
     private fun showVerificationDialog() {
