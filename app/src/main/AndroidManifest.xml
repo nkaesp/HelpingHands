@@ -19,7 +19,8 @@
         tools:targetApi="31">
         <activity
             android:name=".EmailVerificationActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
@@ -30,26 +31,30 @@
         <activity
             android:name=".LaunchActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <intent-filter>-->
+                <action android:name="android.intent.action.MAIN" />-->
+                <category android:name="android.intent.category.LAUNCHER" />-->
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".RegistrationActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HomePageActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
             
         </activity>
         <activity
             android:name=".ProfilePageActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -60,7 +65,8 @@
         </activity>
         <activity
             android:name=".EditProfileActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -71,10 +77,12 @@
         </activity>
         <activity
             android:name=".CampaignJoiningOptionsPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CampaignPostingOptionsPageActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
             <!--
             <intent-filter>
@@ -85,44 +93,50 @@
         </activity> <!-- Donation Campaign -->
         <activity
             android:name=".screens.DonationCampaign.DonationOptionPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignPostingPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignSummaryPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignStatusPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.DonationCampaign.DonationCampaignSelectionPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.PaymentPageActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
       
         <!-- Unspecialized Activity -->
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivityPostingPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivitySummaryPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivityStatusPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivitySelectionPageActivity"
-            android:exported="true" /> <!-- Volunteer Activity -->
+            android:exported="true"
+             android:screenOrientation="portrait"/> <!-- Volunteer Activity -->
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignPostingPageActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -133,10 +147,12 @@
         </activity>
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignSummaryPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignStatusPageActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -145,7 +161,8 @@
         </activity>
         <activity
             android:name=".screens.VolunteerCampaign.VolunteerCampaignSelectionPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

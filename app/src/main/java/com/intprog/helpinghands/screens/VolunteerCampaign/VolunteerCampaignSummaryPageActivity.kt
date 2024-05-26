@@ -15,7 +15,9 @@ import com.google.firebase.storage.StorageReference
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.model.UnspecializedActivityPost
 import com.intprog.helpinghands.models.CampaignType
+import com.intprog.helpinghands.screens.UnspecializedActivity.UnspecializedActivitySelectionPageActivity
 import java.util.*
 
 class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
@@ -30,6 +32,28 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         storageRef = FirebaseStorage.getInstance().reference
 
+        val backButton: ImageButton = findViewById(R.id.backTop)
+        backButton.setOnClickListener {
+            onBackPressed()
+            overridePendingTransition(0, 0)
+        }
+
+        val titleTextView: TextView = findViewById(R.id.titleTextView)
+        val categoryTextView: TextView = findViewById(R.id.categoryTextView)
+        val descTextView: TextView = findViewById(R.id.descTextView)
+        val startDateTextView: TextView = findViewById(R.id.startDateTextView)
+        val endDateTextView: TextView = findViewById(R.id.endDateTextView)
+        val ageTextView: TextView = findViewById(R.id.ageTextView)
+        val locationTextView: TextView = findViewById(R.id.locationTextView)
+        val uploadedImageView: ImageView = findViewById(R.id.uploadedImageView)
+
+        val imageUriString = intent.getStringExtra("imageUri")
+
+        if (!imageUriString.isNullOrEmpty()) {
+            val imageUri = Uri.parse(imageUriString)
+            uploadedImageView.setImageURI(imageUri)
+        }
+
         val title = intent.getStringExtra("title")
         val category = intent.getStringExtra("category")
         val description = intent.getStringExtra("description")
@@ -37,25 +61,24 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
         val endDate = intent.getStringExtra("endDate")
         val age = intent.getStringExtra("age")
         val location = intent.getStringExtra("location")
-        val imageUriString = intent.getStringExtra("imageUri")
 
-        findViewById<TextView>(R.id.titleTextView).text = title
-        findViewById<TextView>(R.id.categoryTextView).text = category
-        findViewById<TextView>(R.id.descTextView).text = description
-        findViewById<TextView>(R.id.startDateTextView).text = startDate
-        findViewById<TextView>(R.id.endDateTextView).text = endDate
-        findViewById<TextView>(R.id.ageTextView).text = age
-        findViewById<TextView>(R.id.locationTextView).text = location
+        titleTextView.text = title
+        categoryTextView.text = category
+        descTextView.text = description
+        startDateTextView.text = startDate
+        endDateTextView.text = endDate
+        ageTextView.text = age
+        locationTextView.text = location
 
-        if (imageUriString != null) {
-            val imageUri = Uri.parse(imageUriString)
-            findViewById<ImageView>(R.id.uploadedImageView).setImageURI(imageUri)
-        }
+        val postButton = findViewById<Button>(R.id.postButton)
+        postButton.setOnClickListener {
+            val post = createVolunteerCampaignPost()
 
-        val backTop = findViewById<ImageButton>(R.id.backTop)
-        backTop.setOnClickListener {
-            onBackPressed()
-            overridePendingTransition(0, 0)
+            if (post != null) {
+                uploadImageToStorage(post)
+            } else {
+                Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
@@ -71,48 +94,82 @@ class VolunteerCampaignSummaryPageActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
+    }
 
-        val postButton = findViewById<Button>(R.id.postButton)
-        postButton.setOnClickListener {
-            if (!title.isNullOrEmpty() && !category.isNullOrEmpty() && !description.isNullOrEmpty()
-                && !startDate.isNullOrEmpty() && !endDate.isNullOrEmpty() && !age.isNullOrEmpty()
-                && !location.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
-                val post = VolunteerCampaignPost(
-                    title ?: "", category ?: "", description ?: "", startDate ?: "",
-                    endDate ?: "", age ?: "", location ?: "", imageUriString, CampaignType.VOLUNTEER
-                )
-                saveVolunteerCampaignPost(post)
-            } else {
-                Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
-            }
+    private fun createVolunteerCampaignPost(): VolunteerCampaignPost? {
+
+        val titleTextView: TextView = findViewById(R.id.titleTextView)
+        val categoryTextView: TextView = findViewById(R.id.categoryTextView)
+        val descTextView: TextView = findViewById(R.id.descTextView)
+        val startDateTextView: TextView = findViewById(R.id.startDateTextView)
+        val endDateTextView: TextView = findViewById(R.id.endDateTextView)
+        val ageTextView: TextView = findViewById(R.id.ageTextView)
+        val locationTextView: TextView = findViewById(R.id.locationTextView)
+
+        val title = titleTextView.text.toString()
+        val category = categoryTextView.text.toString()
+        val description = descTextView.text.toString()
+        val startDate = startDateTextView.text.toString()
+        val endDate = endDateTextView.text.toString()
+        val age = ageTextView.text.toString()
+        val location = locationTextView.text.toString()
+        val imageUriString = intent.getStringExtra("imageUri")
+
+        return if (!title.isNullOrEmpty() && !category.isNullOrEmpty() && !description.isNullOrEmpty()
+            && !startDate.isNullOrEmpty() && !endDate.isNullOrEmpty() && !age.isNullOrEmpty()
+            && !location.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
+            VolunteerCampaignPost( title, category, description, startDate, endDate, age, location, imageUriString, CampaignType.VOLUNTEER)
+        } else {
+            null
         }
     }
 
-    private fun saveVolunteerCampaignPost(post: VolunteerCampaignPost) {
+    private fun saveVolunteerCampaignPostToFirestore(post: VolunteerCampaignPost) {
         db.collection("volunteer_campaign_posts")
             .add(post)
             .addOnSuccessListener { documentReference ->
-                Toast.makeText(this, "Volunteer campaign post added successfully", Toast.LENGTH_SHORT).show()
-                uploadImageToStorage(post.imageUri)
+                val documentId = documentReference.id
+                val postWithId = post.copy(documentId = documentId)
+
+                db.collection("volunteer_campaign_posts")
+                    .document(documentId)
+                    .set(postWithId)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Volunteer campaign post saved successfully", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error updating volunteer campaign with ID: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error adding volunteer campaign post: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to save volunteer campaign post: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun uploadImageToStorage(imageUri: String?) {
-        if (imageUri.isNullOrEmpty()) return
+    private fun uploadImageToStorage(post: VolunteerCampaignPost) {
+        val imageUriString = post.imageUri
 
-        val imageRef = storageRef.child("volunteer_campaign_post_images/${UUID.randomUUID()}")
-        imageRef.putFile(Uri.parse(imageUri))
-            .addOnSuccessListener {
-                Toast.makeText(this, "Image uploaded successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(0, 0)
+        if (imageUriString.isNullOrEmpty()) return
+
+        val imageRef = storageRef.child("unspecialized_activity_post_images/${UUID.randomUUID()}")
+        val uploadTask = imageRef.putFile(Uri.parse(imageUriString))
+
+        uploadTask.addOnSuccessListener { taskSnapshot ->
+            // Image uploaded successfully, now get the download URL
+            imageRef.downloadUrl.addOnSuccessListener { uri ->
+                // Save post with image URL to Firestore
+                val postWithImageUrl = post.copy(imageUri = uri.toString())
+                saveVolunteerCampaignPostToFirestore(postWithImageUrl)
+            }.addOnFailureListener { e ->
+                // Handle any errors retrieving the download URL
+                Toast.makeText(this, "Failed to retrieve image URL: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to upload image: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+        }.addOnFailureListener { e ->
+            // Handle unsuccessful uploads
+            Toast.makeText(this, "Failed to upload image: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 }

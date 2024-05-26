@@ -87,43 +87,30 @@
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/details"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Campaign Details:"
             android:layout_below="@+id/postedpic"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:elevation="3dp"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
 
         <RelativeLayout
             android:id="@+id/campaignDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_below="@+id/details"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp"
+            android:layout_below="@+id/title"
             android:background="@drawable/bg_radius_ten_gray">
 
-            <TextView
-                android:id="@+id/titleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title:"
-                android:textSize="15sp"
-                android:layout_alignParentStart="true"
-                android:layout_marginEnd="10dp"/>
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Insert Title"
-                android:textSize="15sp"
-                android:layout_toEndOf="@id/titleLabel"
-                android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/categoryLabel"
                 android:layout_width="wrap_content"
@@ -131,7 +118,6 @@
                 android:text="Category:"
                 android:textSize="15sp"
                 android:layout_below="@id/title"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"/>
             <TextView
                 android:id="@+id/categoryTextView"
@@ -140,7 +126,6 @@
                 android:text="Insert Category"
                 android:textSize="15sp"
                 android:layout_below="@id/titleLabel"
-                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/categoryLabel"
                 android:textColor="@color/black"/>
 
