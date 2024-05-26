@@ -105,7 +105,7 @@ class HomePageActivity : AppCompatActivity() {
                         putExtra("category", volunteerDetails.category)
                         putExtra("description", volunteerDetails.description)
                         putExtra("startDate", volunteerDetails.startDate)
-                        putExtra("duration", volunteerDetails.endDate)
+                        putExtra("endDate", volunteerDetails.endDate)
                         putExtra("age", volunteerDetails.age)
                         putExtra("location", volunteerDetails.location)
                         putExtra("imageUri", volunteerDetails.imageUri)

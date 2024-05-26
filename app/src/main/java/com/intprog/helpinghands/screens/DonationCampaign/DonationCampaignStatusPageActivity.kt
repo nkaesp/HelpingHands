@@ -117,6 +117,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         setResult(RESULT_OK, intent)
 
         finish()
+        overridePendingTransition(0, 0)
     }
 
     private fun deletePostFromCampaignPrefs(postTitle: String) {
