@@ -96,7 +96,7 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
     private fun uploadImageToStorage(imageUri: String?) {
         if (imageUri.isNullOrEmpty()) return
 
-        val imageRef = storageRef.child("images/${UUID.randomUUID()}")
+        val imageRef = storageRef.child("unspecialized_post_images/${UUID.randomUUID()}")
         imageRef.putFile(Uri.parse(imageUri))
             .addOnSuccessListener {
                 Toast.makeText(this, "Image uploaded successfully", Toast.LENGTH_SHORT).show()
