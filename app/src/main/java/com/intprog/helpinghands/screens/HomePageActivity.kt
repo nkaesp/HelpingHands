@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.intprog.helpinghands.model.UnspecializedActivityPost
@@ -28,9 +29,7 @@ import com.intprog.helpinghands.screens.VolunteerCampaign.VolunteerCampaignPost
 
 class HomePageActivity : AppCompatActivity() {
 
-    private val volunteerCampaignPosts = mutableListOf<VolunteerCampaignPost>()
-    private val donationCampaignPosts = mutableListOf<DonationCampaignPost>()
-    private val unspecializedActivityPosts = mutableListOf<UnspecializedActivityPost>()
+    private val db = FirebaseFirestore.getInstance()
     private val campaigns = mutableListOf<Campaign>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FeaturedOpportunitiesAdapter
@@ -39,22 +38,15 @@ class HomePageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
-        val homeButton = findViewById<ImageButton>(R.id.homeImageButton)
-        homeButton.isSelected = true
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            homeButton.isSelected = false
-        }, 100) // Delay in milliseconds (500ms = 0.5 seconds)
-
         recyclerView = findViewById(R.id.featuredOpportunitiesRecyclerView)
         adapter = FeaturedOpportunitiesAdapter(campaigns) { campaign ->
             navigateToStatusPage(campaign)
         }
 
-        loadCampaigns()
-
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
+
+        loadCampaigns()
 
         val createCampaignButton = findViewById<Button>(R.id.createCampaignButton)
         createCampaignButton.setOnClickListener {
@@ -78,18 +70,49 @@ class HomePageActivity : AppCompatActivity() {
         }
     }
 
-
     private fun loadCampaigns() {
-        val sharedPrefs = getSharedPreferences("CampaignPrefs", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPrefs.getString("posts", null)
-        val type = object : TypeToken<List<Campaign>>() {}.type
-        val loadedPosts: List<Campaign>? = gson.fromJson(json, type)
-        if (loadedPosts != null) {
-            campaigns.clear()
-            campaigns.addAll(loadedPosts)
-            adapter.notifyDataSetChanged()
-        }
+        db.collection("volunteer_campaign_posts")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val campaign = document.toObject(Campaign::class.java)
+                    val updatedCampaign = campaign.copy(type = CampaignType.VOLUNTEER)
+                    campaigns.add(updatedCampaign)
+                }
+                adapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                // Handle any errors
+            }
+
+
+        db.collection("donation_campaign_posts")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val campaign = document.toObject(Campaign::class.java)
+                    val updatedCampaign = campaign.copy(type = CampaignType.DONATION)
+                    campaigns.add(updatedCampaign)
+                }
+                adapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                // Handle any errors
+            }
+
+        db.collection("unspecialized_activity_posts")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val campaign = document.toObject(Campaign::class.java)
+                    val updatedCampaign = campaign.copy(type = CampaignType.UNSPECIALIZED)
+                    campaigns.add(updatedCampaign)
+                }
+                adapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                // Handle any errors
+            }
     }
 
 

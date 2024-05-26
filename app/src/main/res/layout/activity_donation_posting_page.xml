@@ -82,7 +82,7 @@
         android:layout_marginTop="10dp">
     </TextView>
 
-        <ImageButton
+        <com.intprog.helpinghands.customviews.RoundedImageButton
             android:id="@+id/btnUploadImage"
             android:layout_width="300dp"
             android:layout_height="200dp"
@@ -93,7 +93,7 @@
             android:elevation="8dp"
             android:onClick="onUploadImageButtonClick"
             android:scaleType="centerCrop"
-            android:src="@drawable/donation_createpost_image"></ImageButton>
+            android:src="@drawable/donation_createpost_image"></com.intprog.helpinghands.customviews.RoundedImageButton>
 
         <TextView
             android:id="@+id/DonationDetails"

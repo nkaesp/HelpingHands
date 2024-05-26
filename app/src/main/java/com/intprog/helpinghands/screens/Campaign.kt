@@ -2,9 +2,9 @@
 package com.intprog.helpinghands.models
 
 data class Campaign(
-    val title: String,
-    val imageUri: String?,
-    val type: CampaignType,
+    val title: String ="",
+    val imageUri: String?="",
+    val type: CampaignType = CampaignType.UNSPECIALIZED
 )
 
 enum class CampaignType {
