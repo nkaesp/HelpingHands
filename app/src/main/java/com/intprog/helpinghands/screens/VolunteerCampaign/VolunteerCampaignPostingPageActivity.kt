@@ -28,6 +28,8 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
     private val REQUEST_IMAGE_GALLERY = 1001
     private lateinit var uploadedImageView: ImageButton
     private var selectedImageUri: Uri? = null
+    private var startDate: Calendar? = null
+    private var endDate: Calendar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,11 +56,11 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
         val endDateEditText = findViewById<Button>(R.id.endDateEditText)
 
         startDateEditText.setOnClickListener {
-            showDatePickerDialog(startDateEditText)
+            showDatePickerDialog(startDateEditText, true)
         }
 
         endDateEditText.setOnClickListener {
-            showDatePickerDialog(endDateEditText)
+            showDatePickerDialog(endDateEditText, false)
         }
 
         val button = findViewById<Button>(R.id.continueButton)
@@ -74,19 +76,17 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             selectedImageUri = null
         }
 
-
-
         button.setOnClickListener {
             val title = titleEditText.text.toString()
             val category = categoryEditText.text.toString()
             val description = descEditText.text.toString()
-            val startDate = startDateEditText.text.toString()
-            val endDate = endDateEditText.text.toString()
+            val startDateText = startDateEditText.text.toString()
+            val endDateText = endDateEditText.text.toString()
             val age = ageSpinner.selectedItem.toString()
             val location = locationEditText.text.toString()
 
             if (title.isEmpty() || category.isEmpty() || description.isEmpty() ||
-                startDate.isEmpty() || endDate.isEmpty() || age.isEmpty() || location.isEmpty()) {
+                startDateText.isEmpty() || endDateText.isEmpty() || age.isEmpty() || location.isEmpty()) {
                 AlertDialog.Builder(this)
                     .setTitle("Error")
                     .setMessage("Please fill in all fields.")
@@ -103,8 +103,8 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 intent.putExtra("title", title)
                 intent.putExtra("category", category)
                 intent.putExtra("description", description)
-                intent.putExtra("startDate", startDate)
-                intent.putExtra("endDate", endDate)
+                intent.putExtra("startDate", startDateText)
+                intent.putExtra("endDate", endDateText)
                 intent.putExtra("age", age)
                 intent.putExtra("location", location)
                 intent.putExtra("imageUri", selectedImageUri.toString())
@@ -118,10 +118,8 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 endDateEditText.text = ""
                 ageSpinner.setSelection(0)
                 locationEditText.text.clear()
-
             }
         }
-
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
@@ -143,24 +141,39 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDatePickerDialog(button: Button) {
+    private fun showDatePickerDialog(button: Button, isStartDate: Boolean) {
         val calendar = Calendar.getInstance()
+        if (!isStartDate && startDate != null) {
+            calendar.time = startDate!!.time
+        }
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
             this,
-            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                // Update the button text with the selected date
-                button.text = "$dayOfMonth/${monthOfYear + 1}/$year"
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
+                button.text = "${selectedDayOfMonth}/${selectedMonth + 1}/$selectedYear"
+                if (isStartDate) {
+                    startDate = selectedDate
+                } else {
+                    endDate = selectedDate
+                }
             },
             year,
             month,
             day
         )
+        if (isStartDate) {
+            datePickerDialog.datePicker.minDate = calendar.timeInMillis
+        } else if (startDate != null) {
+            datePickerDialog.datePicker.minDate = startDate!!.timeInMillis
+        }
         datePickerDialog.show()
     }
+
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_IMAGE_GALLERY)
