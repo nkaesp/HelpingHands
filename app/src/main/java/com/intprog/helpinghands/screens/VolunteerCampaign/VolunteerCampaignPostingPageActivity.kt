@@ -21,7 +21,9 @@ import com.intprog.helpinghands.CampaignPostingOptionsPageActivity
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
 
@@ -30,6 +32,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
     private var selectedImageUri: Uri? = null
     private var startDate: Calendar? = null
     private var endDate: Calendar? = null
+    private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,15 +55,15 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             )
         }
 
-        val startDateEditText = findViewById<Button>(R.id.startDateEditText)
-        val endDateEditText = findViewById<Button>(R.id.endDateEditText)
+        val startDateButton = findViewById<Button>(R.id.startDateEditText)
+        val endDateButton = findViewById<Button>(R.id.endDateEditText)
 
-        startDateEditText.setOnClickListener {
-            showDatePickerDialog(startDateEditText, true)
+        startDateButton.setOnClickListener {
+            showDatePickerDialog(startDateButton, true)
         }
 
-        endDateEditText.setOnClickListener {
-            showDatePickerDialog(endDateEditText, false)
+        endDateButton.setOnClickListener {
+            showDatePickerDialog(endDateButton, false)
         }
 
         val button = findViewById<Button>(R.id.continueButton)
@@ -80,24 +83,18 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             val title = titleEditText.text.toString()
             val category = categoryEditText.text.toString()
             val description = descEditText.text.toString()
-            val startDateText = startDateEditText.text.toString()
-            val endDateText = endDateEditText.text.toString()
+            val startDateText = startDateButton.text.toString()
+            val endDateText = endDateButton.text.toString()
             val age = ageSpinner.selectedItem.toString()
             val location = locationEditText.text.toString()
 
             if (title.isEmpty() || category.isEmpty() || description.isEmpty() ||
                 startDateText.isEmpty() || endDateText.isEmpty() || age.isEmpty() || location.isEmpty()) {
-                AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage("Please fill in all fields.")
-                    .setPositiveButton("OK", null)
-                    .show()
+                showAlertDialog("Error", "Please fill in all fields.")
             } else if (selectedImageUri == null) {
-                AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage("Please select an image.")
-                    .setPositiveButton("OK", null)
-                    .show()
+                showAlertDialog("Error", "Please select an image.")
+            } else if (!isValidDate(startDateText) || !isValidDate(endDateText)) {
+                showAlertDialog("Error", "Please select valid dates.")
             } else {
                 val intent = Intent(this, VolunteerCampaignSummaryPageActivity::class.java)
                 intent.putExtra("title", title)
@@ -114,8 +111,8 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
                 titleEditText.text.clear()
                 categoryEditText.text.clear()
                 descEditText.text.clear()
-                startDateEditText.text = ""
-                endDateEditText.text = ""
+                startDateButton.text = ""
+                endDateButton.text = ""
                 ageSpinner.setSelection(0)
                 locationEditText.text.clear()
             }
@@ -155,7 +152,7 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
-                button.text = "${selectedDayOfMonth}/${selectedMonth + 1}/$selectedYear"
+                button.text = dateFormat.format(selectedDate.time)
                 if (isStartDate) {
                     startDate = selectedDate
                 } else {
@@ -198,5 +195,22 @@ class VolunteerCampaignPostingPageActivity : AppCompatActivity() {
             }
             .setNegativeButton("No", null)
             .show()
+    }
+
+    private fun showAlertDialog(title: String, message: String) {
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK", null)
+            .show()
+    }
+
+    private fun isValidDate(date: String): Boolean {
+        return try {
+            dateFormat.parse(date)
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 }
