@@ -50,7 +50,7 @@
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/donationAmount"
+        android:id="@+id/amountEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Enter amount"
@@ -61,14 +61,13 @@
         android:layout_centerHorizontal="true"/>
 
 
-
     <Button
-        android:id="@+id/btn_pay"
+        android:id="@+id/stripeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pay now"
+        android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:layout_centerInParent="true"/>
+        android:text="Pay now" />
 
     <fragment
         android:id="@+id/navBarFragment"
