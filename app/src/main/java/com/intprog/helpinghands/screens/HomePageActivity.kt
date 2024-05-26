@@ -121,57 +121,60 @@ class HomePageActivity : AppCompatActivity() {
         Log.d("HomePageActivity", "Navigating to status page for campaign: ${campaign.title}")
         when (campaign.type) {
             CampaignType.VOLUNTEER -> {
-                val volunteerDetails = getVolunteerCampaignDetails(campaign.title)
-                if (volunteerDetails != null) {
-                    val intent = Intent(this, VolunteerCampaignStatusPageActivity::class.java).apply {
-                        putExtra("title", volunteerDetails.title)
-                        putExtra("category", volunteerDetails.category)
-                        putExtra("description", volunteerDetails.description)
-                        putExtra("startDate", volunteerDetails.startDate)
-                        putExtra("endDate", volunteerDetails.endDate)
-                        putExtra("age", volunteerDetails.age)
-                        putExtra("location", volunteerDetails.location)
-                        putExtra("imageUri", volunteerDetails.imageUri)
+                getVolunteerCampaignDetails(campaign.title) { volunteerDetails ->
+                    if (volunteerDetails != null) {
+                        val intent = Intent(this, VolunteerCampaignStatusPageActivity::class.java).apply {
+                            putExtra("title", volunteerDetails.title)
+                            putExtra("category", volunteerDetails.category)
+                            putExtra("description", volunteerDetails.description)
+                            putExtra("startDate", volunteerDetails.startDate)
+                            putExtra("endDate", volunteerDetails.endDate)
+                            putExtra("age", volunteerDetails.age)
+                            putExtra("location", volunteerDetails.location)
+                            putExtra("imageUri", volunteerDetails.imageUri)
+                        }
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
+                    } else {
+                        Log.d("HomePageActivity", "Volunteer details not found for title: ${campaign.title}")
                     }
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                } else {
-                    Log.d("HomePageActivity", "Volunteer details not found for title: ${campaign.title}")
                 }
             }
             CampaignType.DONATION -> {
-                val donationDetails = getDonationCampaignDetails(campaign.title)
-                if (donationDetails != null) {
-                    val intent = Intent(this, DonationCampaignStatusPageActivity::class.java).apply {
-                        putExtra("title", donationDetails.title)
-                        putExtra("description", donationDetails.description)
-                        putExtra("amountNeeded", donationDetails.amountNeeded)
-                        putExtra("category", donationDetails.category)
-                        putExtra("fullName", donationDetails.fullName)
-                        putExtra("email", donationDetails.email)
-                        putExtra("phoneNumber", donationDetails.phoneNumber)
-                        putExtra("contactMethod", donationDetails.contactMethod)
-                        putExtra("imageUri", donationDetails.imageUri)
+                getDonationCampaignDetails(campaign.title) { donationDetails ->
+                    if (donationDetails != null) {
+                        val intent = Intent(this, DonationCampaignStatusPageActivity::class.java).apply {
+                            putExtra("title", donationDetails.title)
+                            putExtra("description", donationDetails.description)
+                            putExtra("amountNeeded", donationDetails.amountNeeded)
+                            putExtra("category", donationDetails.category)
+                            putExtra("fullName", donationDetails.fullName)
+                            putExtra("email", donationDetails.email)
+                            putExtra("phoneNumber", donationDetails.phoneNumber)
+                            putExtra("contactMethod", donationDetails.contactMethod)
+                            putExtra("imageUri", donationDetails.imageUri)
+                        }
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
+                    } else {
+                        Log.d("HomePageActivity", "Donation details not found for title: ${campaign.title}")
                     }
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                } else {
-                    Log.d("HomePageActivity", "Donation details not found for title: ${campaign.title}")
                 }
             }
             CampaignType.UNSPECIALIZED -> {
-                val unspecializedDetails = getUnspecializedActivityDetails(campaign.title)
-                if (unspecializedDetails != null) {
-                    val intent = Intent(this, UnspecializedActivityStatusPageActivity::class.java).apply {
-                        putExtra("title", unspecializedDetails.title)
-                        putExtra("noOfParticipants", unspecializedDetails.noOfParticipants)
-                        putExtra("description", unspecializedDetails.description)
-                        putExtra("imageUri", unspecializedDetails.imageUri)
+                getUnspecializedActivityDetails(campaign.title) { unspecializedDetails ->
+                    if (unspecializedDetails != null) {
+                        val intent = Intent(this, UnspecializedActivityStatusPageActivity::class.java).apply {
+                            putExtra("title", unspecializedDetails.title)
+                            putExtra("noOfParticipants", unspecializedDetails.noOfParticipants)
+                            putExtra("description", unspecializedDetails.description)
+                            putExtra("imageUri", unspecializedDetails.imageUri)
+                        }
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
+                    } else {
+                        Log.d("HomePageActivity", "Unspecialized details not found for title: ${campaign.title}")
                     }
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                } else {
-                    Log.d("HomePageActivity", "Unspecialized details not found for title: ${campaign.title}")
                 }
             }
         }
@@ -179,41 +182,63 @@ class HomePageActivity : AppCompatActivity() {
 
 
 
-
-
-
-    private fun getVolunteerCampaignDetails(title: String): VolunteerCampaignPost? {
-        val sharedPrefs = getSharedPreferences("VolunteerCampaignPrefs", Context.MODE_PRIVATE)
-        val json = sharedPrefs.getString("posts", null)
-        if (json == null) {
-            Log.d("HomePageActivity", "No details found for title: $title")
-            return null
-        }
-        val posts: List<VolunteerCampaignPost> = Gson().fromJson(json, object : TypeToken<List<VolunteerCampaignPost>>() {}.type)
-        return posts.find { it.title == title }
+    private fun getVolunteerCampaignDetails(title: String, callback: (VolunteerCampaignPost?) -> Unit) {
+        db.collection("volunteer_campaign_posts")
+            .whereEqualTo("title", title)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val campaign = documents.first().toObject(VolunteerCampaignPost::class.java)
+                    callback(campaign)
+                } else {
+                    Log.d("HomePageActivity", "No volunteer campaign details found for title: $title")
+                    callback(null)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("HomePageActivity", "Error getting volunteer campaign details", exception)
+                callback(null)
+            }
     }
 
-    private fun getDonationCampaignDetails(title: String): DonationCampaignPost? {
-        val sharedPrefs = getSharedPreferences("DonationCampaignPrefs", Context.MODE_PRIVATE)
-        val json = sharedPrefs.getString("posts", null)
-        if (json == null) {
-            Log.d("HomePageActivity", "No details found for title: $title")
-            return null
-        }
-        val posts: List<DonationCampaignPost> = Gson().fromJson(json, object : TypeToken<List<DonationCampaignPost>>() {}.type)
-        return posts.find { it.title == title }
+    private fun getDonationCampaignDetails(title: String, callback: (DonationCampaignPost?) -> Unit) {
+        db.collection("donation_campaign_posts")
+            .whereEqualTo("title", title)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val campaign = documents.first().toObject(DonationCampaignPost::class.java)
+                    callback(campaign)
+                } else {
+                    Log.d("HomePageActivity", "No donation campaign details found for title: $title")
+                    callback(null)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("HomePageActivity", "Error getting donation campaign details", exception)
+                callback(null)
+            }
     }
 
-    private fun getUnspecializedActivityDetails(title: String): UnspecializedActivityPost? {
-        val sharedPrefs = getSharedPreferences("UnspecializedActivityPrefs", Context.MODE_PRIVATE)
-        val json = sharedPrefs.getString("posts", null)
-        if (json == null) {
-            Log.d("HomePageActivity", "No details found for title: $title")
-            return null
-        }
-        val posts: List<UnspecializedActivityPost> = Gson().fromJson(json, object : TypeToken<List<UnspecializedActivityPost>>() {}.type)
-        return posts.find { it.title == title }
+    private fun getUnspecializedActivityDetails(title: String, callback: (UnspecializedActivityPost?) -> Unit) {
+        db.collection("unspecialized_activity_posts")
+            .whereEqualTo("title", title)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val campaign = documents.first().toObject(UnspecializedActivityPost::class.java)
+                    callback(campaign)
+                } else {
+                    Log.d("HomePageActivity", "No unspecialized activity details found for title: $title")
+                    callback(null)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("HomePageActivity", "Error getting unspecialized activity details", exception)
+                callback(null)
+            }
     }
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
