@@ -30,12 +30,11 @@
         <activity
             android:name=".LaunchActivity"
             android:exported="true">
+        </activity>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
         <activity
             android:name=".RegistrationActivity"
             android:exported="true" />
@@ -46,10 +45,7 @@
             android:name=".HomePageActivity"
             android:exported="true">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+            
         </activity>
         <activity
             android:name=".ProfilePageActivity"
@@ -104,7 +100,10 @@
             android:exported="true" />
         <activity
             android:name=".screens.PaymentPageActivity"
-            android:exported="true" /> <!-- Unspecialized Activity -->
+            android:exported="true">
+        </activity>
+      
+        <!-- Unspecialized Activity -->
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivityPostingPageActivity"
             android:exported="true" />

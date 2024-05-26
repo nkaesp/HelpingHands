@@ -1,19 +1,19 @@
 package com.intprog.helpinghands.screens;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.github.kittinunf.fuel.Fuel;
+import com.github.kittinunf.fuel.core.FuelError;
+import com.github.kittinunf.fuel.core.Handler;
 import com.intprog.helpinghands.HomePageActivity;
 import com.intprog.helpinghands.ProfilePageActivity;
 import com.intprog.helpinghands.R;
@@ -28,16 +28,90 @@ import java.util.Map;
 
 public class PaymentPageActivity extends AppCompatActivity {
 
+    Button stripeButton;
+    EditText amountEditText;
+
     PaymentSheet paymentSheet;
-    String paymentIntentClientSecret;
+    String paymentIntentClientSecret, amount;
     PaymentSheet.CustomerConfiguration customerConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_page);
+        stripeButton = findViewById(R.id.stripeButton);
+        amountEditText = findViewById(R.id.amountEditText);
 
-        // ImageButton for navigating to DonationOptionPageActivity
+        stripeButton.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(amountEditText.getText()
+                    .toString())){
+                Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show();
+            } else {
+                amount = amountEditText.getText().toString() + "00";
+                getDetails();
+            }
+        });
+
+        paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);
+
+    }
+
+    void getDetails(){
+        Fuel.INSTANCE.post("https://us-central1-helpinghands-96b47.cloudfunctions.net/helloWorld?amt=" + amount, null).responseString(new Handler<String>() {
+            @Override
+            public void success(String s) {
+                try {
+                    JSONObject result = new JSONObject(s);
+                    customerConfig = new PaymentSheet.CustomerConfiguration(
+                            result.getString("customer"),
+                            result.getString("ephemeralKey")
+                    );
+                    paymentIntentClientSecret = result.getString("paymentIntent");
+                    PaymentConfiguration.init(getApplicationContext(), result.getString("publishableKey"));
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showStripePaymentSheet();
+                        }
+                    });
+
+
+
+                } catch (JSONException e){
+                    Toast.makeText(PaymentPageActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void failure(@NonNull FuelError fuelError) {
+
+            }
+        });
+    }
+
+    void showStripePaymentSheet(){
+        final PaymentSheet.Configuration configuration = new PaymentSheet.Configuration.Builder("HelpingHands")
+                .customer(customerConfig)
+                .allowsDelayedPaymentMethods(true)
+                .build();
+        paymentSheet.presentWithPaymentIntent(
+                paymentIntentClientSecret,
+                configuration
+        );
+
+    }
+
+    void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult){
+
+        if (paymentSheetResult instanceof PaymentSheetResult.Canceled) {
+            Toast.makeText(this, "Payment Cancelled", Toast.LENGTH_SHORT).show();
+        } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
+            Toast.makeText(this, ((PaymentSheetResult.Failed) paymentSheetResult).getError().toString(), Toast.LENGTH_SHORT).show();
+        } else if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
+            Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show();
+        }
+
         ImageButton backTop = findViewById(R.id.backTop);
         backTop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +123,6 @@ public class PaymentPageActivity extends AppCompatActivity {
             }
         });
 
-        // ImageButton for navigating to HomePageActivity
         ImageButton homeImageButton = findViewById(R.id.homeImageButton);
         homeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +133,6 @@ public class PaymentPageActivity extends AppCompatActivity {
             }
         });
 
-        // ImageButton for navigating to ProfilePageActivity
         ImageButton profileImageButton = findViewById(R.id.profileImageButton);
         profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,68 +143,5 @@ public class PaymentPageActivity extends AppCompatActivity {
             }
         });
 
-        fetchPaymentApi();
-
-        Button button = findViewById(R.id.btn_pay);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (paymentIntentClientSecret != null)
-                    paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, new PaymentSheet.Configuration("Codes Easy", customerConfig));
-                else
-                    Toast.makeText(getApplicationContext(), "API Loading..", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);
-    }
-
-    public void fetchPaymentApi() {
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = "https://helpinghands-stripe-api.onrender.com/";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("R", response);
-                        try {
-                            final JSONObject result = new JSONObject(response);
-                            customerConfig = new PaymentSheet.CustomerConfiguration(
-                                    result.getString("customer"),
-                                    result.getString("ephemeralKey")
-                            );
-                            paymentIntentClientSecret = result.getString("paymentIntent");
-                            PaymentConfiguration.init(getApplicationContext(), result.getString("publishableKey"));
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> paramV = new HashMap<>();
-                paramV.put("authKey", "abc");
-                return paramV;
-            }
-        };
-        queue.add(stringRequest);
-    }
-
-    private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult) {
-        if (paymentSheetResult instanceof PaymentSheetResult.Canceled) {
-            Log.e("R:", "Canceled");
-        } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
-            Log.e("App", "Got error: ", ((PaymentSheetResult.Failed) paymentSheetResult).getError());
-        } else if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
-            // Display for example, an order confirmation screen
-            Log.e("R:", "Completed");
-        }
     }
 }
