@@ -87,6 +87,29 @@ class RegistrationActivity : AppCompatActivity() {
                             Toast.makeText(baseContext, "Registration failed. ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
+<<<<<<< HEAD
+=======
+
+
+                val accountsJson = sharedPreferences.getString("accounts", null)
+                val type = object : TypeToken<MutableMap<String, String>>() {}.type
+                val accounts: MutableMap<String, String> = if (accountsJson != null) {
+                    Gson().fromJson(accountsJson, type)
+                } else {
+                    mutableMapOf()
+                }
+
+                if (accounts.containsKey(email)) {
+                    Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show()
+                } else {
+                    accounts[email] = password
+                    val editor = sharedPreferences.edit()
+                    editor.putString("accounts", Gson().toJson(accounts))
+                    editor.putString("loggedInEmail", email) // Save logged in email
+                    editor.apply()
+                    showRegistrationSuccessDialog()
+                }
+>>>>>>> d3a3487d8f9a8a0282c9cf9f55d55f4f8779a1c4
             }
         }
     }
