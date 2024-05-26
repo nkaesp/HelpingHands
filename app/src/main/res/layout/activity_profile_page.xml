@@ -73,8 +73,8 @@
                 android:layout_height="90dp"
                 android:clipToOutline="true"/>
 
-            <ImageView
-                android:id="@+id/pfp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePictureImageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="20dp"
@@ -90,50 +90,79 @@
                 android:id="@+id/editProfileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pfp"
+                android:layout_below="@id/profilePictureImageView"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:text="Edit Profile"
                 android:textAllCaps="false"
-                android:textColor="#737373"
-                android:textSize="20sp" />
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/nameTextView"
+                android:id="@+id/nameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/editProfileButton"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Name:"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
-
             <TextView
-                android:id="@+id/emailTextview"
+                android:id="@+id/nameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/nameTextView"
+                android:layout_toEndOf="@id/nameLabel"
+                android:layout_below="@id/editProfileButton"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="No name"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/emailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameLabel"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10sp"
                 android:text="Email:"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
-
             <TextView
-                android:id="@+id/phoneTextview"
+                android:id="@+id/emailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/emailTextview"
+                android:layout_toEndOf="@id/emailLabel"
+                android:layout_below="@id/nameLabel"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10sp"
+                android:text="No email"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/phoneLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/emailLabel"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10sp"
                 android:text="Mobile #:"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/phoneTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/phoneLabel"
+                android:layout_below="@id/emailTextView"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10sp"
+                android:text="No mobile #"
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <Button

@@ -52,6 +52,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:23.0.0'
     implementation 'com.github.bumptech.glide:glide:4.16.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.3.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.firebase:firebase-storage-ktx:21.0.0'
 
 
@@ -63,6 +64,8 @@ dependencies {
     implementation 'com.google.gms:google-services:4.3.10'
 
     implementation 'com.stripe:stripe-android:20.44.0'
+    implementation 'com.github.kittinunf.fuel:fuel:2.3.1'
+
     implementation 'com.android.volley:volley:1.2.1'
 }
 apply plugin: 'com.google.gms.google-services'
