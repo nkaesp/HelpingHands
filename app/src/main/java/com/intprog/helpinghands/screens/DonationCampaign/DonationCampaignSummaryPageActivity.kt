@@ -92,7 +92,7 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
 
         val postButton = findViewById<Button>(R.id.btn_postNow)
         postButton.setOnClickListener {
-            val post = createDonationPostFromUI()
+            val post = createDonationCampaignFromUI()
 
             if (post != null) {
                 uploadImageToStorage(post)
@@ -102,7 +102,7 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun createDonationPostFromUI(): DonationPost? {
+    private fun createDonationCampaignFromUI(): DonationCampaignPost? {
         val titleTextView: TextView = findViewById(R.id.titleTextView)
         val descriptionTextView: TextView = findViewById(R.id.descriptionTextView)
         val amountNeededTextView: TextView = findViewById(R.id.amountNeededTextView)
@@ -125,18 +125,18 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         return if (!title.isNullOrEmpty() && !description.isNullOrEmpty() && !amountNeeded.isNullOrEmpty() && !category.isNullOrEmpty()
             && !fullName.isNullOrEmpty() && !email.isNullOrEmpty() && !phoneNumber.isNullOrEmpty() && !contactMethod.isNullOrEmpty()
             && !imageUriString.isNullOrEmpty()) {
-            DonationPost(title, description, amountNeeded, category, fullName, email, phoneNumber, contactMethod, imageUriString)
+            DonationCampaignPost(title , description, amountNeeded, category, fullName, email, phoneNumber, contactMethod, imageUriString, CampaignType.DONATION)
         } else {
             null
         }
     }
 
-    private fun uploadImageToStorage(post: DonationPost) {
+    private fun uploadImageToStorage(post: DonationCampaignPost) {
         val imageUriString = post.imageUri
 
         if (imageUriString.isNullOrEmpty()) return
 
-        val imageRef = storageRef.child("donation_post_images/${UUID.randomUUID()}")
+        val imageRef = storageRef.child("donation_campaign_post_images/${UUID.randomUUID()}")
         val uploadTask = imageRef.putFile(Uri.parse(imageUriString))
 
         uploadTask.addOnSuccessListener { taskSnapshot ->
@@ -144,7 +144,7 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
             imageRef.downloadUrl.addOnSuccessListener { uri ->
                 // Save post with image URL to Firestore
                 val postWithImageUrl = post.copy(imageUri = uri.toString())
-                saveDonationPostToFirestore(postWithImageUrl)
+                saveDonationCampaignPostToFirestore(postWithImageUrl)
             }.addOnFailureListener { e ->
                 // Handle any errors retrieving the download URL
                 Toast.makeText(this, "Failed to retrieve image URL: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -155,17 +155,17 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveDonationPostToFirestore(post: DonationPost) {
-        db.collection("donationPosts")
+    private fun saveDonationCampaignPostToFirestore(post: DonationCampaignPost) {
+        db.collection("donation_campaign_posts")
             .add(post)
             .addOnSuccessListener { documentReference ->
-                Toast.makeText(this, "Donation post added successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Donation Campaign posted successfully", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error adding donation post: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error adding donation campaign: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }
