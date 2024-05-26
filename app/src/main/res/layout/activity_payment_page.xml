@@ -49,6 +49,17 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your donations help us improve our app and provide better services to everyone. Thank you for your support!"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"/>
+
+
     <EditText
         android:id="@+id/amountEditText"
         android:layout_width="wrap_content"
@@ -63,11 +74,14 @@
 
     <Button
         android:id="@+id/stripeButton"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:textStyle="bold"
+        android:textSize="15sp"
         android:layout_marginTop="20dp"
-        android:text="Pay now" />
+        android:background="@drawable/btn_continue"
+        android:text="Donate now" />
 
     <fragment
         android:id="@+id/navBarFragment"
