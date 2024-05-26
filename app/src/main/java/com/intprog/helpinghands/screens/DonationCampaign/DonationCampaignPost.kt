@@ -10,7 +10,7 @@ data class DonationCampaignPost(
     val amountNeeded: String = "",
     val category: String = "",
     val fullName: String = "",
-    val email: String = "",
+    val email: String? = "",
     val phoneNumber: String = "",
     val contactMethod: String = "",
     val imageUri: String? = null,
@@ -23,7 +23,6 @@ data class DonationCampaignPost(
         amountNeeded = parcel.readString() ?: "",
         category = parcel.readString() ?: "",
         fullName = parcel.readString() ?: "",
-        email = parcel.readString() ?: "",
         phoneNumber = parcel.readString() ?: "",
         contactMethod = parcel.readString() ?: "",
         imageUri = parcel.readString(),
@@ -36,7 +35,6 @@ data class DonationCampaignPost(
         parcel.writeString(amountNeeded)
         parcel.writeString(category)
         parcel.writeString(fullName)
-        parcel.writeString(email)
         parcel.writeString(phoneNumber)
         parcel.writeString(contactMethod)
         parcel.writeString(imageUri)

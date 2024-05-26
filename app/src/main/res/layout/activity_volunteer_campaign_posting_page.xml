@@ -241,13 +241,41 @@
                     android:paddingBottom="2dp"
                     android:scrollbars="none"
                     android:textSize="15sp"/>
+                <TextView
+                    android:id="@+id/noOfVolunteersTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/descEditText"
+                    android:text="No. of Volunteers needed: "
+                    android:textSize="15sp"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/noOfVolunteersEditText"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/bg_radius_ten_gray"
+                    android:layout_marginLeft="5dp"
+                    android:hint=""
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingHorizontal="10dp"
+                    android:layout_toRightOf="@id/noOfVolunteersTextView"
+                    android:layout_below="@id/descEditText"
+                    android:elevation="3dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="15sp"
+                    android:maxLength="2">
+                </EditText>
 
                 <TextView
                     android:id="@+id/startDateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_below="@id/descEditText"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/noOfVolunteersTextView"
                     android:text="Start Date:"
                     android:textColor="@color/black"/>
 
@@ -258,9 +286,9 @@
                     android:text="Select Date"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/startDateTextView"
-                    android:layout_below="@id/descEditText"
+                    android:layout_below="@id/noOfVolunteersTextView"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/bg_radius_ten_gray"
                     android:textAllCaps="false"/>
 
@@ -310,7 +338,7 @@
                     android:id="@+id/locationTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="22dp"
                     android:layout_below="@id/ageTextView"
                     android:text="Location:"
                     android:textColor="@color/black"/>
@@ -318,7 +346,7 @@
                 <EditText
                     android:id="@+id/locationEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="24dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/locationTextView"

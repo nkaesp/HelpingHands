@@ -30,6 +30,8 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
     private lateinit var categoryTextView: TextView
     private lateinit var imageView: ImageView
     private lateinit var deletePostButton: Button
+    private lateinit var donateButton: Button
+
 
     private val db = FirebaseFirestore.getInstance()
 
@@ -47,6 +49,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         categoryTextView = findViewById(R.id.categoryTextView)
         imageView = findViewById(R.id.campaignImageView)
         deletePostButton = findViewById(R.id.deletePostButton)
+        donateButton = findViewById(R.id.donateButton)
 
         // Retrieve data from intent
         val title = intent.getStringExtra("title")
@@ -86,6 +89,14 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         } else {
             // Hide delete button
             deletePostButton.visibility = View.GONE
+        }
+
+        if (loggedInUserEmail == postOwnerEmail) {
+            // Hide donate button
+            donateButton.visibility = View.GONE
+        } else {
+            // Show donate button
+            donateButton.visibility = View.VISIBLE
         }
 
         // Set click listener for delete button

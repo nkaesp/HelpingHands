@@ -110,10 +110,12 @@ class VolunteerCampaignSelectionPageActivity : AppCompatActivity() {
                     putExtra("title", post?.title)
                     putExtra("category", post?.category)
                     putExtra("description", post?.description)
+                    putExtra("noOfVolunteers", post?.noOfVolunteers)
                     putExtra("startDate", post?.startDate)
                     putExtra("endDate", post?.endDate)
                     putExtra("age", post?.age)
                     putExtra("location", post?.location)
+                    putExtra("email", post?.email)
                     putExtra("imageUri", post?.imageUri)
                     putExtra("documentId", post?.documentId)
                     // Add other data fields as needed

@@ -8,6 +8,7 @@ data class UnspecializedActivityPost(
     val title: String = "",
     val noOfParticipants: String = "",
     val description: String = "",
+    val email: String? = "",
     val imageUri: String? = null,
     val type: CampaignType = CampaignType.UNSPECIALIZED,
     var documentId: String = ""

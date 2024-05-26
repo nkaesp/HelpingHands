@@ -464,7 +464,7 @@
 
 
                 <Button
-                    android:id="@+id/joinButton"
+                    android:id="@+id/donateButton"
                     android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:layout_below="@+id/contentSummary"
@@ -472,7 +472,8 @@
                     android:backgroundTint="#03A9F4"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="JOIN CAMPAIGN" />
+                    android:layout_marginBottom="120dp"
+                    android:text="DONATE" />
 
                 <Button
                     android:id="@+id/deletePostButton"
@@ -481,7 +482,7 @@
                     android:layout_below="@+id/contentSummary"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="100dp"
+                    android:layout_marginBottom="120dp"
                     android:background="@drawable/option_buttons"
                     android:backgroundTint="#FF0011"
                     android:elevation="10dp"
