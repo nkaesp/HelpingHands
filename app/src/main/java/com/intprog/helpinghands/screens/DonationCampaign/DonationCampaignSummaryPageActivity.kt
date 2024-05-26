@@ -10,12 +10,15 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.firestore.FirebaseFirestore
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.models.CampaignType
 
 class DonationCampaignSummaryPageActivity : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_campaign_summary_page)
@@ -82,20 +85,58 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
 
         val postButton = findViewById<Button>(R.id.btn_postNow)
         postButton.setOnClickListener {
-            if (!title.isNullOrEmpty() && !description.isNullOrEmpty() && !amountNeeded.isNullOrEmpty() && !category.isNullOrEmpty()
-                && !fullName.isNullOrEmpty() && !email.isNullOrEmpty() && !phoneNumber.isNullOrEmpty() && !contactMethod.isNullOrEmpty()
-                && !imageUriString.isNullOrEmpty()) {
-                val post = DonationCampaignPost(title ?: "", description ?: "", amountNeeded ?: "", category ?: "", fullName ?: "",
-                    email ?: "", phoneNumber ?: "", contactMethod ?: "", imageUriString, CampaignType.DONATION)
+            val post = createDonationPostFromUI()
 
-                val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java).apply {
-                    putExtra("post", post)
-                }
-                startActivity(intent)
-                overridePendingTransition(0, 0)
+            if (post != null) {
+                saveDonationPostToFirestore(post)
             } else {
                 Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    private fun createDonationPostFromUI(): DonationPost? {
+        val summaryImageButton: ImageView = findViewById(R.id.imageDonationSummary)
+        val titleTextView: TextView = findViewById(R.id.titleTextView)
+        val descriptionTextView: TextView = findViewById(R.id.descriptionTextView)
+        val amountNeededTextView: TextView = findViewById(R.id.amountNeededTextView)
+        val categoryTextView: TextView = findViewById(R.id.categoryTextView)
+        val fullNameTextView: TextView = findViewById(R.id.fullNameTextView)
+        val emailTextView: TextView = findViewById(R.id.emailTextView)
+        val phoneNumberTextView: TextView = findViewById(R.id.phoneNumberTextView)
+        val contactMethodTextView: TextView = findViewById(R.id.contactMethodTextView)
+
+        val imageUriString = intent.getStringExtra("imageUri")
+        val title = titleTextView.text.toString()
+        val description = descriptionTextView.text.toString()
+        val amountNeeded = amountNeededTextView.text.toString()
+        val category = categoryTextView.text.toString()
+        val fullName = fullNameTextView.text.toString()
+        val email = emailTextView.text.toString()
+        val phoneNumber = phoneNumberTextView.text.toString()
+        val contactMethod = contactMethodTextView.text.toString()
+
+        return if (!title.isNullOrEmpty() && !description.isNullOrEmpty() && !amountNeeded.isNullOrEmpty() && !category.isNullOrEmpty()
+            && !fullName.isNullOrEmpty() && !email.isNullOrEmpty() && !phoneNumber.isNullOrEmpty() && !contactMethod.isNullOrEmpty()
+            && !imageUriString.isNullOrEmpty()) {
+            DonationPost(title, description, amountNeeded, category, fullName, email, phoneNumber, contactMethod, imageUriString)
+        } else {
+            null
+        }
+    }
+
+    private fun saveDonationPostToFirestore(post: DonationPost) {
+        db.collection("donationPosts")
+            .add(post)
+            .addOnSuccessListener { documentReference ->
+                Toast.makeText(this, "Donation post added successfully", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(0, 0)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error adding donation post: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
 }
+
