@@ -12,18 +12,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginPageActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
 
         auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         emailEditText = findViewById(R.id.emailEditText)
         passwordEditText = findViewById(R.id.passwordEditText)
@@ -69,20 +72,32 @@ class LoginPageActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Check if the email is verified
                     val user = auth.currentUser
-                    if (user != null && user.isEmailVerified) {
-                        // Email is verified, proceed to home page
-                        startActivity(Intent(this, HomePageActivity::class.java))
-                        finish()
-                    } else {
-                        // Email is not verified, show a message
-                        Toast.makeText(baseContext, "Please verify your email address.", Toast.LENGTH_SHORT).show()
+                    if (user != null) {
+                        firestore.collection("users").document(user.uid)
+                            .get()
+                            .addOnSuccessListener { document ->
+                                if (document != null && document.exists()) {
+                                    val isVerified = document.getBoolean("verified") ?: false
+                                    if (isVerified) {
+                                        startActivity(Intent(this, HomePageActivity::class.java))
+                                        finish()
+                                    } else {
+                                        Toast.makeText(baseContext, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show()
+                                        auth.signOut()  // Sign out the user since the account is not verified
+                                    }
+                                } else {
+                                    Toast.makeText(baseContext, "User data not found.", Toast.LENGTH_SHORT).show()
+                                    auth.signOut()
+                                }
+                            }
+                            .addOnFailureListener { exception ->
+                                Toast.makeText(baseContext, "Error accessing user data: ${exception.message}", Toast.LENGTH_SHORT).show()
+                                auth.signOut()
+                            }
                     }
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, "Authentication failed. ${task.exception?.message}",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, "Authentication failed. ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }
