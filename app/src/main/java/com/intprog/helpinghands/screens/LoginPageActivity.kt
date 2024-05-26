@@ -1,12 +1,15 @@
 package com.intprog.helpinghands
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -58,7 +61,7 @@ class LoginPageActivity : AppCompatActivity() {
 
         val forgotPasswordButton = findViewById<Button>(R.id.forgotPasswordButton)
         forgotPasswordButton.setOnClickListener {
-            // Implement forgot password functionality if needed
+            showForgotPasswordDialog()
         }
     }
 
@@ -80,6 +83,35 @@ class LoginPageActivity : AppCompatActivity() {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(baseContext, "Authentication failed. ${task.exception?.message}",
                         Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun showForgotPasswordDialog() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = LayoutInflater.from(this)
+        val dialogView = inflater.inflate(R.layout.forgot_password_dialog, null)
+        val emailEditText = dialogView.findViewById<EditText>(R.id.emailEditText)
+
+        builder.setView(dialogView)
+            .setTitle("Forgot Password")
+            .setPositiveButton("Send Email") { dialogInterface: DialogInterface, i: Int ->
+                val email = emailEditText.text.toString()
+                sendPasswordResetEmail(email)
+            }
+            .setNegativeButton("Cancel") { dialogInterface: DialogInterface, i: Int ->
+                // Do nothing
+            }
+            .show()
+    }
+
+    private fun sendPasswordResetEmail(email: String) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Password reset email sent", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Failed to send password reset email", Toast.LENGTH_SHORT).show()
                 }
             }
     }
