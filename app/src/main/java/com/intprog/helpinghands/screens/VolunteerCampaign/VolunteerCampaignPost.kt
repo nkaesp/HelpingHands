@@ -5,26 +5,27 @@ import android.os.Parcelable
 import com.intprog.helpinghands.models.CampaignType
 
 data class VolunteerCampaignPost(
-    val title: String,
-    val category: String,
-    val description: String,
-    val startDate: String,
-    val endDate: String,
-    val age: String,
-    val location: String,
-    val imageUri: String?,
-    val type: CampaignType
+    val title: String = "",
+    val category: String = "",
+    val description: String = "",
+    val startDate: String = "",
+    val endDate: String = "",
+    val age: String = "",
+    val location: String = "",
+    val imageUri: String? = null,
+    val type: CampaignType = CampaignType.VOLUNTEER,
+    var documentId: String = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString(),
-        CampaignType.valueOf(parcel.readString() ?: CampaignType.VOLUNTEER.name)
+        title = parcel.readString() ?: "",
+        category = parcel.readString() ?: "",
+        description = parcel.readString() ?: "",
+        startDate = parcel.readString() ?: "",
+        endDate = parcel.readString() ?: "",
+        age = parcel.readString() ?: "",
+        location = parcel.readString() ?: "",
+        imageUri = parcel.readString(),
+        type = CampaignType.valueOf(parcel.readString() ?: CampaignType.VOLUNTEER.name)
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

@@ -89,7 +89,6 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         val titleTextView: TextView = findViewById(R.id.titleTextView)
         val noOfParticipantsTextView: TextView = findViewById(R.id.noOfParticipantsTextView)
         val descriptionTextView: TextView = findViewById(R.id.descriptionTextView)
-
         val imageUriString = intent.getStringExtra("imageUri")
         val title = titleTextView.text.toString()
         val noOfParticipants = noOfParticipantsTextView.text.toString()
