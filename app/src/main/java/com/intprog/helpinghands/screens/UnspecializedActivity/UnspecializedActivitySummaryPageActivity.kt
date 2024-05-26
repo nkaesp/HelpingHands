@@ -9,18 +9,26 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.model.UnspecializedActivityPost
 import com.intprog.helpinghands.models.CampaignType
+import java.util.*
 
 class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
 
+    private lateinit var storageRef: StorageReference
     private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_unspecialized_summary)
+
+        storageRef = FirebaseStorage.getInstance().reference
 
         val backButton: ImageButton = findViewById(R.id.backTop)
         backButton.setOnClickListener {
@@ -78,12 +86,26 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
             .add(post)
             .addOnSuccessListener { documentReference ->
                 Toast.makeText(this, "Unspecialized activity post saved successfully", Toast.LENGTH_SHORT).show()
+                uploadImageToStorage(post.imageUri)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to save unspecialized activity post: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun uploadImageToStorage(imageUri: String?) {
+        if (imageUri.isNullOrEmpty()) return
+
+        val imageRef = storageRef.child("images/${UUID.randomUUID()}")
+        imageRef.putFile(Uri.parse(imageUri))
+            .addOnSuccessListener {
+                Toast.makeText(this, "Image uploaded successfully", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, UnspecializedActivitySelectionPageActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to save unspecialized activity post: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to upload image: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }

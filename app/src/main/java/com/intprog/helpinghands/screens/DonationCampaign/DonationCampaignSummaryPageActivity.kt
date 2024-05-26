@@ -4,24 +4,31 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
 import com.intprog.helpinghands.models.CampaignType
+import java.util.*
 
 class DonationCampaignSummaryPageActivity : AppCompatActivity() {
 
-    private val db = FirebaseFirestore.getInstance()
+    private lateinit var db: FirebaseFirestore
+    private lateinit var storageRef: StorageReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_campaign_summary_page)
+
+        db = FirebaseFirestore.getInstance()
+        storageRef = FirebaseStorage.getInstance().reference
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
@@ -88,7 +95,7 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
             val post = createDonationPostFromUI()
 
             if (post != null) {
-                saveDonationPostToFirestore(post)
+                uploadImageToStorage(post)
             } else {
                 Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show()
             }
@@ -96,7 +103,6 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
     }
 
     private fun createDonationPostFromUI(): DonationPost? {
-        val summaryImageButton: ImageView = findViewById(R.id.imageDonationSummary)
         val titleTextView: TextView = findViewById(R.id.titleTextView)
         val descriptionTextView: TextView = findViewById(R.id.descriptionTextView)
         val amountNeededTextView: TextView = findViewById(R.id.amountNeededTextView)
@@ -125,6 +131,30 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         }
     }
 
+    private fun uploadImageToStorage(post: DonationPost) {
+        val imageUriString = post.imageUri
+
+        if (imageUriString.isNullOrEmpty()) return
+
+        val imageRef = storageRef.child("donation_post_images/${UUID.randomUUID()}")
+        val uploadTask = imageRef.putFile(Uri.parse(imageUriString))
+
+        uploadTask.addOnSuccessListener { taskSnapshot ->
+            // Image uploaded successfully, now get the download URL
+            imageRef.downloadUrl.addOnSuccessListener { uri ->
+                // Save post with image URL to Firestore
+                val postWithImageUrl = post.copy(imageUri = uri.toString())
+                saveDonationPostToFirestore(postWithImageUrl)
+            }.addOnFailureListener { e ->
+                // Handle any errors retrieving the download URL
+                Toast.makeText(this, "Failed to retrieve image URL: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { e ->
+            // Handle unsuccessful uploads
+            Toast.makeText(this, "Failed to upload image: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun saveDonationPostToFirestore(post: DonationPost) {
         db.collection("donationPosts")
             .add(post)
@@ -139,3 +169,4 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
             }
     }
 }
+
