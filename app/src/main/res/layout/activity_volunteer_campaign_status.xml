@@ -75,7 +75,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"/>
 
-        <ImageView
+        <com.intprog.helpinghands.customviews.RoundedImageView
             android:id="@+id/postedpic"
             android:layout_width="300dp"
             android:layout_height="200dp"

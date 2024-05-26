@@ -71,7 +71,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"></TextView>
 
-            <ImageButton
+            <com.intprog.helpinghands.customviews.RoundedImageButton
                 android:id="@+id/uploadImageButton"
                 android:layout_width="300dp"
                 android:layout_height="200dp"

@@ -71,7 +71,7 @@
                 android:textStyle="bold"
                 android:scaleType="centerCrop"/>
 
-            <ImageButton
+            <com.intprog.helpinghands.customviews.RoundedImageButton
                 android:id="@+id/activityImageButton"
                 android:layout_width="300dp"
                 android:layout_height="200dp"
