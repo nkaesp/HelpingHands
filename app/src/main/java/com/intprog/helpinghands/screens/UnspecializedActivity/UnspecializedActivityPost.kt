@@ -5,18 +5,19 @@ import android.os.Parcelable
 import com.intprog.helpinghands.models.CampaignType
 
 data class UnspecializedActivityPost(
-    val title: String,
-    val noOfParticipants: String,
-    val description: String,
-    val imageUri: String?,
-    val type: CampaignType
+    val title: String = "",
+    val noOfParticipants: String = "",
+    val description: String = "",
+    val imageUri: String? = null,
+    val type: CampaignType = CampaignType.UNSPECIALIZED,
+    var documentId: String = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString(),
-        CampaignType.valueOf(parcel.readString() ?: CampaignType.UNSPECIALIZED.name)
+        title = parcel.readString() ?: "",
+        noOfParticipants = parcel.readString() ?: "",
+        description = parcel.readString() ?: "",
+        imageUri = parcel.readString(),
+        type = CampaignType.valueOf(parcel.readString() ?: CampaignType.UNSPECIALIZED.name)
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

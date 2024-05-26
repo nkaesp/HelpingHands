@@ -5,28 +5,29 @@ import android.os.Parcelable
 import com.intprog.helpinghands.models.CampaignType
 
 data class DonationCampaignPost(
-    val title: String,
-    val description: String,
-    val amountNeeded: String,
-    val category: String,
-    val fullName: String,
-    val email: String,
-    val phoneNumber: String,
-    val contactMethod: String,
-    val imageUri: String?,
-    val type: CampaignType
+    val title: String = "",
+    val description: String = "",
+    val amountNeeded: String = "",
+    val category: String = "",
+    val fullName: String = "",
+    val email: String = "",
+    val phoneNumber: String = "",
+    val contactMethod: String = "",
+    val imageUri: String? = null,
+    val type: CampaignType = CampaignType.DONATION,
+    var documentId: String = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString(),
-        CampaignType.valueOf(parcel.readString() ?: CampaignType.DONATION.name)
+        title = parcel.readString() ?: "",
+        description = parcel.readString() ?: "",
+        amountNeeded = parcel.readString() ?: "",
+        category = parcel.readString() ?: "",
+        fullName = parcel.readString() ?: "",
+        email = parcel.readString() ?: "",
+        phoneNumber = parcel.readString() ?: "",
+        contactMethod = parcel.readString() ?: "",
+        imageUri = parcel.readString(),
+        type = CampaignType.valueOf(parcel.readString() ?: CampaignType.DONATION.name)
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

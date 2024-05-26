@@ -159,14 +159,31 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
         db.collection("donation_campaign_posts")
             .add(post)
             .addOnSuccessListener { documentReference ->
-                Toast.makeText(this, "Donation Campaign posted successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(0, 0)
+                // Generate an ID for the document
+                val documentId = documentReference.id
+
+                // Add the generated ID to the post
+                val postWithId = post.copy(documentId = documentId)
+
+                // Update the document with the generated ID
+                db.collection("donation_campaign_posts")
+                    .document(documentId)
+                    .set(postWithId)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Donation Campaign posted successfully", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error updating donation campaign with ID: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error adding donation campaign: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
+
 }
 
