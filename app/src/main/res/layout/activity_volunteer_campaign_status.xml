@@ -297,6 +297,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"/>
         <RelativeLayout
+            android:id="@+id/peopleWhoVolunteeredRelativeLayout"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/bg_radius_ten_gray"
@@ -304,12 +305,25 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="80dp">
+            android:layout_marginBottom="10dp">
             <ListView
                 android:id="@+id/peopleWhoVolunteeredListView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </RelativeLayout>
+        <Button
+            android:id="@+id/deletePostButton"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/peopleWhoVolunteeredRelativeLayout"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/option_buttons"
+            android:backgroundTint="#FF0011"
+            android:text="DELETE POST"
+            android:elevation="10dp"
+            android:textSize="12dp"/>
     </RelativeLayout>
     </ScrollView>
 

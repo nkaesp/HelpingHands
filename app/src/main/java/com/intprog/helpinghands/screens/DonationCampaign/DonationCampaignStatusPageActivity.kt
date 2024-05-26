@@ -1,5 +1,6 @@
 package com.intprog.helpinghands.screens.DonationCampaign
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,18 +9,37 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
+import com.intprog.helpinghands.models.Campaign
+import com.intprog.helpinghands.models.CampaignType
 
 class DonationCampaignStatusPageActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation_campaign_status_page)
 
         // Retrieve data from Intent extras
+        val currentPost = DonationCampaignPost(
+            title = intent.getStringExtra("title") ?: "",
+            description = intent.getStringExtra("description") ?: "",
+            amountNeeded = intent.getStringExtra("amountNeeded") ?: "",
+            category = intent.getStringExtra("category") ?: "",
+            fullName = intent.getStringExtra("fullName") ?: "",
+            email = intent.getStringExtra("email") ?: "",
+            phoneNumber = intent.getStringExtra("phoneNumber") ?: "",
+            contactMethod = intent.getStringExtra("contactMethod") ?: "",
+            imageUri = intent.getStringExtra("imageUri"),
+            type = CampaignType.DONATION  // Provide a valid CampaignType value
+        )
+        val currentPostTitle = intent.getStringExtra("title") ?: ""
 
-        val imageUriString = intent.getStringExtra("imageUri")
+
+        val imageUriString = currentPost?.imageUri
         if (imageUriString != null) {
             val imageUri = Uri.parse(imageUriString)
             val imageView = findViewById<ImageView>(R.id.campaignImageView)
@@ -27,32 +47,31 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         }
 
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
-        val titleInput = intent.getStringExtra("title")
-        titleTextView.text = "$titleInput"
+        titleTextView.text = currentPost?.title
 
         val descTextView = findViewById<TextView>(R.id.descTextView)
-        val descInput = intent.getStringExtra("description")
-        descTextView.text = "$descInput"
+        descTextView.text = currentPost?.description
 
         val amountNeededTextView = findViewById<TextView>(R.id.amountNeededTextView)
-        val amountNeededInput = intent.getStringExtra("amountNeeded")
-        amountNeededTextView.text = "$amountNeededInput"
+        amountNeededTextView.text = currentPost?.amountNeeded
 
         val fullNameTextView = findViewById<TextView>(R.id.fullNameTextView)
-        val fullNameInput = intent.getStringExtra("fullName")
-        fullNameTextView.text = "$fullNameInput"
+        fullNameTextView.text = currentPost?.fullName
 
         val emailTextView = findViewById<TextView>(R.id.emailTextView)
-        val emailInput = intent.getStringExtra("email")
-        emailTextView.text = "$emailInput"
+        emailTextView.text = currentPost?.email
 
         val phoneNumberTextView = findViewById<TextView>(R.id.phoneNumberTextView)
-        val phoneNumberInput = intent.getStringExtra("phoneNumber")
-        phoneNumberTextView.text = "$phoneNumberInput"
+        phoneNumberTextView.text = currentPost?.phoneNumber
 
         val contactMethodTextView = findViewById<TextView>(R.id.contactMethodTextView)
-        val contactMethodInput = intent.getStringExtra("contactMethod")
-        contactMethodTextView.text = "$contactMethodInput"
+        contactMethodTextView.text = currentPost?.contactMethod
+
+        val deletePostButton = findViewById<Button>(R.id.deletePostButton)
+        deletePostButton.setOnClickListener {
+            deletePost(currentPost)
+            deletePostFromCampaignPrefs(currentPostTitle)
+        }
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
@@ -74,4 +93,48 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
         }
     }
+
+    private fun deletePost(post: DonationCampaignPost?) {
+        if (post == null) return
+
+        val sharedPreferences = getSharedPreferences("DonationCampaignPrefs", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("posts", null)
+        val type = object : TypeToken<MutableList<DonationCampaignPost>>() {}.type
+        val posts: MutableList<DonationCampaignPost> = gson.fromJson(json, type) ?: mutableListOf()
+
+        posts.remove(post)
+
+        // Update shared preferences
+        val editor = sharedPreferences.edit()
+        val updatedJson = gson.toJson(posts)
+        editor.putString("posts", updatedJson)
+        editor.apply()
+
+        // Remove the post from the list displayed in the home page
+        val intent = Intent(this, HomePageActivity::class.java)
+        intent.putExtra("deletedPostTitle", post.title)
+        setResult(RESULT_OK, intent)
+
+        finish()
+    }
+
+    private fun deletePostFromCampaignPrefs(postTitle: String) {
+        val sharedPrefs = getSharedPreferences("CampaignPrefs", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPrefs.getString("posts", null)
+        val type = object : TypeToken<MutableList<Campaign>>() {}.type
+        val posts: MutableList<Campaign> = gson.fromJson(json, type) ?: mutableListOf()
+
+        val postToRemove = posts.find { it.title == postTitle }
+        posts.remove(postToRemove)
+
+        val editor = sharedPrefs.edit()
+        val updatedJson = gson.toJson(posts)
+        editor.putString("posts", updatedJson)
+        editor.apply()
+    }
+
+
+
 }

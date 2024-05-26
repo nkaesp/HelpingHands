@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/fragment_nav_bar.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/navBarRelativeLayout"
     android:layout_width="wrap_content"
@@ -23,12 +24,12 @@
             android:id="@+id/notificationsImageButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="40dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:background="#F4F5F5"
+            android:background="@drawable/selector_button"
             android:scaleType="fitCenter"
             android:src="@drawable/bell" />
 
@@ -36,12 +37,12 @@
             android:id="@+id/homeImageButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="40dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:background="#F4F5F5"
+            android:background="@drawable/selector_button"
             android:scaleType="fitCenter"
             android:src="@drawable/home" />
 
@@ -49,12 +50,12 @@
             android:id="@+id/profileImageButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="40dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:background="#F4F5F5"
+            android:background="@drawable/selector_button"
             android:scaleType="fitCenter"
             android:src="@drawable/profile" />
     </LinearLayout>
