@@ -125,7 +125,8 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:paddingLeft="10dp"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:enabled="false"/>
 
             <TextView
                 android:id="@+id/txtPhone"
