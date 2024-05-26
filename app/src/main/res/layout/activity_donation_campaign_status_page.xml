@@ -217,10 +217,48 @@
 
 
             <TextView
-                android:id="@+id/txtPeopleWhoDonated"
+                android:id="@+id/categoryLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/amountDonatedLabel"
+                android:layout_marginTop="20dp"
+                android:text="Category: "
+                android:textColor="@color/black"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/bgCategory"
+                android:layout_width="280dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/amountDonatedLabel"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@+id/categoryLabel"
+                android:background="@drawable/bg_radius_ten_gray"
+                android:elevation="3dp"></ImageView>
+
+
+            <TextView
+                android:id="@+id/categoryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/amountDonatedLabel"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@+id/categoryLabel"
+                android:elevation="3dp"
+                android:text="Category"
+                android:textColor="@color/black"></TextView>
+
+            <TextView
+                android:id="@+id/txtPeopleWhoDonated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/categoryLabel"
                 android:layout_marginTop="15dp"
                 android:text="People who Donated: "
                 android:textColor="@color/black"

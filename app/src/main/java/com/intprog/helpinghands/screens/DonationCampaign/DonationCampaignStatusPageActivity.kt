@@ -25,6 +25,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
     private lateinit var emailTextView: TextView
     private lateinit var phoneNumberTextView: TextView
     private lateinit var contactMethodTextView: TextView
+    private lateinit var categoryTextView: TextView
     private lateinit var imageView: ImageView
     private lateinit var deletePostButton: Button
 
@@ -41,6 +42,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         emailTextView = findViewById(R.id.emailTextView)
         phoneNumberTextView = findViewById(R.id.phoneNumberTextView)
         contactMethodTextView = findViewById(R.id.contactMethodTextView)
+        categoryTextView = findViewById(R.id.categoryTextView)
         imageView = findViewById(R.id.campaignImageView)
         deletePostButton = findViewById(R.id.deletePostButton)
 
@@ -51,6 +53,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         val email = intent.getStringExtra("email")
         val phoneNumber = intent.getStringExtra("phoneNumber")
         val contactMethod = intent.getStringExtra("contactMethod")
+        val category = intent.getStringExtra("category")
         val imageUri = intent.getStringExtra("imageUri")
         Log.d("DonationCampaignStatusPage", "Image Uri: $imageUri")
 
@@ -61,24 +64,23 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         emailTextView.text = email
         phoneNumberTextView.text = phoneNumber
         contactMethodTextView.text = contactMethod
+        categoryTextView.text = category
 
         if (imageUri != null) {
-            val imageUri = Uri.parse(imageUri)
+            val uri = Uri.parse(imageUri)
             Glide.with(this)
-                .load(imageUri)
+                .load(uri)
                 .into(imageView)
         }
 
         deletePostButton.setOnClickListener {
             val documentId = intent.getStringExtra("documentId")
-
-            if (documentId != null) {
+            documentId?.let {
                 // Delete the post from Firestore
                 db.collection("donation_campaign_posts").document(documentId)
                     .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "Post deleted successfully", Toast.LENGTH_SHORT).show()
-
                         // Navigate back to the home page
                         val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
                         startActivity(intent)
