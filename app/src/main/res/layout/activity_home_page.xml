@@ -60,7 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_below="@id/featuredOpportunitiesLabel"
-        android:background="#0066FF">
+        android:background="#0066FF"
+        android:elevation="20dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -94,7 +95,7 @@
     <RelativeLayout
         android:id="@+id/campaignButtons"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:background="#E4EFFF"
         android:layout_below="@id/categoriesLabel"
         android:layout_marginTop="10dp">
@@ -103,26 +104,29 @@
             android:id="@+id/createCampaignButton"
             android:layout_width="160dp"
             android:layout_height="60dp"
-            android:background="@drawable/bg_radius_ten_lightblue"
-            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginLeft="25dp"
-            android:textSize="17sp"
-            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_radius_ten_lightblue"
             android:text="Create \nCampaign"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/joinCampaignButton"
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:background="@drawable/bg_radius_ten_lightblue"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginRight="25dp"
             android:textSize="17sp"
             android:textColor="@color/white"
             android:text="Join \nCampaign"
-            android:layout_alignParentEnd="true"
-            android:textAllCaps="false"/>
+            android:layout_below="@id/createCampaignButton"
+            android:textAllCaps="false"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 
