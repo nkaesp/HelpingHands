@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -16,7 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/NoAnimationTheme"
         tools:targetApi="31">
+        <activity
+            android:name=".EmailVerificationActivity"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <!-- Main Screens -->
         <activity
             android:name=".LaunchActivity"
@@ -77,8 +86,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             -->
-        </activity>
-        <!-- Donation Campaign -->
+        </activity> <!-- Donation Campaign -->
         <activity
             android:name=".screens.DonationCampaign.DonationOptionPageActivity"
             android:exported="true" />
@@ -96,8 +104,7 @@
             android:exported="true" />
         <activity
             android:name=".screens.PaymentPageActivity"
-            android:exported="true" />
-        <!-- Unspecialized Activity -->
+            android:exported="true" /> <!-- Unspecialized Activity -->
         <activity
             android:name=".screens.UnspecializedActivity.UnspecializedActivityPostingPageActivity"
             android:exported="true" />

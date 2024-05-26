@@ -3,13 +3,12 @@ package com.intprog.helpinghands
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-
 
 class LoginPageActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
@@ -67,10 +66,16 @@ class LoginPageActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+                    // Check if the email is verified
                     val user = auth.currentUser
-                    startActivity(Intent(this, HomePageActivity::class.java))
-                    finish()
+                    if (user != null && user.isEmailVerified) {
+                        // Email is verified, proceed to home page
+                        startActivity(Intent(this, HomePageActivity::class.java))
+                        finish()
+                    } else {
+                        // Email is not verified, show a message
+                        Toast.makeText(baseContext, "Please verify your email address.", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(baseContext, "Authentication failed. ${task.exception?.message}",
