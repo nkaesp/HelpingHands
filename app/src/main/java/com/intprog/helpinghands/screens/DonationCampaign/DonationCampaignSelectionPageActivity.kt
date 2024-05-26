@@ -12,18 +12,18 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
 import com.intprog.helpinghands.HomePageActivity
 import com.intprog.helpinghands.ProfilePageActivity
 import com.intprog.helpinghands.R
-import com.bumptech.glide.Glide
 
 class DonationCampaignSelectionPageActivity : AppCompatActivity() {
 
     private val posts = mutableListOf<DonationCampaignPost>()
     private lateinit var listView: ListView
     private lateinit var adapter: PostAdapter
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +33,9 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
         adapter = PostAdapter(this, R.layout.activity_donation_campaign_selection_item, posts)
         listView.adapter = adapter
 
-        loadPostsFromSharedPreferences()
+        db = FirebaseFirestore.getInstance()
 
-        val post = intent.getParcelableExtra<DonationCampaignPost>("post")
-        if (post != null) {
-            addPost(post)
-        }
+        fetchPostsFromFirestore()
 
         val homeImageButton = findViewById<ImageButton>(R.id.homeImageButton)
         homeImageButton.setOnClickListener {
@@ -63,67 +60,20 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
         }
     }
 
-    fun addPost(post: DonationCampaignPost) {
-        posts.add(post)
-        adapter.notifyDataSetChanged()
-
-        val filterFields = linkedMapOf(
-            "title" to true,
-            "imageUri" to true,
-            "type" to true
-        ) as LinkedHashMap<String, Boolean>
-        savePostsToSharedPreferences(posts, "DonationCampaignPrefs", filterFields)
-    }
-
-    private fun loadPostsFromSharedPreferences() {
-        val sharedPreferences = getSharedPreferences("DonationCampaignPrefs", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPreferences.getString("posts", null)
-        val type = object : TypeToken<List<DonationCampaignPost>>() {}.type
-        val loadedPosts: List<DonationCampaignPost>? = gson.fromJson(json, type)
-        if (loadedPosts != null) {
-            posts.clear()
-            posts.addAll(loadedPosts)
-            adapter.notifyDataSetChanged()
-        }
-    }
-
-    private fun savePostsToSharedPreferences(posts: List<Any>, sharedPreferencesName: String, filterFields: LinkedHashMap<String, Boolean>) {
-        val sharedPreferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val gson = Gson()
-        val json = gson.toJson(posts)
-        editor.putString("posts", json)
-        editor.apply()
-
-        // Process and save to additional shared preferences
-        if (posts.isNotEmpty()) {
-            val additionalSharedPreferences = getSharedPreferences("CampaignPrefs", Context.MODE_PRIVATE)
-            val existingJson = additionalSharedPreferences.getString("posts", "[]")
-            val type = object : TypeToken<List<LinkedHashMap<String, Any?>>>() {}.type
-            val existingPosts: MutableList<LinkedHashMap<String, Any?>> = gson.fromJson(existingJson, type) ?: mutableListOf()
-
-            val newPosts = posts.map { post ->
-                val postMap = gson.fromJson(gson.toJson(post), Map::class.java) as Map<String, Any?>
-                val orderedPostMap = LinkedHashMap<String, Any?>()
-                filterFields.forEach { (key, _) ->
-                    orderedPostMap[key] = postMap[key]
+    private fun fetchPostsFromFirestore() {
+        db.collection("donation_campaign_posts")
+            .get()
+            .addOnSuccessListener { result ->
+                posts.clear()
+                for (document in result) {
+                    val post = document.toObject(DonationCampaignPost::class.java)
+                    posts.add(post)
                 }
-                orderedPostMap
+                adapter.notifyDataSetChanged()
             }
-
-            // Add only unique new posts
-            for (newPost in newPosts) {
-                if (!existingPosts.contains(newPost)) {
-                    existingPosts.add(newPost)
-                }
+            .addOnFailureListener { exception ->
+                // Handle any errors here
             }
-
-            val combinedJson = gson.toJson(existingPosts)
-            val additionalEditor = additionalSharedPreferences.edit()
-            additionalEditor.putString("posts", combinedJson)
-            additionalEditor.apply()
-        }
     }
 
     override fun onResume() {
@@ -156,6 +106,7 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
                 .into(imageView)
 
             viewDetailsButton.setOnClickListener {
+                val post = getItem(position) // Get the post at the current position
                 val intent = Intent(context, DonationCampaignStatusPageActivity::class.java).apply {
                     putExtra("title", post?.title)
                     putExtra("description", post?.description)
@@ -166,10 +117,13 @@ class DonationCampaignSelectionPageActivity : AppCompatActivity() {
                     putExtra("phoneNumber", post?.phoneNumber)
                     putExtra("contactMethod", post?.contactMethod)
                     putExtra("imageUri", post?.imageUri)
+                    putExtra("type", post?.type.toString()) // Pass campaign type
+                    putExtra("documentId", post?.documentId)
                 }
                 context.startActivity(intent)
                 overridePendingTransition(0, 0)
             }
+
 
             return itemView
         }
