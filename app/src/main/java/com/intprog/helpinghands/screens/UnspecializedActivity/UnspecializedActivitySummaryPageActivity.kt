@@ -97,7 +97,7 @@ class UnspecializedActivitySummaryPageActivity : AppCompatActivity() {
         val description = descriptionTextView.text.toString()
 
         return if (!title.isNullOrEmpty() && !noOfParticipants.isNullOrEmpty() && !description.isNullOrEmpty() && !imageUriString.isNullOrEmpty()) {
-            UnspecializedActivityPost(title, noOfParticipants, description, email, imageUriString, CampaignType.UNSPECIALIZED)
+            UnspecializedActivityPost(title,noOfParticipants, description, email, imageUriString, CampaignType.UNSPECIALIZED)
         } else {
             null
         }

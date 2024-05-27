@@ -29,12 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/image1"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
             android:text="Title"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"/>
 
 <!--        <TextView-->
 <!--            android:id="@+id/category"-->
@@ -52,23 +54,23 @@
             android:layout_height="25dp"
             android:layout_below="@id/title"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/bg_radius_ten_lightblue"
             android:text="View Details"
             android:textColor="@color/black"
             android:textSize="8sp" />
 
-        <ImageButton
-            android:id="@+id/bell"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_below="@id/title"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_toRightOf="@id/viewDetailsButton"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/bell" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/bell"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_below="@id/title"-->
+<!--            android:layout_marginLeft="25dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:layout_toRightOf="@id/viewDetailsButton"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/bell" />-->
 
     </RelativeLayout>
 

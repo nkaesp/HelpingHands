@@ -23,6 +23,7 @@ data class DonationCampaignPost(
         amountNeeded = parcel.readString() ?: "",
         category = parcel.readString() ?: "",
         fullName = parcel.readString() ?: "",
+        email = parcel.readString() ?: "",
         phoneNumber = parcel.readString() ?: "",
         contactMethod = parcel.readString() ?: "",
         imageUri = parcel.readString(),
@@ -35,6 +36,7 @@ data class DonationCampaignPost(
         parcel.writeString(amountNeeded)
         parcel.writeString(category)
         parcel.writeString(fullName)
+        parcel.writeString(email)
         parcel.writeString(phoneNumber)
         parcel.writeString(contactMethod)
         parcel.writeString(imageUri)

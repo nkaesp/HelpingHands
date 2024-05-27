@@ -137,83 +137,38 @@
                     android:textStyle="bold">
 
                 </TextView>
-
-                <ImageView
-                    android:id="@+id/bgAmountDonated"
-                    android:layout_width="250dp"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/bg1Status"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
+                <RelativeLayout
+                    android:id="@+id/currentAmountRelativeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/amountDonatedLabel"
+                    android:layout_below="@id/bg1Status"
                     android:background="@drawable/bg_radius_ten_gray"
-                    android:elevation="3dp"></ImageView>
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:paddingHorizontal="10dp">
+                    <TextView
+                        android:id="@+id/currencyTag1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/bg1Status"
+                        android:elevation="3dp"
+                        android:text="₱"
+                        android:textColor="@color/black"
+                        ></TextView>
 
-                <TextView
-                    android:id="@+id/currencyTag1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/bg1Status"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/amountDonatedLabel"
-                    android:elevation="3dp"
-                    android:text="₱"
-                    android:textColor="@color/black"></TextView>
+                    <TextView
+                        android:id="@+id/currentAmountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/bg1Status"
+                        android:layout_toRightOf="@+id/currencyTag1"
+                        android:layout_marginLeft="10dp"
+                        android:elevation="3dp"
+                        android:text="0"
+                        android:textColor="@color/black"></TextView>
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/currentAmountTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/bg1Status"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/currencyTag1"
-                    android:elevation="3dp"
-                    android:text="0"
-                    android:textColor="@color/black"></TextView>
-
-                <TextView
-                    android:id="@+id/slash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/bg1Status"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/currentAmountTextView"
-                    android:elevation="3dp"
-                    android:text="/"
-                    android:textColor="@color/black"></TextView>
-
-                <TextView
-                    android:id="@+id/currencyTag2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/bg1Status"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/slash"
-                    android:elevation="3dp"
-                    android:text="₱"
-                    android:textColor="@color/black"></TextView>
-
-                <TextView
-                    android:id="@+id/amountNeededTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/bg1Status"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/currencyTag2"
-                    android:elevation="3dp"
-                    android:text="0"
-                    android:textColor="@color/black"></TextView>
 
 
                 <TextView
@@ -221,24 +176,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/amountDonatedLabel"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:text="Category: "
                     android:textColor="@color/black"
                     android:textStyle="bold">
 
                 </TextView>
 
-                <ImageView
-                    android:id="@+id/bgCategory"
-                    android:layout_width="280dp"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/amountDonatedLabel"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/categoryLabel"
-                    android:background="@drawable/bg_radius_ten_gray"
-                    android:elevation="3dp"></ImageView>
 
 
                 <TextView
@@ -249,10 +193,12 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="5dp"
+                    android:paddingHorizontal="10dp"
                     android:layout_toRightOf="@+id/categoryLabel"
                     android:elevation="3dp"
                     android:text="Category"
-                    android:textColor="@color/black"></TextView>
+                    android:textColor="@color/black"
+                    android:background="@drawable/bg_radius_ten_gray"></TextView>
 
                 <TextView
                     android:id="@+id/txtPeopleWhoDonated"
@@ -267,26 +213,16 @@
                 </TextView>
 
 
-                <ImageView
-                    android:id="@+id/bgPeopleDonated"
-                    android:layout_width="375dp"
-                    android:layout_height="130dp"
-                    android:layout_below="@+id/txtPeopleWhoDonated"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/bg_radius_ten_gray"
-                    android:elevation="3dp"
-                    android:textAlignment="center"></ImageView>
+
 
                 <ListView
                     android:id="@+id/listViewOfPeopleDonated"
                     android:layout_width="360dp"
                     android:layout_height="130dp"
                     android:layout_below="@+id/txtPeopleWhoDonated"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
+                    android:background="@drawable/bg_radius_ten_gray"
                     android:elevation="3dp"
                     android:textSize="10sp">
 
@@ -296,7 +232,7 @@
                     android:id="@+id/numOfPeopleDonatedLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/bgPeopleDonated"
+                    android:layout_below="@+id/listViewOfPeopleDonated"
                     android:layout_marginTop="15dp"
                     android:text="Number of people donated: "
                     android:textColor="@color/black"
@@ -308,7 +244,7 @@
                     android:id="@+id/bgNumPeopleDonated"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_below="@id/bgPeopleDonated"
+                    android:layout_below="@id/listViewOfPeopleDonated"
                     android:layout_marginLeft="7dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
@@ -321,7 +257,7 @@
                     android:id="@+id/numPeopleDonated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/bgPeopleDonated"
+                    android:layout_below="@id/listViewOfPeopleDonated"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="5dp"
@@ -471,7 +407,7 @@
                     android:background="@drawable/option_buttons"
                     android:backgroundTint="#03A9F4"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="120dp"
                     android:text="DONATE" />
 
@@ -481,7 +417,7 @@
                     android:layout_height="30dp"
                     android:layout_below="@+id/contentSummary"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="120dp"
                     android:background="@drawable/option_buttons"
                     android:backgroundTint="#FF0011"
