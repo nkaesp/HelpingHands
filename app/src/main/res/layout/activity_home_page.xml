@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+android:background="@drawable/bg_gradient"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomePageActivity">
 
@@ -60,8 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_below="@id/featuredOpportunitiesLabel"
-        android:background="#0066FF"
-        android:elevation="20dp">
+        android:background="@android:color/transparent"
+        android:elevation="550dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
