@@ -120,29 +120,38 @@ class VolunteerCampaignStatusPageActivity : AppCompatActivity() {
 
         deletePostButton.setOnClickListener {
             val documentId = intent.getStringExtra("documentId")
+            documentId?.let {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Delete Post")
+                builder.setMessage("Are you sure you want to delete this post?")
 
-            if (documentId != null) {
-                // Delete the post from Firestore
-                db.collection("volunteer_campaign_posts").document(documentId)
-                    .delete()
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Post deleted successfully", Toast.LENGTH_SHORT).show()
+                // Set up the buttons
+                builder.setPositiveButton("Yes") { dialog, which ->
+                    // User confirmed to delete the post
+                    db.collection("volunteer_campaign_posts").document(documentId)
+                        .delete()
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Post deleted successfully", Toast.LENGTH_SHORT).show()
+                            // Navigate back to the home page
+                            val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                            overridePendingTransition(0, 0)
+                        }
+                        .addOnFailureListener { exception ->
+                            Toast.makeText(this, "Failed to delete post: ${exception.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
 
-                        // Navigate back to the home page
-                        val intent = Intent(this, VolunteerCampaignSelectionPageActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                        overridePendingTransition(0, 0)
-                    }
-                    .addOnFailureListener { exception ->
-                        Toast.makeText(
-                            this,
-                            "Failed to delete post: ${exception.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                builder.setNegativeButton("No") { dialog, which ->
+                    // User cancelled the dialog
+                    dialog.dismiss()
+                }
+
+                builder.show()
             }
         }
+
 
         joinButton.setOnClickListener {
             val loggedInUserId = FirebaseAuth.getInstance().currentUser?.uid

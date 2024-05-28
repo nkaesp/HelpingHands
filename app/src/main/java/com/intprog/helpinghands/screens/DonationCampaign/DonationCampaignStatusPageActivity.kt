@@ -170,22 +170,37 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         deletePostButton.setOnClickListener {
             val documentId = intent.getStringExtra("documentId")
             documentId?.let {
-                // Delete the post from Firestore
-                db.collection("donation_campaign_posts").document(documentId)
-                    .delete()
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Post deleted successfully", Toast.LENGTH_SHORT).show()
-                        // Navigate back to the home page
-                        val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                        overridePendingTransition(0, 0)
-                    }
-                    .addOnFailureListener { exception ->
-                        Toast.makeText(this, "Failed to delete post: ${exception.message}", Toast.LENGTH_SHORT).show()
-                    }
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Delete Post")
+                builder.setMessage("Are you sure you want to delete this post?")
+
+                // Set up the buttons
+                builder.setPositiveButton("Yes") { dialog, which ->
+                    // User confirmed to delete the post
+                    db.collection("donation_campaign_posts").document(documentId)
+                        .delete()
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Post deleted successfully", Toast.LENGTH_SHORT).show()
+                            // Navigate back to the home page
+                            val intent = Intent(this, DonationCampaignSelectionPageActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                            overridePendingTransition(0, 0)
+                        }
+                        .addOnFailureListener { exception ->
+                            Toast.makeText(this, "Failed to delete post: ${exception.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+
+                builder.setNegativeButton("No") { dialog, which ->
+                    // User cancelled the dialog
+                    dialog.dismiss()
+                }
+
+                builder.show()
             }
         }
+
 
         donateButton.setOnClickListener {
             showDonateDialog()
@@ -213,6 +228,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         }
 
         paymentSheet = PaymentSheet(this@DonationCampaignStatusPageActivity, ::onPaymentSheetResult)
+
     }
 
     private var donationDialog: AlertDialog? = null // Declare a global variable to hold the reference to the donation dialog
@@ -226,6 +242,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         val cancelButton = dialogView.findViewById<Button>(R.id.cancelButton)
         val amountEditText = dialogView.findViewById<EditText>(R.id.amountEditText)
 
+
         donationDialog = builder.create() // Assign the dialog to the global variable
         donationDialog?.show()
 
@@ -238,6 +255,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
                     amount = amountStr + "00"
                     getDetails()
                     donationDialog?.hide()
+
                 }
             }
         }
@@ -314,6 +332,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
                     "Payment Successful",
                     Toast.LENGTH_SHORT
                 ).show()
+                donationDialog?.dismiss()
                 recordDonation()
             }
         }
@@ -352,6 +371,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Failed to fetch document: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
+
     }
 
 
