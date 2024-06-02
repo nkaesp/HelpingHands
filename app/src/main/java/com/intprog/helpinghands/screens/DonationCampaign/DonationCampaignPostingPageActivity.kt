@@ -100,6 +100,11 @@ class DonationCampaignPostingPageActivity : AppCompatActivity() {
                 theCategory.isNotEmpty() && theFullName.isNotEmpty() &&
                 thePhoneNum.isNotEmpty() && theContactMethod.isNotEmpty()
             ) {
+                if (thePhoneNum.length < 11) {
+                    Toast.makeText(this, "Phone number must be a valid number", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 val intent = Intent(this, DonationCampaignSummaryPageActivity::class.java).apply {
                     putExtra("title", theTitle)
                     putExtra("description", theDesc)
