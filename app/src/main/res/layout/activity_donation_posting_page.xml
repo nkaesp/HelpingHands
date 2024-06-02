@@ -142,7 +142,7 @@
                 android:elevation="3dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:maxLength="25"
+                android:maxLength="30"
                 android:textSize="15sp">
             </EditText>
 
@@ -431,7 +431,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Ex. Phone"
+                android:hint="Phone/Email"
                 android:background="@drawable/bg_radius_ten_gray"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
@@ -460,7 +460,7 @@
             android:layout_marginLeft="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="100dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="120dp"
             android:background="@drawable/btn_continue"
             android:text="Continue"
             android:textAllCaps="false"

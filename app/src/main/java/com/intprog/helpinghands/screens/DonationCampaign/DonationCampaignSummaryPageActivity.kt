@@ -32,9 +32,7 @@ class DonationCampaignSummaryPageActivity : AppCompatActivity() {
 
         val backTop = findViewById<ImageButton>(R.id.backTop)
         backTop.setOnClickListener {
-            val intent = Intent(this, DonationCampaignPostingPageActivity::class.java)
-            startActivity(intent)
-            finish()
+            onBackPressed()
             overridePendingTransition(0, 0)
         }
 
