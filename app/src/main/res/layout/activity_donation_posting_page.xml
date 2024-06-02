@@ -403,7 +403,8 @@
                 android:inputType="phone"
                 android:elevation="3dp"
                 android:textSize="15sp"
-                android:maxLength="11">
+                android:maxLength="11"
+                >
             </EditText>
 
         </LinearLayout>

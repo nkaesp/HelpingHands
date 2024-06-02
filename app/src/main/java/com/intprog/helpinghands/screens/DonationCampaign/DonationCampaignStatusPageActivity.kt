@@ -62,6 +62,7 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private lateinit var donorsAdapter: ArrayAdapter<String>
     private val donorsList = mutableListOf<String>()
+    private val fetchedDonorNames = HashSet<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,28 +139,41 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
                     noOfDonorsTextView.text = "$noOfDonors"
 
                     val donations = snapshot.get("donations") as? List<Map<String, Any>> ?: emptyList()
-                    donorsList.clear() // Clear the list to prevent duplication
 
-                    donations.forEach { donation ->
-                        val donorId = donation["donorId"] as? String ?: return@forEach
-                        val isAnonymous = donation["anonymous"] as? Boolean ?: false
 
-                        if (isAnonymous) {
-                            donorsList.add("Anonymous")
-                            donorsAdapter.notifyDataSetChanged()
-                        } else {
-                            db.collection("users").document(donorId).get()
-                                .addOnSuccessListener { userDocument ->
-                                    val donorName = userDocument.getString("name") ?: "Anonymous"
-                                    donorsList.clear()
-                                    donorsList.add(donorName)
-                                    donorsAdapter.notifyDataSetChanged()
-                                }
-                                .addOnFailureListener { exception ->
-                                    Toast.makeText(this, "Failed to fetch donor details: ${exception.message}", Toast.LENGTH_SHORT).show()
-                                }
+                        donations.forEach { donation ->
+                            val donorId = donation["donorId"] as? String ?: return@forEach
+                            val isAnonymous = donation["anonymous"] as? Boolean ?: false
+
+                            if (isAnonymous) {
+                                db.collection("users").document(donorId).get()
+                                    .addOnSuccessListener { userDocument ->
+                                        val donorName = userDocument.getString("name") ?: "Anonymous"
+                                        if (!fetchedDonorNames.contains(donorName)) {
+                                            fetchedDonorNames.add(donorName) // Add the donor name to the set
+                                            donorsList.add("Anonymous") // Append the donor's name to the list
+                                            donorsAdapter.notifyDataSetChanged() // Notify the adapter of the data change
+                                        }
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        Toast.makeText(this, "Failed to fetch donor details: ${exception.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            } else {
+                                db.collection("users").document(donorId).get()
+                                    .addOnSuccessListener { userDocument ->
+                                        val donorName = userDocument.getString("name") ?: "Anonymous"
+                                        if (!fetchedDonorNames.contains(donorName)) {
+                                            fetchedDonorNames.add(donorName) // Add the donor name to the set
+                                            donorsList.add(donorName) // Append the donor's name to the list
+                                            donorsAdapter.notifyDataSetChanged() // Notify the adapter of the data change
+                                        }
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        Toast.makeText(this, "Failed to fetch donor details: ${exception.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
                         }
-                    }
+
 
                     // Update the current amount
                     updateCurrentAmount(donations)
