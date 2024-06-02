@@ -11,6 +11,8 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -51,6 +53,10 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
     private lateinit var currentAmountTextView: TextView
     private lateinit var noOfDonorsTextView: TextView
     private lateinit var donorsListView: ListView
+    private lateinit var donationTypeRadioGroup: RadioGroup
+    private lateinit var publiclyRadioButton: RadioButton
+    private lateinit var anonymouslyRadioButton: RadioButton
+    private var donationType: String? = null
 
 
     private val db = FirebaseFirestore.getInstance()
@@ -109,17 +115,18 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         db.collection("donation_campaign_posts").document(documentId).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val amountsDonated = document.get("amountsDonated") as? List<Long> ?: emptyList()
+                    val amountDonated = document.get("amountDonated") as? List<Map<String, Any>> ?: emptyList()
                     val noOfDonors = document.getLong("noOfDonors")?.toInt() ?: 0
                     noOfDonorsTextView.text = "$noOfDonors"
-                    updateCurrentAmount(amountsDonated)
+                    updateCurrentAmount(amountDonated)
                 }
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Failed to fetch document: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
 
-        db.collection("donation_campaign_posts").document(documentId!!)
+
+        db.collection("donation_campaign_posts").document(documentId)
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Toast.makeText(this, "Failed to load donors count", Toast.LENGTH_SHORT).show()
@@ -130,21 +137,38 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
                     val noOfDonors = snapshot.getLong("noOfDonors")?.toInt() ?: 0
                     noOfDonorsTextView.text = "$noOfDonors"
 
-                    val donors = snapshot.get("donors") as? List<String> ?: emptyList()
+                    val donations = snapshot.get("donations") as? List<Map<String, Any>> ?: emptyList()
                     donorsList.clear() // Clear the list to prevent duplication
-                    donors.forEach { donorId ->
-                        db.collection("users").document(donorId)
-                            .get()
-                            .addOnSuccessListener { userDocument ->
-                                val name = userDocument.getString("name")
-                                if (name != null) {
-                                    donorsList.add(name)
+
+                    donations.forEach { donation ->
+                        val donorId = donation["donorId"] as? String ?: return@forEach
+                        val isAnonymous = donation["anonymous"] as? Boolean ?: false
+
+                        if (isAnonymous) {
+                            donorsList.add("Anonymous")
+                            donorsAdapter.notifyDataSetChanged()
+                        } else {
+                            db.collection("users").document(donorId).get()
+                                .addOnSuccessListener { userDocument ->
+                                    val donorName = userDocument.getString("name") ?: "Anonymous"
+                                    donorsList.clear()
+                                    donorsList.add(donorName)
                                     donorsAdapter.notifyDataSetChanged()
                                 }
-                            }
+                                .addOnFailureListener { exception ->
+                                    Toast.makeText(this, "Failed to fetch donor details: ${exception.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
                     }
+
+                    // Update the current amount
+                    updateCurrentAmount(donations)
                 }
             }
+
+
+
+
 
         // Check if the logged-in user is the owner of the post
         val loggedInUserEmail = FirebaseAuth.getInstance().currentUser?.email
@@ -241,21 +265,30 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
         val confirmButton = dialogView.findViewById<Button>(R.id.confirmButton)
         val cancelButton = dialogView.findViewById<Button>(R.id.cancelButton)
         val amountEditText = dialogView.findViewById<EditText>(R.id.amountEditText)
+        donationTypeRadioGroup = dialogView.findViewById(R.id.donationTypeRadioGroup)
+        publiclyRadioButton = dialogView.findViewById(R.id.publiclyRadioButton)
+        anonymouslyRadioButton = dialogView.findViewById(R.id.anonymouslyRadioButton)
 
-
-        donationDialog = builder.create() // Assign the dialog to the global variable
+        donationDialog = builder.create()
         donationDialog?.show()
 
         confirmButton.setOnClickListener {
-            if (amountEditText.text.toString().isEmpty()) {
-                Toast.makeText(this@DonationCampaignStatusPageActivity, "Amount cannot be empty", Toast.LENGTH_SHORT).show()
+            val amountStr = amountEditText.text.toString()
+
+            if (amountStr.isEmpty()) {
+                Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show()
+            } else if (donationTypeRadioGroup.checkedRadioButtonId == -1) {
+                Toast.makeText(this, "Please select a donation type", Toast.LENGTH_SHORT).show()
             } else {
-                val amountStr = amountEditText.text.toString()
                 if (isAmountValid(amountStr)) {
                     amount = amountStr + "00"
+                    donationType = if (publiclyRadioButton.isChecked) {
+                        "publicly"
+                    } else {
+                        "anonymously"
+                    }
                     getDetails()
                     donationDialog?.hide()
-
                 }
             }
         }
@@ -341,27 +374,51 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
     private fun recordDonation() {
         val documentId = intent.getStringExtra("documentId") ?: return
         val donorId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val donationAmount = amount.toInt()
+        val donationAmount = amount.toInt() / 100
 
         db.collection("donation_campaign_posts").document(documentId).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val donors = document.get("donors") as? ArrayList<String> ?: ArrayList()
-                    val amountsDonated = document.get("amountsDonated") as? ArrayList<Long> ?: ArrayList()
-                    val noOfDonors = document.getLong("noOfDonors")?.toInt() ?: 0
+                    val donations = document.get("donations") as? ArrayList<Map<String, Any>> ?: ArrayList()
+                    var donorExists = false
 
-                    donors.add(donorId)
-                    amountsDonated.add((donationAmount.toLong() / 100)) // Divide by 100 to reduce by 2 decimal places
+                    // Iterate over donations to find if donor exists
+                    for (donation in donations) {
+                        if (donation["donorId"] == donorId) {
+                            donorExists = true
+                            // Update donation amount
+                            val currentAmountDonated = donation["amountDonated"] as? Long ?: 0L
+                            val newAmountDonated = currentAmountDonated + donationAmount
+                            val updatedDonation = donation.toMutableMap()
+                            updatedDonation["amountDonated"] = newAmountDonated
+                            // Replace old donation with updated one
+                            val index = donations.indexOf(donation)
+                            if (index != -1) {
+                                donations[index] = updatedDonation
+                            }
+                            break
+                        }
+                    }
 
+                    // If donor doesn't exist, add new donation
+                    if (!donorExists) {
+                        val donationData = mapOf(
+                            "donorId" to donorId,
+                            "anonymous" to (donationType == "anonymously"),
+                            "amountDonated" to donationAmount
+                        )
+                        donations.add(donationData)
+                    }
+
+                    // Update document in Firestore
                     val updates = mapOf(
-                        "donors" to donors,
-                        "amountsDonated" to amountsDonated,
-                        "noOfDonors" to FieldValue.increment(1)
+                        "donations" to donations,
+                        "noOfDonors" to if (!donorExists) FieldValue.increment(1) else FieldValue.increment(0)
                     )
 
                     db.collection("donation_campaign_posts").document(documentId).update(updates)
                         .addOnSuccessListener {
-                            updateCurrentAmount(amountsDonated)
+                            Toast.makeText(this, "Donation recorded successfully", Toast.LENGTH_SHORT).show()
                         }
                         .addOnFailureListener { exception ->
                             Toast.makeText(this, "Failed to record donation: ${exception.message}", Toast.LENGTH_SHORT).show()
@@ -371,20 +428,36 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Failed to fetch document: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
-
     }
 
 
-    private fun updateCurrentAmount(amountsDonated: List<Long>) {
-        val totalAmount = amountsDonated.sum()
-        val amountNeeded = intent.getStringExtra("amountNeeded")
-        currentAmountTextView.text = "$totalAmount  /   ₱   $amountNeeded"
 
-        if (amountNeeded != null) {
-            if (totalAmount >= amountNeeded.toInt()) {
-                // Hide the join button if the total amount exceeds or equals the required amount
-                donateButton.visibility = View.GONE
-            }
+    private fun updateCurrentAmount(amountDonated: List<Map<String, Any>>) {
+        // Calculate the total amount donated
+        val totalAmount = amountDonated.sumOf { donation ->
+            (donation["amountDonated"] as? Long) ?: 0L
         }
+
+        // Get the document ID from the intent
+        val documentId = intent.getStringExtra("documentId") ?: return
+
+        // Update the Firestore document with the new total amount donated
+        db.collection("donation_campaign_posts").document(documentId)
+            .update("totalAmountDonated", totalAmount)
+            .addOnSuccessListener {
+                // Update the UI with the new total amount donated
+                val amountNeeded = intent.getStringExtra("amountNeeded")?.toInt() ?: 0
+                currentAmountTextView.text = "$totalAmount  /   ₱   $amountNeeded"
+
+                // Check if the donation goal is reached
+                if (totalAmount >= amountNeeded) {
+                    donateButton.visibility = View.GONE
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Failed to update total amount donated: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
     }
+
 }
+

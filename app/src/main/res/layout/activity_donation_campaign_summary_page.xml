@@ -343,7 +343,7 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="100dp"
-                android:layout_marginBottom="80dp"
+                android:layout_marginBottom="120dp"
                 android:background="@drawable/btn_continue"
                 android:onClick="onPostNowClicked"
                 android:text="Post Now"
