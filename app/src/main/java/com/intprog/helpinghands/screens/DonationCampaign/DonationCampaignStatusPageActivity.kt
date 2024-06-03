@@ -139,8 +139,6 @@ class DonationCampaignStatusPageActivity : AppCompatActivity() {
                     noOfDonorsTextView.text = "$noOfDonors"
 
                     val donations = snapshot.get("donations") as? List<Map<String, Any>> ?: emptyList()
-
-
                         donations.forEach { donation ->
                             val donorId = donation["donorId"] as? String ?: return@forEach
                             val isAnonymous = donation["anonymous"] as? Boolean ?: false
